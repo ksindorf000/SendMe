@@ -9,12 +9,16 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SendMe.Models;
+using System.Data.Entity;
+using System.Collections.Generic;
 
 namespace SendMe.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        ApplicationDbContext db = new ApplicationDbContext();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -22,7 +26,7 @@ namespace SendMe.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +38,9 @@ namespace SendMe.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -120,7 +124,7 @@ namespace SendMe.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -133,35 +137,81 @@ namespace SendMe.Controllers
                     return View(model);
             }
         }
+        
+        //Create School List
+        private List<SelectListItem> CreateSchoolList()
+        {
+            var sList = db.Schools.ToList();
+            List<SelectListItem> sSelectList = new List<SelectListItem>();
 
-        //
+            foreach (var item in sList)
+            {
+                sSelectList.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Name });
+            }
+
+            return sSelectList;
+
+        }
+
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.Schools = CreateSchoolList().AsEnumerable();
             return View();
         }
-
-        //
+                
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            //-----------------------------------------------
+            //            Verify Domain of Email
+            //-----------------------------------------------
+            string schDomain = db.Schools
+                .Where(s => s.Id == model.SchoolId)
+                .Select(s => s.EmailDomain)
+                .Single();
+
+            if (!model.Email.Contains(schDomain))
+            {
+                ViewBag.Schools = CreateSchoolList();
+                ModelState.AddModelError("Email", "That domain is not approved by your school. "
+                    + "Please check for typos and ensure that you have selected the correct school. "
+                    + "If you believe you received this message in error, please contact your administrator.");
+                return View(model);
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    //-------------------------------
+                    // Create username for custom url
+                    //-------------------------------
+                    int idxAT = model.Email.IndexOf("@");
+                    int idxPeriod = model.Email.IndexOf(".") - 1;
+
+                    string un1 = model.Email.Substring(0, idxAT);
+                    string un2 = model.Email.Substring((idxAT + 1), (idxPeriod - idxAT));
+
+                    string username = un1 + un2;
+                    user.UserName = username;
+
+                    db.Entry(user).State = EntityState.Modified;
+                    db.SaveChanges();
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     return RedirectToAction("Index", "Home");
                 }

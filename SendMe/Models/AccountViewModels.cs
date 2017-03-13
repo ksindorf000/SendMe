@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace SendMe.Models
 {
@@ -65,6 +66,10 @@ namespace SendMe.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "School")]
+        public int SchoolId { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -79,6 +84,7 @@ namespace SendMe.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        
     }
 
     public class ResetPasswordViewModel

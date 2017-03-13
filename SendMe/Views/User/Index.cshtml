@@ -1,0 +1,24 @@
+﻿@model SendMe.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Index";
+}
+<!-----------PROFILE PIC------------->
+<div class="row profile-header">
+    <div class="col-md-12 text-center marb-35">
+        <img class="thumb profile-pic" src="https://www.materialist.com/static/new_store/images/avatar_placeholder.svg" style="max-width: 300px" />
+
+        <!-----------HEADER------------->
+        <h1 class="header-h">@Model.UserName.ToUpper()</h1>
+        <p class="header-p">
+            @if (Model.UserName == User.Identity.Name)
+            {
+                <h4>@Html.ActionLink("Manage Account", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</h4>
+            }
+            else
+            {
+                <strong>Not logged in.</strong>
+            }
+        </p>
+    </div>
+</div>
