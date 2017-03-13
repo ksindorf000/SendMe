@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using SendMe.Models;
 using System.Data.Entity;
 using System.Collections.Generic;
+using SendMe.Helpers;
 
 namespace SendMe.Controllers
 {
@@ -76,10 +77,12 @@ namespace SendMe.Controllers
             {
                 return View(model);
             }
+                        
+            string username = UserHelpers.CreateUserName(model.Email);
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(username, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -195,14 +198,8 @@ namespace SendMe.Controllers
                     //---------------------------------------------------
                     //          Create username for custom url
                     //---------------------------------------------------
-                    int idxAT = model.Email.IndexOf("@");
-                    int idxPeriod = model.Email.IndexOf(".") - 1;
 
-                    string un1 = model.Email.Substring(0, idxAT);
-                    string un2 = model.Email.Substring((idxAT + 1), (idxPeriod - idxAT));
-
-                    string username = un1 + un2;
-                    user.UserName = username;
+                    user.UserName = UserHelpers.CreateUserName(model.Email);
 
                     db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
