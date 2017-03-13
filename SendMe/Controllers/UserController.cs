@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using SendMe.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -14,18 +15,26 @@ namespace SendMe.Controllers
         /*********************************
          * INDEX: No Username
          ********************************/
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                string userId = User.Identity.GetUserId();
-                user = db.Users
-                    .Where(u => u.Id == userId)
-                    .FirstOrDefault();
 
-                return View(user);
+            if (id == null)
+            {
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Home");
+
+            List<StudentViewModel> vmList = new List<StudentViewModel>();
+            List<StuProfile> stuList = db.StuProfiles
+                .Where(s => s.SchoolId == id)
+                .ToList();
+
+            foreach (var student in stuList)
+            {
+                StudentViewModel sVM = new StudentViewModel(student);
+                vmList.Add(sVM);
+            };
+
+            return View(vmList);
         }
 
         /*********************************
@@ -34,11 +43,19 @@ namespace SendMe.Controllers
         [Route("send/{username}")]
         public ActionResult Index(string username)
         {
-            user = db.Users
-                .Where(u => u.UserName == username)
+            StuProfile student = db.StuProfiles
+                .Where(sp => sp.User.UserName == username)
                 .FirstOrDefault();
 
-            return View(user);
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Home");
+
+            }
+
+            StudentViewModel studentVM = new StudentViewModel(student);
+            return View(studentVM);
+
         }
     }
 
