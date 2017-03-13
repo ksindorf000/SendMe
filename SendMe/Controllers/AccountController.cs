@@ -79,14 +79,30 @@ namespace SendMe.Controllers
             }
                         
             string username = UserHelpers.CreateUserName(model.Email);
-
+            
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(username, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+
+                    var userid = UserManager.FindByEmail(model.Email).Id;
+
+                    //If user email has not been verified return view with message
+                    if (!UserManager.IsEmailConfirmed(userid))
+                    {
+                        ViewBag.NotConfirmed = "A confirmation email was sent to " + model.Email
+                        + " but the email has not yet been confirmed. Please look for the confirmation"
+                        + " email in your inbox and click the provided link to confirm and log in.";
+                        ModelState.Clear();
+                        return View();
+                    }
+                    else
+                    {
+                        return RedirectToLocal(returnUrl);
+                    }
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -203,11 +219,7 @@ namespace SendMe.Controllers
 
                     db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
-
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
+                    
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account",
                        new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
@@ -221,7 +233,7 @@ namespace SendMe.Controllers
 
                     ViewBag.Schools = CreateSchoolList().AsEnumerable();
 
-                    return View();
+                    return View(model);
                 }
                 AddErrors(result);
             }
