@@ -219,7 +219,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="ReadMe.md" />
     <Content Include="MailSettings.config" />
     <Content Include="AppSettingsSecrets.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
