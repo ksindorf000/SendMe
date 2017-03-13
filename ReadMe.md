@@ -8,7 +8,16 @@ _A collaborative project between Michael Anderson and Kristin Sindorf._
 ---------------
 
 ###The Motivation
-[Info about the Global Health Initiative]
+
+####The Global Health Initiative from the World Health Organization
+
+WHO's Global School Health Initiative, launched in 1995, seeks to mobilise and strengthen health promotion and education activities at the local, national, regional and global levels. The Initiative is designed to improve the health of students, school personnel, families and other members of the community through schools.
+
+**Research to improve school health programmes**: Evaluation research and expert opinion is analyzed and consolidated to describe the nature and effectiveness of school health programmes.
+
+**Building capacity to advocate for improved school health programmes**: technical documents are generated that consolidate research and expert opinion about the nature, scope and effectiveness of school health programmes.Each advocacy document makes a strong case for addressing an important health problem, identifies components of a comprehensive school health programme, and provides guidance in integrating the issue into the components.
+
+**Strengthening national capacities**: collaboration between health and education agencies is fostered and countries are helped to develop strategies and programmes to improve health through schools. Pilot projects implemented by the GSHI and partners include Helminth Interventions with China in 1996, HIV/STI Prevention in China in 1997, and Health-Promoting Schools/Health Insurance in Vietnam in 1998.
 
 ###The Problem
 Medical students need to be able to raise and track funds for their
