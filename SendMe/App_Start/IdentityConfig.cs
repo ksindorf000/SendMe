@@ -11,15 +11,39 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using SendMe.Models;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using System.Web.Configuration;
 
 namespace SendMe
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            await configSendGridasync(message);
+        }
+
+        private async Task configSendGridasync(IdentityMessage message)
+        {
+            var apiKey = WebConfigurationManager.AppSettings["SendGridApiKey"];
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress(WebConfigurationManager.AppSettings["SendEmailsFrom"], "SendMe!");
+            var subject = message.Subject;
+            var to = new EmailAddress(message.Destination, message.Destination);
+            var plainTextContent = message.Body;
+            var htmlContent =
+                "<table><tr>"
+                + "<td style=\"max-height: 200px\">"
+                + "<a href=\"www.google.com\"><img src=\"https://cmeblogspot.files.wordpress.com/2013/11/welcome-email-header-2.png?w=600\"/></a>"
+                + "</td></tr>"
+                + "<tr><td>"
+                + "<p style=\"text-align: center\"> " + message.Body + "</p>"
+                + "</td></tr></table>";
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = await client.RequestAsync(method: SendGridClient.Method.POST,
+                                                 requestBody: msg.Serialize(),
+                                                 urlPath: "mail/send");
         }
     }
 

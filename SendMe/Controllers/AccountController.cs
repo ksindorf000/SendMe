@@ -170,19 +170,19 @@ namespace SendMe.Controllers
             //-----------------------------------------------
             //            Verify Domain of Email
             //-----------------------------------------------
-            string schDomain = db.Schools
+            /*string schDomain = db.Schools
                 .Where(s => s.Id == model.SchoolId)
                 .Select(s => s.EmailDomain)
                 .Single();
 
             if (!model.Email.Contains(schDomain))
             {
-                ViewBag.Schools = CreateSchoolList();
+                ViewBag.Schools = CreateSchoolList().AsEnumerable();
                 ModelState.AddModelError("Email", "That domain is not approved by your school. "
                     + "Please check for typos and ensure that you have selected the correct school. "
                     + "If you believe you received this message in error, please contact your administrator.");
                 return View(model);
-            }
+            }*/
 
             if (ModelState.IsValid)
             {
@@ -192,9 +192,9 @@ namespace SendMe.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    //-------------------------------
-                    // Create username for custom url
-                    //-------------------------------
+                    //---------------------------------------------------
+                    //          Create username for custom url
+                    //---------------------------------------------------
                     int idxAT = model.Email.IndexOf("@");
                     int idxPeriod = model.Email.IndexOf(".") - 1;
 
@@ -209,11 +209,22 @@ namespace SendMe.Controllers
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    return RedirectToAction("Index", "Home");
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account",
+                       new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id,
+                       "Confirm your account", "Please confirm your account by clicking <a href=\""
+                       + callbackUrl + "\">here</a>");
+
+                    ViewBag.SentConf = "A confirmation email was sent to " + model.Email
+                    + ". Please look for the confirmation email in your inbox and click the provided link to confirm and log in.";
+                    ModelState.Clear();
+
+                    ViewBag.Schools = CreateSchoolList().AsEnumerable();
+
+                    return View();
                 }
                 AddErrors(result);
             }

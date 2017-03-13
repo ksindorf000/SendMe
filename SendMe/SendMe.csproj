@@ -49,6 +49,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGrid, Version=9.0.12.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.9.0.12\lib\net452\SendGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -112,9 +120,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -188,6 +193,14 @@
     <Compile Include="Migrations\201703131328456_AddedSchoolsTable.Designer.cs">
       <DependentUpon>201703131328456_AddedSchoolsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703131710287_EmailVerification.cs" />
+    <Compile Include="Migrations\201703131710287_EmailVerification.Designer.cs">
+      <DependentUpon>201703131710287_EmailVerification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703131734466_RemovedDuplicateFieldsFromUser.cs" />
+    <Compile Include="Migrations\201703131734466_RemovedDuplicateFieldsFromUser.Designer.cs">
+      <DependentUpon>201703131734466_RemovedDuplicateFieldsFromUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -206,6 +219,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ReadMe.md" />
+    <Content Include="MailSettings.config" />
+    <Content Include="AppSettingsSecrets.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -268,6 +283,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201703131328456_AddedSchoolsTable.resx">
       <DependentUpon>201703131328456_AddedSchoolsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703131710287_EmailVerification.resx">
+      <DependentUpon>201703131710287_EmailVerification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703131734466_RemovedDuplicateFieldsFromUser.resx">
+      <DependentUpon>201703131734466_RemovedDuplicateFieldsFromUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
