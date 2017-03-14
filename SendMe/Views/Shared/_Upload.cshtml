@@ -2,58 +2,20 @@
 
 @if (ViewBag.Type == "Student")
 {
-   using (Html.BeginForm("Upload", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-   {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-    <div class="row">        
-        <p>
-            <input type="file" name="File" class="form-control btn btn-default" />
-            <input type="hidden" name="refId" value=@ViewBag.RefId />
-            <input type="hidden" name="type" value="ProfPic" />
-        </p>
-        <p>
-            <button type="submit" class="btn btn-toolbar btn-success">
-                <span class="glyphicon glyphicon-check"></span>
-            </button>
-        </p>
-    </div>
-    }
-}
-else if (ViewBag.Type == "School")
-{
     using (Html.BeginForm("Upload", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="row">
+            <div id="errorMsg"></div>
             <p>
-                <input type="file" name="File" class="form-control btn btn-default" />
+                <input id="myFile" type="file" name="File" class="form-control btn btn-default" />
                 <input type="hidden" name="refId" value=@ViewBag.RefId />
-                <input type="hidden" name="type" value="Cover" />
+                <input type="hidden" name="type" value="ProfPic" />
             </p>
             <p>
-                <button type="submit" class="btn btn-toolbar btn-success">
-                    <span class="glyphicon glyphicon-check"></span>
-                </button>
-            </p>
-        </div>
-    }
-    using (Html.BeginForm("Upload", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <div class="row">
-            <p>
-                <input type="file" name="File" class="form-control btn btn-default" />
-                <input type="hidden" name="refId" value=@ViewBag.RefId />
-                <input type="hidden" name="type" value="Logo" />
-            </p>
-            <p>
-                <button type="submit" class="btn btn-toolbar btn-success">
+                <button id="Upload" type="submit" class="btn btn-toolbar btn-success">
                     <span class="glyphicon glyphicon-check"></span>
                 </button>
             </p>

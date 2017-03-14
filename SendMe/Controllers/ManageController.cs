@@ -75,8 +75,9 @@ namespace SendMe.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+
             return View(model);
-        }
+        }        
 
         //
         // POST: /Manage/RemoveLogin
@@ -310,7 +311,7 @@ namespace SendMe.Controllers
         {
             // Request a redirect to the external login provider to link a login for the current user
             return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
-        }
+        }        
 
         //
         // GET: /Manage/LinkLoginCallback

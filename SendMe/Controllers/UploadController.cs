@@ -13,15 +13,14 @@ namespace SendMe.Controllers
     public class UploadController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-
-
+        
         //----------------------------
         //      Process Upload
         //----------------------------
         // POST: Image Upload
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Upload(UploadViewModel formData)
+        public void Upload(UploadViewModel formData)
         {
             //Save File and Create Path
             var uploadedFile = Request.Files[0];
@@ -42,8 +41,6 @@ namespace SendMe.Controllers
 
             db.Uploads.Add(uploadModel);
             db.SaveChanges();
-
-            return RedirectToAction("Index", "Home");
         }
 
     }
