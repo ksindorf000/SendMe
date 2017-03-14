@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Index";
+    ViewBag.CurrentUser = User.Identity.Name;
+    ViewBag.userProfile = Model.User.UserName;
 }
 <!-----------PROFILE PIC------------->
 <div class="row profile-header">
@@ -10,30 +12,39 @@
 
         <!-----------HEADER------------->
         <h1 class="header-h">@Model.FirstName @Model.LastName</h1>
-        <p class="header-p">
-            @*
-                <h4 id="manageAcct">
-                -------ADD JS TO SHOW MANAGE LINK-----------
+        <p>
+            @Model.School.Name
+        </p>
+        @if (ViewBag.CurrentUser == ViewBag.userProfile)
+        {
+            <h4 id="manageAcct">
                 @Html.ActionLink("Manage Account", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                </h4>
-            *@
+            </h4>
+        }
+        <p class="header-p">
             @Model.Bio
         </p>
         <p>
-            <ul>
-                <li>
-                    @Model.Email
-                </li>
-                <li>
-                    @Model.School.Name
-                </li>
-                <li>
-                    @Model.Year
-                </li>
-                <li>
-                    @Model.Speciality
-                </li>
-            </ul>
+            @Model.User.Email
+        </p>
+        <p>
+            @Model.Year
+        </p>
+        <p>
+            @Model.Speciality
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h3>@Model.ActiveTrip.Title</h3>
+        <sub>@Model.ActiveTrip.Dates</sub>
+        <p>
+            @Model.ActiveTrip.Desc
+        </p>
+        <p>
+            @Model.ActiveTrip.Destination <br />
+            $@Model.ActiveTrip.TargetAmnt
         </p>
     </div>
 </div>

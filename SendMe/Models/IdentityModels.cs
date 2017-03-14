@@ -23,6 +23,7 @@ namespace SendMe.Models
     {
         public DbSet<School> Schools { get; set; }
         public DbSet<StuProfile> StuProfiles { get; set; }
+        public DbSet<Trip> Trips { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
