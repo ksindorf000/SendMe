@@ -1,4 +1,4 @@
-﻿var stripe = Stripe(pubKey);
+﻿var stripe = Stripe(PubKey);
 var elements = stripe.elements();
 function checkEmail(emailAddress) {
     var validEmail = /^[a-z0-9\.\_%+-]+@@[a-z0-9\.\-]+\.[a-z]{2,4}$/i;

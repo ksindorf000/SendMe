@@ -20,7 +20,6 @@ namespace SendMe.Controllers
             ViewBag.Message = null;
             if (!string.IsNullOrEmpty(stripeToken))
             {
-
                 var donorInfo = new Donor
                 {
                     Name = Name,
