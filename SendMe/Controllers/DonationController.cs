@@ -15,7 +15,7 @@ namespace SendMe.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult Payment(string stripeToken, int? amount, string Name, string Email, string Phone)
+        public ActionResult Payment(string stripeToken, int? amount, string Name, string Email, string Phone, int? tripId)
         {
             ViewBag.Message = null;
             if (!string.IsNullOrEmpty(stripeToken))
@@ -50,7 +50,7 @@ namespace SendMe.Controllers
                 {
                     Amount = amount/100,
                     HaveThanked = false,
-                    TripId = 0,
+                    TripId = (int)tripId,
                     Donor = attachDonor
                 };
 
@@ -73,6 +73,19 @@ namespace SendMe.Controllers
                     if (result.Paid)
                     {
                         ViewBag.Message = "Payment Successful!";
+
+                        if (tripId != null)
+                        {
+                            //Update Percentage for trip
+                            Trip trip = db.Trips.Find(tripId);
+                            var donated = db.Donations
+                                        .Where(d => d.TripId == trip.Id)
+                                        .Sum(d => d.Amount);
+                            double target = trip.TargetAmnt;
+                            trip.PercentOfAmnt = (double)((donated / target) * 100);
+                            db.Entry(trip).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+                        }
                         //var myMessage = new SendGrid.SendGridMessage();
                         //myMessage.AddTo("test@sendgrid.com");
                         //myMessage.From = new MailAddress("you@youremail.com", "First Last");
