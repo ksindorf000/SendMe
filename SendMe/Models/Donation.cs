@@ -9,7 +9,7 @@ namespace SendMe.Models
     public class Donation
     {
         public int Id { get; set; }
-        public double Amount { get; set; }
+        public double? Amount { get; set; }
         public bool HaveThanked { get; set; }
         public int TripId { get; set; }
         public int DonorId { get; set; }

@@ -1,0 +1,38 @@
+﻿<form name="DonationForm">
+    Optional
+    <div class="group">
+        <label>
+            <span>Name</span>
+            <input name="DonorName" id="DonorName" class="field" placeholder="Mic Anderson" type="text" maxlength="30" />
+        </label>
+        <label>
+            <span>Email</span>
+            <input id="DonorEmail" class="field" placeholder="Example@Example.com" type="email" />
+        </label>
+        <label>
+            <span>Phone</span>
+            <input id="DonorPhoneNumber" class="field" placeholder="(555)-555-5555" type="tel" min="10" max="10" />
+        </label>
+    </div>
+    Required
+    <div class="group">
+        <label>
+            <span>Amount</span>
+            <input class="field" placeholder="25.00" id="DonationAmount" type="number" min="0" required />
+        </label>
+        <label>
+            <span>Card</span>
+            <div id="card-element" class="field"></div>
+        </label>
+    </div>
+    <button type="submit">Donate</button>
+    <div class="outcome">
+        <div class="alert alert-danger">
+            <strong class="error"></strong>
+        </div>
+
+    </div>
+    <script language="JavaScript" type="text/javascript">
+            var pubKey ='@System.Configuration.ConfigurationManager.AppSettings["PubKey"]';
+    </script>
+</form>

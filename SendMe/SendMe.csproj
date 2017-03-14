@@ -57,8 +57,13 @@
       <HintPath>..\packages\Sendgrid.9.0.12\lib\net452\SendGrid.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Stripe.net, Version=7.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.7.4.0\lib\net45\Stripe.net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -183,6 +188,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DonationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -213,6 +219,10 @@
     <Compile Include="Migrations\201703141452002_AddedDonorAndDonations.cs" />
     <Compile Include="Migrations\201703141452002_AddedDonorAndDonations.Designer.cs">
       <DependentUpon>201703141452002_AddedDonorAndDonations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703141530312_madeAmountInDonationNullable.cs" />
+    <Compile Include="Migrations\201703141530312_madeAmountInDonationNullable.Designer.cs">
+      <DependentUpon>201703141530312_madeAmountInDonationNullable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -251,6 +261,7 @@
     <Content Include="Scripts\myJS.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Stripe.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -287,6 +298,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Donation\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -317,6 +329,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703141452002_AddedDonorAndDonations.resx">
       <DependentUpon>201703141452002_AddedDonorAndDonations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703141530312_madeAmountInDonationNullable.resx">
+      <DependentUpon>201703141530312_madeAmountInDonationNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
