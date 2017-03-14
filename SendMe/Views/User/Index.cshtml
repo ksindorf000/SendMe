@@ -11,7 +11,7 @@
         <img class="thumb profile-pic" src="https://www.materialist.com/static/new_store/images/avatar_placeholder.svg" style="max-width: 300px" />
 
         <!-----------HEADER------------->
-        <h1 class="header-h">@Model.FirstName @Model.LastName</h1>
+        <h1 class="header-h">@Model.Student.FirstName @Model.Student.LastName</h1>
         <p>
             @Model.School.Name
         </p>
@@ -22,16 +22,16 @@
             </h4>
         }
         <p class="header-p">
-            @Model.Bio
+            @Model.Student.Bio
         </p>
         <p>
             @Model.User.Email
         </p>
         <p>
-            @Model.Year
+            @Model.Student.Year
         </p>
         <p>
-            @Model.Speciality
+            @Model.Student.Speciality
         </p>
     </div>
 </div>

@@ -10,11 +10,7 @@ namespace SendMe.Models
         ApplicationDbContext db = new ApplicationDbContext();
 
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Bio { get; set; }
-        public string Year { get; set; }
-        public string Speciality { get; set; }
+        public StuProfile Student { get; set; }
         public List<Trip> Trips { get; set; }
         public Trip ActiveTrip { get; set; }
         public School School { get; set; }
@@ -28,12 +24,7 @@ namespace SendMe.Models
 
         public StudentViewModel(StuProfile student)
         {
-            Id = student.Id;
-            FirstName = student.FirstName;
-            LastName = student.LastName;
-            Bio = student.Bio;
-            Year = student.Year;
-            Speciality = student.Speciality;
+            Student = student;
             School = db.Schools.Find(student.SchoolId);
             User = student.User;
 
