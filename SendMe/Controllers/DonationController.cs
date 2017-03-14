@@ -20,27 +20,44 @@ namespace SendMe.Controllers
             ViewBag.Message = null;
             if (!string.IsNullOrEmpty(stripeToken))
             {
+                var attachDonor = new Donor();
 
-                var donorInfo = new Donor
+                //Check for an existing donor
+                var existingDonor = db.Donors.Where(d => d.Email == Email || d.Phone == Phone).FirstOrDefault();
+
+                //Add donor record if none existing
+                if (existingDonor == null && (Name != null || Email != null))
                 {
-                    Name = Name,
-                    Email = Email,
-                    Phone = Phone
-                };
-                db.Donors.Add(donorInfo);
-                db.SaveChanges();
+                    Donor donorInfo = new Donor
+                    {
+                        Name = Name,
+                        Email = Email,
+                        Phone = Phone
+                    };
 
+                    db.Donors.Add(donorInfo);
+                    db.SaveChanges();
+
+                    attachDonor = donorInfo;
+                }
+                else
+                {
+                    attachDonor = existingDonor;
+                }
+
+                //Add donation record
                 var donation = new Donation
                 {
-                    Amount = amount,
+                    Amount = amount/100,
                     HaveThanked = false,
                     TripId = 0,
-                    Donor = db.Donors.Where(d => d.Email == Email).FirstOrDefault()
-            };
+                    Donor = attachDonor
+                };
+
                 db.Donations.Add(donation);
                 db.SaveChanges();
 
-            if (ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     var chargeRequest = new StripeChargeCreateOptions()
                     {
@@ -56,6 +73,14 @@ namespace SendMe.Controllers
                     if (result.Paid)
                     {
                         ViewBag.Message = "Payment Successful!";
+                        //var myMessage = new SendGrid.SendGridMessage();
+                        //myMessage.AddTo("test@sendgrid.com");
+                        //myMessage.From = new MailAddress("you@youremail.com", "First Last");
+                        //myMessage.Subject = "Sending with SendGrid is Fun";
+                        //myMessage.Text = "and easy to do anywhere, even with C#";
+
+                        //var transportWeb = new SendGrid.Web("SENDGRID_APIKEY");
+                        //transportWeb.DeliverAsync(myMessage);
                     }
                     else
                     {
