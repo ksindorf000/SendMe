@@ -15,7 +15,7 @@ namespace SendMe.Models
         public Trip ActiveTrip { get; set; }
         public School School { get; set; }
         public ApplicationUser User { get; set; }
-        public string ProfPicPath { get; set; }
+        public Upload Upload { get; set; }
 
         public StudentViewModel()
         {
@@ -34,10 +34,10 @@ namespace SendMe.Models
 
             ActiveTrip = Trips.Where(t => t.IsActive == true).FirstOrDefault();
 
-            /*ProfPicPath = db.Uploads
-                .Where(p => p.RefType == "ProfPic"
+            Upload = db.Uploads
+                .Where(p => p.TypeRef == "ProfPic"
                 && p.RefId == student.UserId)
-                .FirstOrDefault();*/
+                .FirstOrDefault();
         }
     }
 }

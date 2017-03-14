@@ -64,6 +64,9 @@ namespace SendMe.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            ViewBag.RefId = userId;
+            ViewBag.Type = "Student";
+
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),

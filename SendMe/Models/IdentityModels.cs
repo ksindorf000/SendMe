@@ -26,6 +26,7 @@ namespace SendMe.Models
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Donor> Donors { get; set; }
         public DbSet<Donation> Donations { get; set; }
+        public DbSet<Upload> Uploads { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
