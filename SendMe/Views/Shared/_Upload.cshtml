@@ -8,18 +8,72 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="row">
-            <div id="fileError"></div>
+            <div id="ppfileError"></div>
             <p>
-                <input id="myFile" type="file" name="File" class="form-control btn btn-default" />
+                <input type="file" name="File" id="ppFile" class="form-control btn btn-default" />
                 <input type="hidden" name="refId" value=@ViewBag.RefId />
                 <input type="hidden" name="type" value="ProfPic" />
             </p>
             <p>
                 Acceptable file size: 500KB <br/>
-                Acceptable file types: "jpg", "jpeg", "png"
+                Acceptable file types: "jpg", "jpeg", "png" <br/>
+                <strong>For best results, use a square image.</strong>
+
             </p>
             <p>
-                <button id="Upload" type="submit" class="btn btn-toolbar btn-success">
+                <button type="submit" id="ppUpload" class="btn btn-toolbar btn-success">
+                    <span class="glyphicon glyphicon-check"></span>
+                </button>
+            </p>
+        </div>
+    }
+}
+else if (ViewBag.Type == "School")
+{
+    using (Html.BeginForm("Upload", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div id="scfileError"></div>
+            <p>
+                <input type="file" name="File" id="scFile" class="form-control btn btn-default" />
+                <input type="hidden" name="refId" value=@ViewBag.RefId />
+                <input type="hidden" name="type" value="Cover" />
+            </p>
+            <p>
+                Acceptable file size: 500KB <br />
+                Acceptable file types: "jpg", "jpeg", "png" <br/>
+                <strong>For best results, use a landscape oriented image that is at least 50% wider than it is tall.</strong>
+
+            </p>
+            <p>
+                <button type="submit" id="scUpload" class="btn btn-toolbar btn-success">
+                    <span class="glyphicon glyphicon-check"></span>
+                </button>
+            </p>
+        </div>
+    }
+    using (Html.BeginForm("Upload", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div id="slfileError"></div>
+            <p>
+                <input type="file" name="File" id="slFile" class="form-control btn btn-default" />
+                <input type="hidden" name="refId" value=@ViewBag.RefId />
+                <input type="hidden" name="type" value="Logo" />
+            </p>
+            <p>
+                Acceptable file size: 500KB <br />
+                Acceptable file types: "jpg", "jpeg", "png" <br/>
+                <strong>For best results, use a square image.</strong>
+            </p>
+            <p>
+                <button type="submit" id="slUpload" class="btn btn-toolbar btn-success">
                     <span class="glyphicon glyphicon-check"></span>
                 </button>
             </p>
