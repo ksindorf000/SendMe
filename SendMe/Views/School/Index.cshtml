@@ -1,0 +1,36 @@
+﻿@model SendMe.ViewModels.SchoolViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="jumbotron">
+    <img class="cover" style="max-width: 100%" src="@Model.CoverImg.FilePath" />
+</div>
+
+<div class="row profile-header">
+    <div class="col-md-12 text-center marb-35">
+        <!-----------HEADER------------->
+        <h1 class="header-h">
+            <img class="logo" src="@Model.LogoImg.FilePath" style="max-width: 300px" /> 
+            <a href="@Model.School.Website" target="_blank">@Model.School.Name</a>
+        </h1>
+        @foreach (var student in Model.Students)
+        {
+            <h2>
+                @student.Student.FirstName @student.Student.LastName
+            </h2>
+
+            <h3>@student.ActiveTrip.Title</h3>
+            <sub>@student.ActiveTrip.Dates</sub>
+            <p>
+                @student.ActiveTrip.Desc
+            </p>
+            <p>
+                @student.ActiveTrip.Destination <br />
+                @student.ActiveTrip.TargetAmnt
+            </p>
+        }
+    </div>
+</div>
+

@@ -188,9 +188,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DonationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SchoolController.cs" />
     <Compile Include="Controllers\TripController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -253,6 +255,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\School.cs" />
+    <Compile Include="ViewModels\SchoolViewModel.cs" />
     <Compile Include="ViewModels\StudentViewModel.cs" />
     <Compile Include="Models\StuProfile.cs" />
     <Compile Include="Models\Trip.cs" />
@@ -286,6 +289,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Stripe.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Upload\uscmedCover031517.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -325,10 +329,10 @@
     <Content Include="Views\View.cshtml" />
     <Content Include="Views\Shared\_Upload.cshtml" />
     <Content Include="Views\Trip\Index.cshtml" />
+    <Content Include="Views\School\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

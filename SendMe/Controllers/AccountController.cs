@@ -211,6 +211,10 @@ namespace SendMe.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    //---------------------------------------------------
+                    //          Verify Admin Key and Add to Role
+                    //---------------------------------------------------
                     string adminKey = WebConfigurationManager.AppSettings["AdminKey"];
                     if (model.AdminKey != null && model.AdminKey == adminKey)
                     {
@@ -222,12 +226,15 @@ namespace SendMe.Controllers
                     //---------------------------------------------------
                     //          Create username for custom url
                     //---------------------------------------------------
-
                     user.UserName = UserHelpers.CreateUserName(model.Email);
 
                     db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
-                    
+
+
+                    //---------------------------------------------------
+                    //          Send Confirmation Email
+                    //---------------------------------------------------
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account",
                        new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
