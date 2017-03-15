@@ -12,6 +12,7 @@ using SendMe.Models;
 using System.Data.Entity;
 using System.Collections.Generic;
 using SendMe.Helpers;
+using System.Web.Configuration;
 
 namespace SendMe.Controllers
 {
@@ -205,10 +206,17 @@ namespace SendMe.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };               
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    string adminKey = WebConfigurationManager.AppSettings["AdminKey"];
+                    if (model.AdminKey != null && model.AdminKey == adminKey)
+                    {
+                        var result1 = UserManager.AddToRole(user.Id, "Admin");
+                    }
+
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     //---------------------------------------------------

@@ -45,6 +45,15 @@
         </div>
     </div>
 
+    <!--Admin Code-->
+    <div class="form-group">
+        @Html.LabelFor(m => m.AdminKey, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.AdminKey, new { @class = "form-control", id = "adminKey" })
+        </div>
+        <div id="adminErr"></div>
+    </div>
+
     <!--Submit-->
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
@@ -56,3 +65,4 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
