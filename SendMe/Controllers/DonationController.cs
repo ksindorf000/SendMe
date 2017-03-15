@@ -21,6 +21,8 @@ namespace SendMe.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.TripId = tripId;
             ViewBag.Message = null;
             if (!string.IsNullOrEmpty(stripeToken))
             {
@@ -109,7 +111,7 @@ namespace SendMe.Controllers
 
                 }
             }
-            return View();
+            return View(ViewBag.tripId);
 
         }
     }

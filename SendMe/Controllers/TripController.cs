@@ -16,9 +16,16 @@ namespace SendMe.Controllers
         public ActionResult Index()
         {
             
-            var trip = db.Trips.Find(3);
-            var model = new TripViewModel(trip);
+            var trip = db.Trips.ToList();
+            var model = new List<TripViewModel>();
+            foreach (var item in trip)
+            {
+                TripViewModel test = new TripViewModel(item);
+                model.Add(test);
+           
+            }
             return View(model);
+
         }
     }
 }

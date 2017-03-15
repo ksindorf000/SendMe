@@ -33,6 +33,7 @@
         <p>
             @Model.Student.Speciality
         </p>
+        @Html.ActionLink("Donate", "Payment", "Donation", new {tripId = @Model.ActiveTrip.Id}, null )
     </div>
 </div>
 <div class="row">

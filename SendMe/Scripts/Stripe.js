@@ -1,4 +1,5 @@
-﻿var stripe = Stripe(pubKey);
+﻿
+var stripe = Stripe(pubKey);
 var elements = stripe.elements();
 function checkEmail(emailAddress) {
     var validEmail = /^[a-z0-9\.\_%+-]+@@[a-z0-9\.\-]+\.[a-z]{2,4}$/i;
@@ -40,7 +41,7 @@ function setOutcome(result) {
         var Name = $("#DonorName").val();
         var Email = $("#DonorEmail").val();
         var Phone = $("#DonorPhoneNumber").val();
-        window.location.href = "/Donation/Payment?stripeToken=" + result.token.id + "&amount=" + amount + "&Name=" + Name + "&Email=" + Email + "&Phone=" + Phone;
+        window.location.href = "/Donation/Payment?stripeToken=" + result.token.id + "&amount=" + amount + "&Name=" + Name + "&Email=" + Email + "&Phone=" + Phone + "&tripId=" + tripId;
 
 
 

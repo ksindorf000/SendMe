@@ -25,14 +25,17 @@
             <div id="card-element" class="field"></div>
         </label>
     </div>
+   
     <button type="submit">Donate</button>
     <div class="outcome">
         <div class="alert alert-danger">
             <strong class="error"></strong>
         </div>
-
     </div>
     <script language="JavaScript" type="text/javascript">
-            var pubKey ='@System.Configuration.ConfigurationManager.AppSettings["PubKey"]';
+        var pubKey = '@System.Configuration.ConfigurationManager.AppSettings["PubKey"]';
+        var tripId = '@(ViewBag.TripId)';
     </script>
 </form>
+
+
