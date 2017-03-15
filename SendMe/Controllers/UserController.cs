@@ -22,15 +22,18 @@ namespace SendMe.Controllers
             StuProfile student = db.StuProfiles
                 .Where(sp => sp.User.UserName == username)
                 .FirstOrDefault();
+            var currentUser = User.Identity.GetUserId();
+            Trip currentTrip = db.Trips.Where(t => t.Student.UserId == currentUser).FirstOrDefault();
 
             if (user == null)
             {
                 return RedirectToAction("Index", "Home");
 
             }
-
+            TripViewModel tripVM = new TripViewModel(currentTrip);
             StudentViewModel studentVM = new StudentViewModel(student);
-            return View(studentVM);
+            
+            return View(new Tuple<StudentViewModel, TripViewModel>(studentVM, tripVM));
 
         }
     }

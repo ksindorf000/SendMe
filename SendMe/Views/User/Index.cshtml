@@ -1,19 +1,19 @@
-﻿@model SendMe.Models.StudentViewModel
+﻿@model Tuple<SendMe.Models.StudentViewModel, SendMe.Models.TripViewModel>
 
 @{
     ViewBag.Title = "Index";
     ViewBag.CurrentUser = User.Identity.Name;
-    ViewBag.userProfile = Model.User.UserName;
+    ViewBag.userProfile = Model.Item1.User.UserName;
 }
 <!-----------PROFILE PIC------------->
 <div class="row profile-header">
     <div class="col-md-12 text-center marb-35">
-        <img class="thumb profile-pic" src="@Model.Upload.FilePath" style="max-width: 300px" />
+        <img class="thumb profile-pic" src="@Model.Item1.Upload.FilePath" style="max-width: 300px" />
 
         <!-----------HEADER------------->
-        <h1 class="header-h">@Model.Student.FirstName @Model.Student.LastName</h1>
+        <h1 class="header-h">@Model.Item1.Student.FirstName @Model.Item1.Student.LastName</h1>
         <p>
-            @Model.School.Name
+            @Model.Item1.School.Name
         </p>
         @if (ViewBag.CurrentUser == ViewBag.userProfile)
         {
@@ -22,30 +22,58 @@
             </h4>
         }
         <p class="header-p">
-            @Model.Student.Bio
+            @Model.Item1.Student.Bio
         </p>
         <p>
-            @Model.User.Email
+            @Model.Item1.User.Email
         </p>
         <p>
-            @Model.Student.Year
+            @Model.Item1.Student.Year
         </p>
         <p>
-            @Model.Student.Speciality
+            @Model.Item1.Student.Speciality
         </p>
-        @Html.ActionLink("Donate", "Payment", "Donation", new {tripId = @Model.ActiveTrip.Id}, null )
+        @Html.ActionLink("Donate", "Payment", "Donation", new {tripId = @Model.Item1.ActiveTrip.Id}, null )
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <h3>@Model.ActiveTrip.Title</h3>
-        <sub>@Model.ActiveTrip.Dates</sub>
+        <h3>@Model.Item1.ActiveTrip.Title</h3>
+        <sub>@Model.Item1.ActiveTrip.Dates</sub>
         <p>
-            @Model.ActiveTrip.Desc
+            @Model.Item1.ActiveTrip.Desc
         </p>
         <p>
-            @Model.ActiveTrip.Destination <br />
-            $@Model.ActiveTrip.TargetAmnt
+            @Model.Item1.ActiveTrip.Destination <br />
+            $@Model.Item1.ActiveTrip.TargetAmnt
         </p>
+    </div>
+</div>
+
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    Check Donations
+</button>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Donations</h4>
+            </div>
+            <div class="modal-body">
+                @foreach(var donation in Model.Item2.Donations)
+                {
+                    <h4>Donor Name : @donation.Donor.Name</h4>
+                    <p>
+                       Donation Amount:$ @donation.Amount
+                       Have Thanked: @donation.HaveThanked
+                    </p>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>
