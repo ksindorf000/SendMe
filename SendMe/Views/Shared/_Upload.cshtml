@@ -8,11 +8,15 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="row">
-            <div id="errorMsg"></div>
+            <div id="fileError"></div>
             <p>
                 <input id="myFile" type="file" name="File" class="form-control btn btn-default" />
                 <input type="hidden" name="refId" value=@ViewBag.RefId />
                 <input type="hidden" name="type" value="ProfPic" />
+            </p>
+            <p>
+                Acceptable file size: 500KB <br/>
+                Acceptable file types: "jpg", "jpeg", "png"
             </p>
             <p>
                 <button id="Upload" type="submit" class="btn btn-toolbar btn-success">
