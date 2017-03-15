@@ -17,6 +17,10 @@ namespace SendMe.Controllers
 
         public ActionResult Payment(string stripeToken, int? amount, string Name, string Email, string Phone, int? tripId)
         {
+            if (tripId == null)
+            {
+                return HttpNotFound();
+            }
             ViewBag.Message = null;
             if (!string.IsNullOrEmpty(stripeToken))
             {
@@ -28,9 +32,11 @@ namespace SendMe.Controllers
                 //Add donor record if none existing
                 if (existingDonor == null && (Name != null || Email != null))
                 {
+                    string name = (Name == "" ? "Anonymous" : Name);
+
                     Donor donorInfo = new Donor
-                    {
-                        Name = Name,
+                    { 
+                        Name = name,
                         Email = Email,
                         Phone = Phone
                     };

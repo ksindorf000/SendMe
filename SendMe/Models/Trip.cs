@@ -18,7 +18,7 @@ namespace SendMe.Models
         public double TargetAmnt { get; set; }
         public double PercentOfAmnt { get; set; }
         public bool IsActive { get; set; }
-        public int StuId { get; set; }
+        public int? StuId { get; set; }
 
         [ForeignKey("StuId")]
         public virtual StuProfile Student { get; set; }
