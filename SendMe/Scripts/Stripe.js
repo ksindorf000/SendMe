@@ -43,8 +43,6 @@ function setOutcome(result) {
         var Phone = $("#DonorPhoneNumber").val();
         window.location.href = "/Donation/Payment?stripeToken=" + result.token.id + "&amount=" + amount + "&Name=" + Name + "&Email=" + Email + "&Phone=" + Phone + "&tripId=" + tripId;
 
-
-
     } else if (result.error) {
         errorElement.textContent = result.error.message;
         errorElement.classList.add('visible');

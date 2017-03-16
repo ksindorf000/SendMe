@@ -49,7 +49,24 @@
         </p>
     </div>
 </div>
+
 <!-----------Progress bar------------->
+<script type="text/javascript">
+    var targetAmount = '@Model.Item1.ActiveTrip.TargetAmnt';
+    @{
+        var totalDonation = 0.0;
+        foreach(var donation in Model.Item2.Donations)
+        {
+            totalDonation += (double)donation.Amount;
+        }
+        if (totalDonation >= Model.Item1.ActiveTrip.TargetAmnt)
+        {
+            totalDonation = Model.Item1.ActiveTrip.TargetAmnt;
+        }
+    }
+    var currentTotal = @totalDonation;
+</script>
+
 <div class="container">
     <div id="goal"></div>
 </div>
@@ -76,13 +93,15 @@
                     <p>
                         @if (donation.HaveThanked == false)
                         {
-                            @Ajax.ActionLink("Thank for Donation", "Index", new { donationId = donation.Id }, new AjaxOptions
-                   {
-                       UpdateTargetId = "myModel",
-                       LoadingElementId = "progress",
-                       OnSuccess = "disablelink",
-                   },
-                      new { @class = "btn btn-success" })
+
+                            @Ajax.ActionLink("Thank for Donation", "Index", new { donationId = donation.Id },
+                            new AjaxOptions
+                            {
+                                UpdateTargetId = "myModel",
+                                LoadingElementId = "progress",
+                                OnSuccess = "disablelink",
+                            },
+                       new { @class = "btn btn-success" })
                         }
                     </p>
                 }

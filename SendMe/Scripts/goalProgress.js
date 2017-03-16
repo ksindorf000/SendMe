@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     $('#goal').goalProgress({
-        goalAmount: 1000,
-        currentAmount: 100,
+        goalAmount: targetAmount,
+        currentAmount: currentTotal,
         textBefore: '$',
         textAfter: ' raised.'
     });
