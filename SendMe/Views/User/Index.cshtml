@@ -67,7 +67,7 @@
                     <h4>Donor Name : @donation.Donor.Name</h4>
                     <p>
                        Donation Amount:$ @donation.Amount
-                       Have Thanked: @donation.HaveThanked
+                            @Ajax.ActionLink("Thank for Donation", "Index", new { donationId = donation.Id }, new AjaxOptions { UpdateTargetId = "myModel"})
                     </p>
                 }
             </div>

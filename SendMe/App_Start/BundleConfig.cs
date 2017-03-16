@@ -23,7 +23,8 @@ namespace SendMe
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/myJS.js",
-                       "~/Scripts/Stripe.js"));
+                       "~/Scripts/Stripe.js",
+                       "~/Scripts/jquery.unobtrusive-ajax.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

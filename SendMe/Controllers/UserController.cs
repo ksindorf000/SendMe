@@ -15,7 +15,8 @@ namespace SendMe.Controllers
          * INDEX: Username
          ********************************/
         [Route("send/{username}")]
-        public ActionResult Index(string username)
+        public ActionResult Index(string username, int? donationId)
+
         {
             ApplicationUser user = new ApplicationUser();
 
@@ -30,13 +31,17 @@ namespace SendMe.Controllers
                 return RedirectToAction("Index", "Home");
 
             }
+
             TripViewModel tripVM = new TripViewModel(currentTrip);
             StudentViewModel studentVM = new StudentViewModel(student);
-            
+
             return View(new Tuple<StudentViewModel, TripViewModel>(studentVM, tripVM));
 
         }
-    }
 
+
+    }
 }
+
+
 
