@@ -19,5 +19,13 @@ namespace SendMe.Models
 
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }
+
+        public StuProfile() { }
+
+        public StuProfile(ApplicationUser user, int schoolId)
+        {
+            SchoolId = schoolId;
+            UserId = user.Id;
+        }
     }
 }

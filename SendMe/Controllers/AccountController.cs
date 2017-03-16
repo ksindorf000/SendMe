@@ -78,9 +78,9 @@ namespace SendMe.Controllers
             {
                 return View(model);
             }
-                        
+
             string username = UserHelpers.CreateUserName(model.Email);
-            
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(username, model.Password, model.RememberMe, shouldLockout: false);
@@ -157,7 +157,7 @@ namespace SendMe.Controllers
                     return View(model);
             }
         }
-        
+
         //Create School List
         private List<SelectListItem> CreateSchoolList()
         {
@@ -180,7 +180,7 @@ namespace SendMe.Controllers
             ViewBag.Schools = CreateSchoolList().AsEnumerable();
             return View();
         }
-                
+
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -206,7 +206,7 @@ namespace SendMe.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };               
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -230,6 +230,11 @@ namespace SendMe.Controllers
 
                     db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
+
+                    //---------------------------------------------------
+                    //              Create Student Profile
+                    //---------------------------------------------------
+                    StuProfile stuProfile = new StuProfile(user, model.SchoolId);
 
 
                     //---------------------------------------------------
@@ -296,10 +301,10 @@ namespace SendMe.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                 await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form

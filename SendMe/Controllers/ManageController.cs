@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SendMe.Models;
+using System.Dynamic;
+using System.Data.Entity;
 
 namespace SendMe.Controllers
 {
@@ -15,6 +17,7 @@ namespace SendMe.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -54,6 +57,7 @@ namespace SendMe.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
+
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -69,16 +73,20 @@ namespace SendMe.Controllers
             ViewBag.ReturnUrl = "../Manage";
             ViewBag.ImgPath = GetExistingImage("ProfPic", ViewBag.RefId);
 
-            var model = new IndexViewModel
+            var indexVM = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)                
             };
 
-            return View(model);
+            StuProfile profile = db.StuProfiles
+                .Where(sp => sp.UserId == userId)
+                .FirstOrDefault();
+
+            return View(new Tuple<StuProfile, IndexViewModel>(profile, indexVM));
         }
 
         //----------------------------
@@ -86,7 +94,6 @@ namespace SendMe.Controllers
         //----------------------------
         public string GetExistingImage(string type, string refId)
         {
-            ApplicationDbContext db = new ApplicationDbContext();
 
             Upload img = db.Uploads
                 .Where(u => u.TypeRef == type && u.RefId == refId)
@@ -97,11 +104,42 @@ namespace SendMe.Controllers
             return filePath;
         }
 
+        //----------------------------
+        //      Update Profile 
+        //----------------------------
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateProfile([Bind(Prefix = "Item1")] StuProfile model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            string userId = User.Identity.GetUserId();
+
+            StuProfile profile = db.StuProfiles
+                .Where(sp => sp.UserId == userId)
+                .FirstOrDefault();
+
+            profile.FirstName = model.FirstName;
+            profile.LastName = model.LastName;
+            profile.SchoolId = model.SchoolId;
+            profile.Speciality = model.Speciality;
+            profile.Year = model.Year;
+            profile.Bio = model.Bio;
+
+            db.Entry(profile).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Manage");
+        }
+
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
+        public async Task<ActionResult> RemoveLogin([Bind(Prefix = "Item2")] string loginProvider, string providerKey)
         {
             ManageMessageId? message;
             var result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
@@ -132,7 +170,7 @@ namespace SendMe.Controllers
         // POST: /Manage/AddPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
+        public async Task<ActionResult> AddPhoneNumber([Bind(Prefix = "Item2")] AddPhoneNumberViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -246,7 +284,7 @@ namespace SendMe.Controllers
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        public async Task<ActionResult> ChangePassword([Bind(Prefix = "Item2")] ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -277,7 +315,7 @@ namespace SendMe.Controllers
         // POST: /Manage/SetPassword
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
+        public async Task<ActionResult> SetPassword([Bind(Prefix = "Item2")] SetPasswordViewModel model)
         {
             if (ModelState.IsValid)
             {

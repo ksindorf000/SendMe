@@ -49,7 +49,7 @@
         }
         else if (size > 1000000) {
             errorMsg.append("<p class=\"alert alert-danger\" role=\"alert\">"
-                + "Your file is too big. Please upload a file no larger than 500KB.</p>");
+                + "Your file is too big. Please upload a file no larger than 1MB.</p>");
         }
         else if (size <= 500000) {
             errorMsg.append("<p class=\"alert alert-danger\" role=\"alert\">"

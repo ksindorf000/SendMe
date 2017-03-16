@@ -42,17 +42,21 @@ namespace SendMe.Controllers
                 .Where(t => t.Student.UserId == currentUser)
                 .FirstOrDefault();
 
-            if (user == null)
+            if (student == null)
             {
                 return RedirectToAction("Index", "Home");
 
             }
 
+            Trip currentTrip = db.Trips.Where(t => t.Student.UserId == currentUser).FirstOrDefault();
             TripViewModel tripVM = new TripViewModel(currentTrip);
             StudentViewModel studentVM = new StudentViewModel(student);
 
             return View(new Tuple<StudentViewModel, TripViewModel>(studentVM, tripVM));
+
         }
+
+
     }
 }
 
