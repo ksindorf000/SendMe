@@ -66,6 +66,8 @@ namespace SendMe.Controllers
             var userId = User.Identity.GetUserId();
             ViewBag.RefId = userId;
             ViewBag.Type = "Student";
+            ViewBag.ReturnUrl = "../Manage";
+            ViewBag.ImgPath = GetExistingImage("ProfPic", ViewBag.RefId);
 
             var model = new IndexViewModel
             {
@@ -77,7 +79,23 @@ namespace SendMe.Controllers
             };
 
             return View(model);
-        }        
+        }
+
+        //----------------------------
+        //      Get Existing Img 
+        //----------------------------
+        public string GetExistingImage(string type, string refId)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            Upload img = db.Uploads
+                .Where(u => u.TypeRef == type && u.RefId == refId)
+                .FirstOrDefault();
+
+            string filePath = img.FilePath;
+
+            return filePath;
+        }
 
         //
         // POST: /Manage/RemoveLogin

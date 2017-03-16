@@ -1,5 +1,8 @@
 ﻿@model SendMe.Models.UploadViewModel
 
+<!---------------------------->
+<!--    Profile Picture     -->
+<!---------------------------->
 @if (ViewBag.Type == "Student")
 {
     using (Html.BeginForm("Upload", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -8,18 +11,84 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="row">
-            <div id="fileError"></div>
+            <div id="ppfileError"></div>
+            <img src="@ViewBag.ImgPath" class="img-thumbnail" />
             <p>
-                <input id="myFile" type="file" name="File" class="form-control btn btn-default" />
-                <input type="hidden" name="refId" value=@ViewBag.RefId />
-                <input type="hidden" name="type" value="ProfPic" />
+                <input type="file" name="File" id="ppFile" class="form-control btn btn-default" />
+                 @Html.HiddenFor(m => m.refId, new { Value = ViewBag.RefId })
+                 @Html.HiddenFor(m => m.type, new { Value = "ProfPic" })
+                 @Html.HiddenFor(m => m.ReturnUrl, new { Value = ViewBag.ReturnUrl })
             </p>
             <p>
-                Acceptable file size: 500KB <br/>
-                Acceptable file types: "jpg", "jpeg", "png"
+                Acceptable file size: 250KB <br/>
+                Acceptable file types: "jpg", "jpeg", "png" <br/>
+                <strong>For best results, use a square image.</strong>
+
             </p>
             <p>
-                <button id="Upload" type="submit" class="btn btn-toolbar btn-success">
+                <button type="submit" id="ppUpload" class="btn btn-toolbar btn-success">
+                    <span class="glyphicon glyphicon-check"></span>
+                </button>
+            </p>
+        </div>
+    }
+}
+else if (ViewBag.Type == "School")
+{
+<!---------------------------->
+<!--     School Cover       -->
+<!---------------------------->
+    using (Html.BeginForm("Upload", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div id="scfileError"></div>
+            <img src="@ViewBag.CoverPath" class="img-thumbnail" />
+            <p>
+                <input type="file" name="File" id="scFile" class="form-control btn btn-default" />
+                @Html.HiddenFor(m => m.refId, new { Value = ViewBag.RefId })
+                @Html.HiddenFor(m => m.type, new { Value = "schCover" })
+                @Html.HiddenFor(m => m.ReturnUrl, new { Value = ViewBag.ReturnUrl })
+            </p>
+            <p>
+                Acceptable file size: 500KB <br />
+                Acceptable file types: "jpg", "jpeg", "png" <br/>
+                <strong>For best results, use a landscape oriented image that is at least 50% wider than it is tall.</strong>
+
+            </p>
+            <p>
+                <button type="submit" id="scUpload" class="btn btn-toolbar btn-success">
+                    <span class="glyphicon glyphicon-check"></span>
+                </button>
+            </p>
+        </div>
+    }
+<!---------------------------->
+<!--     School Logo        -->
+<!---------------------------->
+    using (Html.BeginForm("Upload", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div id="slfileError"></div>
+            <img src="@ViewBag.LogoPath" class="img-thumbnail" />
+            <p>
+                <input type="file" name="File" id="slFile" class="form-control btn btn-default" />
+                @Html.HiddenFor(m => m.refId, new { Value = ViewBag.RefId })
+                @Html.HiddenFor(m => m.type, new { Value = "schLogo" })
+                @Html.HiddenFor(m => m.ReturnUrl, new { Value = ViewBag.ReturnUrl })
+            </p>
+            <p>
+                Acceptable file size: 250KB <br />
+                Acceptable file types: "jpg", "jpeg", "png" <br/>
+                <strong>For best results, use a square image.</strong>
+            </p>
+            <p>
+                <button type="submit" id="slUpload" class="btn btn-toolbar btn-success">
                     <span class="glyphicon glyphicon-check"></span>
                 </button>
             </p>

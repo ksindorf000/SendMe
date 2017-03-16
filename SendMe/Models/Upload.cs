@@ -28,5 +28,6 @@ namespace SendMe.Models
         public HttpPostedFile File { get; set; }
         public string refId { get; set; }
         public string type { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

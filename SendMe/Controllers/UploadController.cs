@@ -2,6 +2,7 @@
 using SendMe.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -13,14 +14,14 @@ namespace SendMe.Controllers
     public class UploadController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-        
+
         //----------------------------
         //      Process Upload
         //----------------------------
         // POST: Image Upload
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public void Upload(UploadViewModel formData)
+        public ActionResult Upload(UploadViewModel formData)
         {
             //Save File and Create Path
             var uploadedFile = Request.Files[0];
@@ -28,20 +29,33 @@ namespace SendMe.Controllers
             var serverPath = Server.MapPath(@"~\Upload");
             var fullPath = Path.Combine(serverPath, filename);
 
-            //Save Image
             uploadedFile.SaveAs(fullPath);
 
-            //Create Upload Entry
-            var uploadModel = new Upload
+            Upload existing = db.Uploads
+                .Where(u => u.RefId == formData.refId && u.TypeRef == formData.type)
+                .FirstOrDefault();
+
+            if (existing == null)
             {
-                File = filename,
-                RefId = formData.refId,
-                TypeRef = formData.type
-            };
+                var uploadModel = new Upload
+                {
+                    File = filename,
+                    RefId = formData.refId,
+                    TypeRef = formData.type
+                };
 
-            db.Uploads.Add(uploadModel);
+                db.Uploads.Add(uploadModel);
+            }
+            else
+            {
+                existing.File = filename;
+                db.Entry(existing).State = EntityState.Modified;
+            }
+
             db.SaveChanges();
-        }
 
+            return Redirect(formData.ReturnUrl);
+        }
+        
     }
 }

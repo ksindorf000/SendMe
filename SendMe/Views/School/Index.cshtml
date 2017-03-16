@@ -12,12 +12,17 @@
     <div class="col-md-12 text-center marb-35">
         <!-----------HEADER------------->
         <h1 class="header-h">
-            <img class="logo" src="@Model.LogoImg.FilePath" style="max-width: 300px" /> 
+            <img class="img-thumbnail img-circle" src="@Model.LogoImg.FilePath" style="max-width: 300px" /> 
             <a href="@Model.School.Website" target="_blank">@Model.School.Name</a>
         </h1>
+        @if (User.IsInRole("Admin") && ViewBag.UserSchId == Model.School.Id)
+        {
+            @Html.ActionLink("Edit", "Manage", new { id = Model.School.Id })
+        }
         @foreach (var student in Model.Students)
         {
             <h2>
+                <img class="img-thumbnail img-circle" src="@student.Upload.FilePath" style="width: 150px; height: 150px" />
                 @student.Student.FirstName @student.Student.LastName
             </h2>
 
