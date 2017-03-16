@@ -23,7 +23,7 @@ namespace SendMe.Controllers
         /*********************************
          * INDEX: School
          ********************************/
-        [Route("school/{id}")]
+         [Route("School/{id}")]
         public ActionResult Index(int? id)
         {
             if (id == null)
@@ -60,12 +60,29 @@ namespace SendMe.Controllers
                 return RedirectToAction("Index", "School", new { id = id });
             }
 
-            ViewBag.RefId = id;
+            ViewBag.RefId = id.ToString();
             ViewBag.Type = "School";
+            ViewBag.ReturnUrl = "../School/Manage/" + ViewBag.RefId;
+            ViewBag.CoverPath = GetExistingImage("schCover", ViewBag.RefId);
+            ViewBag.LogoPath = GetExistingImage("schLogo", ViewBag.RefId);
 
             var school = db.Schools.Find(id);
 
             return View(school);
+        }
+
+        //----------------------------
+        //      Get Existing Img 
+        //----------------------------
+        public string GetExistingImage(string type, string refId)
+        {
+            Upload img = db.Uploads
+                .Where(u => u.TypeRef == type && u.RefId == refId)
+                .FirstOrDefault();
+
+            string filePath = img.FilePath;
+
+            return filePath;
         }
 
         /*********************************

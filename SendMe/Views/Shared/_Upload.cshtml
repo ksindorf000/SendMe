@@ -1,5 +1,8 @@
 ﻿@model SendMe.Models.UploadViewModel
 
+<!---------------------------->
+<!--    Profile Picture     -->
+<!---------------------------->
 @if (ViewBag.Type == "Student")
 {
     using (Html.BeginForm("Upload", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -9,13 +12,15 @@
 
         <div class="row">
             <div id="ppfileError"></div>
+            <img src="@ViewBag.ImgPath" class="img-thumbnail" />
             <p>
                 <input type="file" name="File" id="ppFile" class="form-control btn btn-default" />
-                <input type="hidden" name="refId" value=@ViewBag.RefId />
-                <input type="hidden" name="type" value="ProfPic" />
+                 @Html.HiddenFor(m => m.refId, new { Value = ViewBag.RefId })
+                 @Html.HiddenFor(m => m.type, new { Value = "ProfPic" })
+                 @Html.HiddenFor(m => m.ReturnUrl, new { Value = ViewBag.ReturnUrl })
             </p>
             <p>
-                Acceptable file size: 500KB <br/>
+                Acceptable file size: 250KB <br/>
                 Acceptable file types: "jpg", "jpeg", "png" <br/>
                 <strong>For best results, use a square image.</strong>
 
@@ -30,6 +35,9 @@
 }
 else if (ViewBag.Type == "School")
 {
+<!---------------------------->
+<!--     School Cover       -->
+<!---------------------------->
     using (Html.BeginForm("Upload", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
@@ -37,10 +45,12 @@ else if (ViewBag.Type == "School")
 
         <div class="row">
             <div id="scfileError"></div>
+            <img src="@ViewBag.CoverPath" class="img-thumbnail" />
             <p>
                 <input type="file" name="File" id="scFile" class="form-control btn btn-default" />
-                <input type="hidden" name="refId" value=@ViewBag.RefId />
-                <input type="hidden" name="type" value="Cover" />
+                @Html.HiddenFor(m => m.refId, new { Value = ViewBag.RefId })
+                @Html.HiddenFor(m => m.type, new { Value = "schCover" })
+                @Html.HiddenFor(m => m.ReturnUrl, new { Value = ViewBag.ReturnUrl })
             </p>
             <p>
                 Acceptable file size: 500KB <br />
@@ -55,6 +65,9 @@ else if (ViewBag.Type == "School")
             </p>
         </div>
     }
+<!---------------------------->
+<!--     School Logo        -->
+<!---------------------------->
     using (Html.BeginForm("Upload", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
@@ -62,13 +75,15 @@ else if (ViewBag.Type == "School")
 
         <div class="row">
             <div id="slfileError"></div>
+            <img src="@ViewBag.LogoPath" class="img-thumbnail" />
             <p>
                 <input type="file" name="File" id="slFile" class="form-control btn btn-default" />
-                <input type="hidden" name="refId" value=@ViewBag.RefId />
-                <input type="hidden" name="type" value="Logo" />
+                @Html.HiddenFor(m => m.refId, new { Value = ViewBag.RefId })
+                @Html.HiddenFor(m => m.type, new { Value = "schLogo" })
+                @Html.HiddenFor(m => m.ReturnUrl, new { Value = ViewBag.ReturnUrl })
             </p>
             <p>
-                Acceptable file size: 500KB <br />
+                Acceptable file size: 250KB <br />
                 Acceptable file types: "jpg", "jpeg", "png" <br/>
                 <strong>For best results, use a square image.</strong>
             </p>

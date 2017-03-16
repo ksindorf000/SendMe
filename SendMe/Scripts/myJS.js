@@ -8,6 +8,7 @@
 
     $('#ppFile').bind('change', function () {
         var errorMsg = $('#ppfileError');
+        var btn = $('#ppUpload');
         errorMsg.html("");
 
         var size = this.files[0].size;
@@ -16,8 +17,7 @@
         var accExt = ['jpg', 'jpeg', 'png'];
 
         if ((size > 0 && size <= 250000) && (accExt.indexOf(ext) > -1)) {
-            $('#ppUpload').attr('disabled', false);
-            alert(size);
+            btn.attr('disabled', false);
         }
         else if (size > 250000) {
             errorMsg.append("<p class=\"alert alert-danger\" role=\"alert\">"
@@ -36,6 +36,7 @@
 
     $(document).on("change", '#scFile', function () {
         var errorMsg = $('#scfileError');
+        var btn = $('#scUpload');
         errorMsg.html("");
 
         var size = this.files[0].size;
@@ -43,13 +44,16 @@
         var ext = fname.substr(fname.lastIndexOf('.') + 1);
         var accExt = ['jpg', 'jpeg', 'png'];
 
-        if ((size > 0 && size <= 500000) && (accExt.indexOf(ext) > -1)) {
-            $('#scUpload').attr('disabled', false);
-            alert(size);
+        if ((size > 0 && size <= 1000000) && (accExt.indexOf(ext) > -1)) {
+            btn.attr('disabled', false);
         }
-        else if (size > 500000) {
+        else if (size > 1000000) {
             errorMsg.append("<p class=\"alert alert-danger\" role=\"alert\">"
                 + "Your file is too big. Please upload a file no larger than 500KB.</p>");
+        }
+        else if (size <= 500000) {
+            errorMsg.append("<p class=\"alert alert-danger\" role=\"alert\">"
+                + "Your file is too small. Please upload a file bewteen 500KB and 1MB.</p>");
         }
         else if (accExt.indexOf(ext) <= -1) {
             errorMsg.append("<p class=\"alert alert-danger\" role=\"alert\">"
@@ -64,6 +68,7 @@
 
     $('#slFile').bind('change', function () {
         var errorMsg = $('#slfileError');
+        var btn = $('#slUpload');
         errorMsg.html("");
 
         var size = this.files[0].size;
@@ -72,8 +77,7 @@
         var accExt = ['jpg', 'jpeg', 'png'];
 
         if ((size > 0 && size <= 250000) && (accExt.indexOf(ext) > -1)) {
-            $('#slUpload').attr('disabled', false);
-            alert(size);
+            btn.attr('disabled', false);
         }
         else if (size > 250000) {
             errorMsg.append("<p class=\"alert alert-danger\" role=\"alert\">"
@@ -96,7 +100,7 @@
             $("#urlError").append("Please use the full url (includes \"http://\" or \"https://\".)");
         }
         else {
-            document.getElementById("urlError").innerHTML = "";
+            $("#urlError").innerHTML = "";
         }
     });
 
