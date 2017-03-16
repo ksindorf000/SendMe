@@ -12,14 +12,13 @@ namespace SendMe.Controllers
     {
         ApplicationDbContext db = new ApplicationDbContext();
 
+        
         /*********************************
          * INDEX: Username
          ********************************/
         [Route("send/{username}")]
         public ActionResult Index(string username, int? donationId)
-        {
-            ApplicationUser user = new ApplicationUser();
-    
+        {   
             if (donationId != null)
             {
                 var donationModify =
@@ -33,7 +32,9 @@ namespace SendMe.Controllers
                 }
                 db.SaveChanges();
             }
+
             var currentUser = User.Identity.GetUserId();
+
             StuProfile student = db.StuProfiles
                 .Where(sp => sp.User.UserName == username)
                 .FirstOrDefault();
@@ -48,12 +49,10 @@ namespace SendMe.Controllers
 
             }
 
-            Trip currentTrip = db.Trips.Where(t => t.Student.UserId == currentUser).FirstOrDefault();
             TripViewModel tripVM = new TripViewModel(currentTrip);
             StudentViewModel studentVM = new StudentViewModel(student);
 
             return View(new Tuple<StudentViewModel, TripViewModel>(studentVM, tripVM));
-
         }
 
 

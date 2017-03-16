@@ -232,23 +232,34 @@ namespace SendMe.Controllers
                     db.SaveChanges();
 
                     //---------------------------------------------------
-                    //              Create Student Profile
+                    //   Create Student Profile & Add Placeholder Pic
                     //---------------------------------------------------
                     StuProfile stuProfile = new StuProfile(user, model.SchoolId);
+                    db.StuProfiles.Add(stuProfile);
 
+                    Upload placeholder = new Upload
+                    {
+                        File = "sm03162017_profpic-placeholder.png",
+                        RefId = user.Id,
+                        TypeRef = "ProfPic"
+                    };
+                    db.Uploads.Add(placeholder);
+
+                    db.SaveChanges();
 
                     //---------------------------------------------------
                     //          Send Confirmation Email
                     //---------------------------------------------------
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account",
-                       new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id,
-                       "Confirm your account", "Please confirm your account by clicking <a href=\""
-                       + callbackUrl + "\">here</a>");
+                    //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account",
+                    //   new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id,
+                    //   "Confirm your account", "Please confirm your account by clicking <a href=\""
+                    //   + callbackUrl + "\">here</a>");
 
-                    ViewBag.SentConf = "A confirmation email was sent to " + model.Email
-                    + ". Please look for the confirmation email in your inbox and click the provided link to confirm and log in.";
+                    //ViewBag.SentConf = "A confirmation email was sent to " + model.Email
+                    //+ ". Please look for the confirmation email in your inbox and click the provided link to confirm and log in.";
+
                     ModelState.Clear();
 
                     ViewBag.Schools = CreateSchoolList().AsEnumerable();

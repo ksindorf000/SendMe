@@ -121,13 +121,26 @@ namespace SendMe.Controllers
             StuProfile profile = db.StuProfiles
                 .Where(sp => sp.UserId == userId)
                 .FirstOrDefault();
-
-            profile.FirstName = model.FirstName;
-            profile.LastName = model.LastName;
-            profile.SchoolId = model.SchoolId;
-            profile.Speciality = model.Speciality;
-            profile.Year = model.Year;
-            profile.Bio = model.Bio;
+            if (model.FirstName != null)
+            {
+                profile.FirstName = model.FirstName;
+            }
+            if (model.LastName != null)
+            {
+                profile.LastName = model.LastName;
+            }            
+            if (model.Speciality != null)
+            {
+                profile.Speciality = model.Speciality;
+            }
+            if (model.Year != null)
+            {
+                profile.Year = model.Year;
+            }
+            if (model.Bio != null)
+            {
+                profile.Bio = model.Bio;
+            }
 
             db.Entry(profile).State = EntityState.Modified;
             db.SaveChanges();
