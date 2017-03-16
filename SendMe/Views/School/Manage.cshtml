@@ -1,4 +1,4 @@
-﻿@model SendMe.ViewModels.SchoolViewModel
+﻿@model SendMe.Models.School
 
 @{
     ViewBag.Title = "Manage";
@@ -11,33 +11,26 @@
     <h4>Change your school's settings</h4>
     <hr />
 
-    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("Manage", "School", new { id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary("", new { @class = "text-danger" })
 
     <!--Name-->
         <div class="form-group">
-            @Html.LabelFor(m => m.School.Name, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(x => x.School.Name, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.School.Name)
-            </div>
-        </div>
-
-    <!--Address-->
-        <div class="form-group">
-            @Html.LabelFor(m => m.School.Address, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.EditorFor(m => m.School.Address, new { @class = "form-control" })
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name)
             </div>
         </div>
 
     <!--Website-->
         <div class="form-group">
-            @Html.LabelFor(m => m.School.Website, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => m.Website, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.EditorFor(m => m.School.Website, new { @class = "form-control" })
+                <input type="url" class="form-control" name="Website" id ="schUrl" value="@Model.Website" />
+                <p id="urlError" class="alert-warning"></p>
             </div>
         </div>
 
