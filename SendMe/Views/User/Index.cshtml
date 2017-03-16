@@ -33,7 +33,7 @@
         <p>
             @Model.Item1.Student.Speciality
         </p>
-        @Html.ActionLink("Donate", "Payment", "Donation", new {tripId = @Model.Item1.ActiveTrip.Id}, null )
+        @Html.ActionLink("Donate", "Payment", "Donation", new { tripId = @Model.Item1.ActiveTrip.Id }, null)
     </div>
 </div>
 <div class="row">
@@ -49,7 +49,12 @@
         </p>
     </div>
 </div>
+<!-----------Progress bar------------->
+<div class="container">
+    <div id="goal"></div>
+</div>
 
+<!-----------Model for donations------------->
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
     Check Donations
 </button>
@@ -62,14 +67,26 @@
                 <h4 class="modal-title" id="myModalLabel">Donations</h4>
             </div>
             <div class="modal-body">
-                @foreach(var donation in Model.Item2.Donations)
+                @foreach (var donation in Model.Item2.Donations)
                 {
                     <h4>Donor Name : @donation.Donor.Name</h4>
                     <p>
-                       Donation Amount:$ @donation.Amount
-                            @Ajax.ActionLink("Thank for Donation", "Index", new { donationId = donation.Id }, new AjaxOptions { UpdateTargetId = "myModel"})
+                        Donation Amount:$ @donation.Amount
+                    </p>
+                    <p>
+                        @if (donation.HaveThanked == false)
+                        {
+                            @Ajax.ActionLink("Thank for Donation", "Index", new { donationId = donation.Id }, new AjaxOptions
+                   {
+                       UpdateTargetId = "myModel",
+                       LoadingElementId = "progress",
+                       OnSuccess = "disablelink",
+                   },
+                      new { @class = "btn btn-success" })
+                        }
                     </p>
                 }
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

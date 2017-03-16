@@ -147,3 +147,7 @@ button:active {
   font-weight: 500;
   font-size: 13px;
 }
+/* Hide thankBtn*/
+.hide {
+    display: none;
+}

@@ -24,11 +24,13 @@ namespace SendMe
                       "~/Scripts/respond.js",
                       "~/Scripts/myJS.js",
                        "~/Scripts/Stripe.js",
-                       "~/Scripts/jquery.unobtrusive-ajax.min.js"));
+                       "~/Scripts/jquery.unobtrusive-ajax.min.js",
+                       "~/Scripts/goalProgress.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                       "~/Content/goalProgress.css"));
         }
     }
 }
