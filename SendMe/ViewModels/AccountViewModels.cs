@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SendMe.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 

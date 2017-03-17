@@ -13,6 +13,7 @@ using System.Data.Entity;
 using System.Collections.Generic;
 using SendMe.Helpers;
 using System.Web.Configuration;
+using SendMe.Collections;
 
 namespace SendMe.Controllers
 {
@@ -157,27 +158,12 @@ namespace SendMe.Controllers
                     return View(model);
             }
         }
-
-        //Create School List
-        private List<SelectListItem> CreateSchoolList()
-        {
-            var sList = db.Schools.ToList();
-            List<SelectListItem> sSelectList = new List<SelectListItem>();
-
-            foreach (var item in sList)
-            {
-                sSelectList.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Name });
-            }
-
-            return sSelectList;
-
-        }
-
+        
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.Schools = CreateSchoolList().AsEnumerable();
+            ViewBag.Schools = new SchoolCollection();
             return View();
         }
 
@@ -187,6 +173,12 @@ namespace SendMe.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+
+            if (ModelState.ContainsKey("Email"))
+            {
+                ModelState["Email"].Errors.Clear();
+            }
+
             //-----------------------------------------------
             //            Verify Domain of Email
             //-----------------------------------------------
@@ -197,10 +189,12 @@ namespace SendMe.Controllers
 
             if (!model.Email.Contains(schDomain))
             {
-                ViewBag.Schools = CreateSchoolList().AsEnumerable();
                 ModelState.AddModelError("Email", "That domain is not approved by your school. "
                     + "Please check for typos and ensure that you have selected the correct school. "
                     + "If you believe you received this message in error, please contact your administrator.");
+
+                ViewBag.Schools = new SchoolCollection();                
+
                 return View(model);
             }
 
@@ -221,7 +215,7 @@ namespace SendMe.Controllers
                         var result1 = UserManager.AddToRole(user.Id, "Admin");
                     }
 
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     //---------------------------------------------------
                     //          Create username for custom url
@@ -250,26 +244,28 @@ namespace SendMe.Controllers
                     //---------------------------------------------------
                     //          Send Confirmation Email
                     //---------------------------------------------------
-                    //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account",
-                    //   new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    //await UserManager.SendEmailAsync(user.Id,
-                    //   "Confirm your account", "Please confirm your account by clicking <a href=\""
-                    //   + callbackUrl + "\">here</a>");
+                    /*string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account",
+                       new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id,
+                       "Confirm your account", "Please confirm your account by clicking <a href=\""
+                       + callbackUrl + "\">here</a>");
 
-                    //ViewBag.SentConf = "A confirmation email was sent to " + model.Email
-                    //+ ". Please look for the confirmation email in your inbox and click the provided link to confirm and log in.";
+                    ViewBag.SentConf = "A confirmation email was sent to " + model.Email
+                    + ". Please look for the confirmation email in your inbox and click the provided link to confirm and log in.";
 
                     ModelState.Clear();
 
-                    ViewBag.Schools = CreateSchoolList().AsEnumerable();
+                    //ViewBag.Schools = CreateSchoolList().AsEnumerable();
 
-                    return View(model);
+                    return View(model);*/
+                    return RedirectToAction("Login", "Account");
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
+            ViewBag.Schools = new SchoolCollection();
             return View(model);
         }
 

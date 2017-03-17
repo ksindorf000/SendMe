@@ -37,28 +37,28 @@
 </div>
 
 
-    <div class="row">
-        <div class="col-md-12">
-            <h3>@Model.ActiveTrip.Trip.Title</h3>
-            <sub>@Model.ActiveTrip.Trip.Dates</sub>
-            <p>
-                @Model.ActiveTrip.Trip.Desc
-            </p>
-            <p>
-                @Model.ActiveTrip.Trip.Destination <br />
-                $@Model.ActiveTrip.Trip.TargetAmnt
-            </p>
-            @Html.ActionLink("Donate", "Payment", "Donation", new { tripId = @Model.ActiveTrip.Trip.Id }, null)
-        </div>
+<div class="row">
+    <div class="col-md-12">
+        <h3>@Model.ActiveTrip.Trip.Title</h3>
+        <sub>@Model.ActiveTrip.Trip.Dates</sub>
+        <p>
+            @Model.ActiveTrip.Trip.Desc
+        </p>
+        <p>
+            @Model.ActiveTrip.Trip.Destination <br />
+            $@Model.ActiveTrip.Trip.TargetAmnt
+        </p>
+        @Html.ActionLink("Donate", "Payment", "Donation", new { tripId = @Model.ActiveTrip.Trip.Id }, null)
     </div>
+</div>
 
 <!-----------Progress bar------------->
 <script type="text/javascript">
 
-        var targetAmount = Model.ActiveTrip.Trip.TargetAmnt;
-    @{ 
+    var targetAmount = Model.ActiveTrip.Trip.TargetAmnt;
+    @{
         var totalDonation = 0.0;
-     
+
         foreach (var donation in Model.ActiveTrip.Donations)
         {
             totalDonation += (double)donation.Amount;
@@ -77,44 +77,49 @@
 </div>
 
 <!-----------Modal for donations------------->
+@if (Model.User.UserName == User.Identity.Name)
+{
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
         Check Donations
     </button>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Donations</h4>
-            </div>
-            <div class="modal-body">
 
-                @foreach (var donation in Model.ActiveTrip.Donations)
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Donations</h4>
+                </div>
+                <div class="modal-body">
+
+                    @foreach (var donation in Model.ActiveTrip.Donations)
                 {
-                    <h4>Donor Name : @donation.Donor.Name</h4>
-                    <p>
-                        Donation Amount:$ @donation.Amount
-                    </p>
-                    <p>
-                        @if (donation.HaveThanked == false)
-                        {
-                            @Ajax.ActionLink("Thank for Donation", "Index", new { donationId = donation.Id },
-                                 new AjaxOptions
-                                 {
-                                     UpdateTargetId = "myModel",
-                                     LoadingElementId = "progress",
-                                     OnSuccess = "disablelink",
-                                 },
-                            new { @class = "btn btn-success" })
-                        }
-                    </p>
-                }
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <h4>Donor Name : @donation.Donor.Name</h4>
+                        <p>
+                            Donation Amount:$ @donation.Amount
+                        </p>
+                        <p>
+                            @if (donation.HaveThanked == false)
+                            {
+                                @Ajax.ActionLink("Thank for Donation", "Index", new { donationId = donation.Id },
+                      new AjaxOptions
+                      {
+                          UpdateTargetId = "myModel",
+                          LoadingElementId = "progress",
+                          OnSuccess = "disablelink",
+                      },
+                 new { @class = "btn btn-success" })
+                            }
+                        </p>
+                    }
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+
             </div>
         </div>
     </div>
-</div>
+}
