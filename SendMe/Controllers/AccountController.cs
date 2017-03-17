@@ -190,7 +190,7 @@ namespace SendMe.Controllers
             //-----------------------------------------------
             //            Verify Domain of Email
             //-----------------------------------------------
-            /*string schDomain = db.Schools
+            string schDomain = db.Schools
                 .Where(s => s.Id == model.SchoolId)
                 .Select(s => s.EmailDomain)
                 .Single();
@@ -202,7 +202,7 @@ namespace SendMe.Controllers
                     + "Please check for typos and ensure that you have selected the correct school. "
                     + "If you believe you received this message in error, please contact your administrator.");
                 return View(model);
-            }*/
+            }
 
             if (ModelState.IsValid)
             {

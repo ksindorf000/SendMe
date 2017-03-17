@@ -111,7 +111,7 @@ namespace SendMe.Controllers
 
                 }
             }
-            return View(ViewBag.tripId);
+            return View(ViewBag.TripId);
 
         }
     }
