@@ -12,7 +12,7 @@ namespace SendMe.Models
         public int Id { get; set; }
         public StuProfile Student { get; set; }
         public List<Trip> Trips { get; set; }
-        public Trip ActiveTrip { get; set; }
+        public TripViewModel ActiveTrip { get; set; }
         public School School { get; set; }
         public ApplicationUser User { get; set; }
         public Upload Upload { get; set; }
@@ -32,7 +32,13 @@ namespace SendMe.Models
                 .Where(t => t.Student.UserId == student.UserId)
                 .ToList();
 
-            ActiveTrip = Trips.Where(t => t.IsActive == true).FirstOrDefault();
+            if (Trips.Count > 0)
+            {
+                Trip activeTrip = Trips
+                        .Where(t => t.IsActive == true
+                          && t.StuId == student.Id).FirstOrDefault();
+                ActiveTrip = new TripViewModel(activeTrip);
+            }
 
             Upload = db.Uploads
                 .Where(p => p.TypeRef == "ProfPic"

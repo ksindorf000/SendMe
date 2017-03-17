@@ -1,80 +1,85 @@
-﻿@model Tuple<SendMe.Models.StudentViewModel, SendMe.Models.TripViewModel>
+﻿@model SendMe.Models.StudentViewModel
 
 @{
     ViewBag.Title = "Index";
     ViewBag.CurrentUser = User.Identity.Name;
-    ViewBag.userProfile = Model.Item1.User.UserName;
+    ViewBag.userProfile = Model.Student.User.UserName;
 }
 <!-----------PROFILE PIC------------->
 <div class="row profile-header">
     <div class="col-md-12 text-center marb-35">
-        <img class="thumb profile-pic" src="@Model.Item1.Upload.FilePath" style="max-width: 300px" />
+        <img class="thumb profile-pic" src="@Model.Upload.FilePath" style="max-width: 300px" />
 
         <!-----------HEADER------------->
-        <h1 class="header-h">@Model.Item1.Student.FirstName @Model.Item1.Student.LastName</h1>
+        <h1 class="header-h">@Model.Student.FirstName @Model.Student.LastName</h1>
         <p>
-            @Model.Item1.School.Name
+            @Model.School.Name
         </p>
-        @if (ViewBag.CurrentUser == ViewBag.userProfile)
+        @if (Model.User.UserName == User.Identity.Name)
         {
             <h4 id="manageAcct">
                 @Html.ActionLink("Manage Account", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </h4>
         }
         <p class="header-p">
-            @Model.Item1.Student.Bio
+            @Model.Student.Bio
         </p>
         <p>
-            @Model.Item1.User.Email
+            @Model.User.Email
         </p>
         <p>
-            @Model.Item1.Student.Year
+            @Model.Student.Year
         </p>
         <p>
-            @Model.Item1.Student.Speciality
-        </p>
-        @Html.ActionLink("Donate", "Payment", "Donation", new { tripId = @Model.Item1.ActiveTrip.Id }, null)
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <h3>@Model.Item1.ActiveTrip.Title</h3>
-        <sub>@Model.Item1.ActiveTrip.Dates</sub>
-        <p>
-            @Model.Item1.ActiveTrip.Desc
-        </p>
-        <p>
-            @Model.Item1.ActiveTrip.Destination <br />
-            $@Model.Item1.ActiveTrip.TargetAmnt
+            @Model.Student.Speciality
         </p>
     </div>
 </div>
 
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>@Model.ActiveTrip.Trip.Title</h3>
+            <sub>@Model.ActiveTrip.Trip.Dates</sub>
+            <p>
+                @Model.ActiveTrip.Trip.Desc
+            </p>
+            <p>
+                @Model.ActiveTrip.Trip.Destination <br />
+                $@Model.ActiveTrip.Trip.TargetAmnt
+            </p>
+            @Html.ActionLink("Donate", "Payment", "Donation", new { tripId = @Model.ActiveTrip.Trip.Id }, null)
+        </div>
+    </div>
+
 <!-----------Progress bar------------->
 <script type="text/javascript">
-    var targetAmount = '@Model.Item1.ActiveTrip.TargetAmnt';
-    @{
+
+        var targetAmount = Model.ActiveTrip.Trip.TargetAmnt;
+    @{ 
         var totalDonation = 0.0;
-        foreach(var donation in Model.Item2.Donations)
+     
+        foreach (var donation in Model.ActiveTrip.Donations)
         {
             totalDonation += (double)donation.Amount;
         }
-        if (totalDonation >= Model.Item1.ActiveTrip.TargetAmnt)
+        if (totalDonation >= Model.ActiveTrip.Trip.TargetAmnt)
         {
-            totalDonation = Model.Item1.ActiveTrip.TargetAmnt;
+            totalDonation = Model.ActiveTrip.Trip.TargetAmnt;
         }
+
+        var currentTotal = @totalDonation;
     }
-    var currentTotal = @totalDonation;
 </script>
 
 <div class="container">
     <div id="goal"></div>
 </div>
 
-<!-----------Model for donations------------->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-    Check Donations
-</button>
+<!-----------Modal for donations------------->
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        Check Donations
+    </button>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -84,7 +89,8 @@
                 <h4 class="modal-title" id="myModalLabel">Donations</h4>
             </div>
             <div class="modal-body">
-                @foreach (var donation in Model.Item2.Donations)
+
+                @foreach (var donation in Model.ActiveTrip.Donations)
                 {
                     <h4>Donor Name : @donation.Donor.Name</h4>
                     <p>
@@ -93,19 +99,18 @@
                     <p>
                         @if (donation.HaveThanked == false)
                         {
-
                             @Ajax.ActionLink("Thank for Donation", "Index", new { donationId = donation.Id },
-                            new AjaxOptions
-                            {
-                                UpdateTargetId = "myModel",
-                                LoadingElementId = "progress",
-                                OnSuccess = "disablelink",
-                            },
-                       new { @class = "btn btn-success" })
+                                 new AjaxOptions
+                                 {
+                                     UpdateTargetId = "myModel",
+                                     LoadingElementId = "progress",
+                                     OnSuccess = "disablelink",
+                                 },
+                            new { @class = "btn btn-success" })
                         }
                     </p>
                 }
-
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

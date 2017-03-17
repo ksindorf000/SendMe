@@ -33,14 +33,8 @@ namespace SendMe.Controllers
                 db.SaveChanges();
             }
 
-            var currentUser = User.Identity.GetUserId();
-
             StuProfile student = db.StuProfiles
                 .Where(sp => sp.User.UserName == username)
-                .FirstOrDefault();
-           
-            Trip currentTrip = db.Trips
-                .Where(t => t.Student.UserId == currentUser)
                 .FirstOrDefault();
 
             if (student == null)
@@ -49,10 +43,9 @@ namespace SendMe.Controllers
 
             }
 
-            TripViewModel tripVM = new TripViewModel(currentTrip);
             StudentViewModel studentVM = new StudentViewModel(student);
 
-            return View(new Tuple<StudentViewModel, TripViewModel>(studentVM, tripVM));
+            return View(studentVM);
         }
 
 
