@@ -13,9 +13,9 @@ namespace SendMe.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
 
         
-        /*********************************
-         * INDEX: Username
-         ********************************/
+        //--------------------------------
+        // INDEX: Username
+        //--------------------------------
         [Route("send/{username}")]
         public ActionResult Index(string username, int? donationId)
         {   
@@ -40,14 +40,51 @@ namespace SendMe.Controllers
             if (student == null)
             {
                 return RedirectToAction("Index", "Home");
-
             }
 
             StudentViewModel studentVM = new StudentViewModel(student);
+            ViewBag.CurrentTotal = 0;
+
+            if (studentVM.ActiveTrip != null)
+            {
+                ViewBag.TargetAmount = studentVM.ActiveTrip.Trip.TargetAmnt;
+                if (studentVM.ActiveTrip.Donations.Count() != 0)
+                {
+                    foreach (var donation in studentVM.ActiveTrip.Donations)
+                    {
+                        ViewBag.CurrentTotal += (double)donation.Amount;
+                    }
+                }
+
+                if (ViewBag.TargetAmount <= ViewBag.CurrentTotal)
+                {
+                    ViewBag.CurrentTotal = ViewBag.TargetAmount;
+                }
+            }
 
             return View(studentVM);
         }
 
+        //--------------------------------
+        // Render Partial
+        //--------------------------------
+        public ActionResult RenderTripModal()
+        {
+            string userId = User.Identity.GetUserId();
+            int stuId = db.StuProfiles
+                .Where(sp => sp.UserId == userId)
+                .Select(sp => sp.Id)
+                .FirstOrDefault();
+
+            Trip newTrip = new Trip()
+            {
+                StuId = stuId,
+                IsActive = true,
+                PercentOfAmnt = 0
+            };
+
+            return PartialView("_CreateTrip", newTrip);
+        }       
 
     }
 }

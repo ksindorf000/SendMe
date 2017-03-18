@@ -2,8 +2,8 @@
 
 @{
     ViewBag.Title = "Index";
-    ViewBag.CurrentUser = User.Identity.Name;
-    ViewBag.userProfile = Model.Student.User.UserName;
+    ViewBag.currentUser = User.Identity.Name;
+    ViewBag.userProfile = Model.User.UserName;
 }
 <!-----------PROFILE PIC------------->
 <div class="row profile-header">
@@ -15,7 +15,7 @@
         <p>
             @Model.School.Name
         </p>
-        @if (Model.User.UserName == User.Identity.Name)
+        @if (ViewBag.userProfile == ViewBag.currentUser)
         {
             <h4 id="manageAcct">
                 @Html.ActionLink("Manage Account", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
@@ -36,40 +36,43 @@
     </div>
 </div>
 
+<!------------------------
+   Add Trip Btn & Modal
+------------------------->
 
-<div class="row">
-    <div class="col-md-12">
-        <h3>@Model.ActiveTrip.Trip.Title</h3>
-        <sub>@Model.ActiveTrip.Trip.Dates</sub>
-        <p>
-            @Model.ActiveTrip.Trip.Desc
-        </p>
-        <p>
-            @Model.ActiveTrip.Trip.Destination <br />
-            $@Model.ActiveTrip.Trip.TargetAmnt
-        </p>
-        @Html.ActionLink("Donate", "Payment", "Donation", new { tripId = @Model.ActiveTrip.Trip.Id }, null)
+@if (Model.ActiveTrip == null && ViewBag.userProfile == ViewBag.currentUser)
+{
+    <h3>Add your trip!</h3>
+    Html.RenderPartial("_CreateTrip", new SendMe.Models.Trip());
+}
+else if (Model.ActiveTrip == null && ViewBag.userProfile != ViewBag.currentUser)
+{
+    <h3>@Model.Student.FirstName hasn't added any trips! Please check back later.</h3>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>@Model.ActiveTrip.Trip.Title</h3>
+            <sub>@Model.ActiveTrip.Trip.Dates</sub>
+            <p>
+                @Model.ActiveTrip.Trip.Desc
+            </p>
+            <p>
+                @Model.ActiveTrip.Trip.Destination <br />
+                $@Model.ActiveTrip.Trip.TargetAmnt
+            </p>
+            @Html.ActionLink("Donate", "Payment", "Donation", new { tripId = @Model.ActiveTrip.Trip.Id }, null)
+        </div>
     </div>
-</div>
+}
 
 <!-----------Progress bar------------->
 <script type="text/javascript">
 
-    var targetAmount = Model.ActiveTrip.Trip.TargetAmnt;
-    @{
-        var totalDonation = 0.0;
+    var targetAmount = @ViewBag.TargetAmount;
+    var currentTotal = @ViewBag.CurrentTotal;
 
-        foreach (var donation in Model.ActiveTrip.Donations)
-        {
-            totalDonation += (double)donation.Amount;
-        }
-        if (totalDonation >= Model.ActiveTrip.Trip.TargetAmnt)
-        {
-            totalDonation = Model.ActiveTrip.Trip.TargetAmnt;
-        }
-
-        var currentTotal = @totalDonation;
-    }
 </script>
 
 <div class="container">
@@ -77,7 +80,7 @@
 </div>
 
 <!-----------Modal for donations------------->
-@if (Model.User.UserName == User.Identity.Name)
+@if (Model.User.UserName == User.Identity.Name && Model.ActiveTrip != null)
 {
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
         Check Donations

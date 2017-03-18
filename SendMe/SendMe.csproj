@@ -334,6 +334,7 @@
     <Content Include="Views\Shared\_Upload.cshtml" />
     <Content Include="Views\School\Index.cshtml" />
     <Content Include="Views\School\Manage.cshtml" />
+    <Content Include="Views\Shared\_CreateTrip.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

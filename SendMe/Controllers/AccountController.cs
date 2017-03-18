@@ -75,12 +75,25 @@ namespace SendMe.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            string username = UserHelpers.CreateUserName(model.Email);
+            string userid = UserManager.FindByEmail(model.Email).Id;
+
+            //If user email has not been verified return view with message
+            if (!UserManager.IsEmailConfirmed(userid))
+            {
+                ViewBag.NotConfirmed = "A confirmation email was sent to " + model.Email
+                + " but the email has not yet been confirmed. Please look for the confirmation"
+                + " email in your inbox and click the provided link to confirm and log in.";
+                ModelState.Clear();
+                return View();
+            }            
+
+                string username = UserHelpers.CreateUserName(model.Email);
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
@@ -89,16 +102,12 @@ namespace SendMe.Controllers
             {
                 case SignInStatus.Success:
 
-                    var userid = UserManager.FindByEmail(model.Email).Id;
-
-                    //If user email has not been verified return view with message
-                    if (!UserManager.IsEmailConfirmed(userid))
+                    bool hasActiveTrip = db.Trips
+                        .Any(t => t.Student.UserId == userid);
+                     
+                    if (!hasActiveTrip)
                     {
-                        ViewBag.NotConfirmed = "A confirmation email was sent to " + model.Email
-                        + " but the email has not yet been confirmed. Please look for the confirmation"
-                        + " email in your inbox and click the provided link to confirm and log in.";
-                        ModelState.Clear();
-                        return View();
+                        return RedirectToAction("Index", "Manage");
                     }
                     else
                     {
