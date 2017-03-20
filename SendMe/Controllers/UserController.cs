@@ -11,7 +11,6 @@ namespace SendMe.Controllers
     public class UserController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-
         
         //--------------------------------
         // INDEX: Username
@@ -60,31 +59,14 @@ namespace SendMe.Controllers
                 {
                     ViewBag.CurrentTotal = ViewBag.TargetAmount;
                 }
+            }                      
+            else
+            {
+                ViewBag.Action = "Create";
             }
 
             return View(studentVM);
-        }
-
-        //--------------------------------
-        // Render Partial
-        //--------------------------------
-        public ActionResult RenderTripModal()
-        {
-            string userId = User.Identity.GetUserId();
-            int stuId = db.StuProfiles
-                .Where(sp => sp.UserId == userId)
-                .Select(sp => sp.Id)
-                .FirstOrDefault();
-
-            Trip newTrip = new Trip()
-            {
-                StuId = stuId,
-                IsActive = true,
-                PercentOfAmnt = 0
-            };
-
-            return PartialView("_CreateTrip", newTrip);
-        }       
+        }          
 
     }
 }

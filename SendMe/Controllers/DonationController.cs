@@ -107,8 +107,6 @@ namespace SendMe.Controllers
                     {
                         ViewBag.Message = result.FailureMessage;
                     }
-
-
                 }
             }
             return View(ViewBag.TripId);
