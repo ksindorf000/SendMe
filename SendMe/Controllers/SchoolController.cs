@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Newtonsoft.Json.Linq;
+using SendMe.Helpers;
 using SendMe.Models;
 using SendMe.ViewModels;
 using System;
@@ -52,7 +53,7 @@ namespace SendMe.Controllers
         /*********************************
          * MANAGE: School
          ********************************/
-        [Authorize(Roles = "Admin")]
+        [CustomAuthorize(Roles = "Admin")]
         public ActionResult Manage(int? id)
         {
             if (id == null)
