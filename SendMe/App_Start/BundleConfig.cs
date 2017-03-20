@@ -31,7 +31,8 @@ namespace SendMe
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                       "~/Content/goalProgress.css"));
+                      "~/Content/goalProgress.css",
+                      "~/Content/stripe.css"));
         }
     }
 }

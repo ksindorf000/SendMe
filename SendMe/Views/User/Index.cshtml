@@ -67,15 +67,73 @@ else
     </div>
 }
 
+<!-- Payment Modal -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Donate</button>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Payment</h4>
+            </div>
+            <div class="modal-body">
+                <form name="DonationForm">
+                    Optional
+                    <div class="group">
+                        <label>
+                            <span>Name</span>
+                            <input name="DonorName" id="DonorName" class="field" type="text" maxlength="30" />
+                        </label>
+                        <label>
+                            <span>Email</span>
+                            <input id="DonorEmail" class="field" type="email" />
+                        </label>
+                        <label>
+                            <span>Phone</span>
+                            <input id="DonorPhoneNumber" class="field" type="tel" min="10" max="10" />
+                        </label>
+                    </div>
+                    Required
+                    <div class="group">
+                        <label>
+                            <span>Amount</span>
+                            <input class="field" id="DonationAmount" type="number" min="0" required />
+                        </label>
+                        <label>
+                            <span>Card</span>
+                            <div id="card-element" class="field"></div>
+                        </label>
+                    </div>
+
+                    <button type="submit">Donate</button>
+                    <div class="outcome">
+                        <div class="alert alert-danger">
+                            <strong class="error"></strong>
+                        </div>
+                    </div>
+                    <script language="JavaScript" type="text/javascript">
+                        var pubKey = '@System.Configuration.ConfigurationManager.AppSettings["PubKey"]';
+                        var tripId = '@Model.ActiveTrip.Trip.Id';
+                    </script>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-----------Map------------->
+<div class=" container">
+    <div id="map" style="width: 350px; height: 350px; border: 2px solid #1abbac;"></div>
+</div>
+
 <!-----------Progress bar------------->
 <script type="text/javascript">
-
     var targetAmount = @ViewBag.TargetAmount;
     var currentTotal = @ViewBag.CurrentTotal;
-
 </script>
-<div id="map" style="width: 350px; height: 350px; border: 2px solid #1abbac;"></div>
-
 <div class="container">
     <div id="goal"></div>
 </div>

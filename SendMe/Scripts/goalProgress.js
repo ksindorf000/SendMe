@@ -13,7 +13,7 @@
             var defaults = {
                 goalAmount: 100,
                 currentAmount: 50,
-                speed: 1000,
+                speed: 500,
                 textBefore: '',
                 textAfter: '',
                 milestoneNumber: 70,
