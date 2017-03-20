@@ -63,6 +63,9 @@ else
             </p>
             <p id="attachMenu">
                 @Model.ActiveTrip.Trip.Destination <br />
+
+                <div id="map" style="width: 350px; height: 350px; border: 2px solid #1abbac;"></div><br/>
+
                 $@Model.ActiveTrip.Trip.TargetAmnt
 
                 <!----------------------------------------
@@ -135,7 +138,6 @@ else
     var currentTotal = @ViewBag.CurrentTotal;
 
 </script>
-<div id="map" style="width: 350px; height: 350px; border: 2px solid #1abbac;"></div>
 
 <div class="container">
     <div id="goal"></div>

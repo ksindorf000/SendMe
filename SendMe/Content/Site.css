@@ -176,7 +176,7 @@ button {
 .btn-group .btn-fab {
     border-radius: 50%;
     position: absolute;
-    bottom: 0;
+    top: 0;
     right: 0;
 }
 
