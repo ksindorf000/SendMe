@@ -37,7 +37,10 @@ namespace SendMe.Models
                 Trip activeTrip = Trips
                         .Where(t => t.IsActive == true
                           && t.StuId == student.Id).FirstOrDefault();
-                ActiveTrip = new TripViewModel(activeTrip);
+                if (activeTrip != null)
+                {
+                    ActiveTrip = new TripViewModel(activeTrip);
+                }
             }
 
             Upload = db.Uploads

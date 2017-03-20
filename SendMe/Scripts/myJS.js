@@ -109,17 +109,33 @@
     //      http://codepen.io/apocheau/pen/EKeZgg
     //------------------------------------------------------
 
+    //Expand Menu
     $("#tripMenuMain").click(function () {
         $("#mini-fab").toggleClass('hidden');
     });
 
+    //Edit Trip
     $("#editTrip").hide();
 
     $("#edit").click(function () {
         $("#tripDetails").hide();
         $("#editTrip").show();
+        $("#mini-fab").toggleClass('hidden');
     });
 
+    //Cancel Trip 
+    $("#confirmCancel").hide();
+
+    $("#cancel").click(function () {
+        $("#confirmCancel").show();
+        $("#mini-fab").toggleClass('hidden');
+    });
+
+    $("#dontCancel").click(function () {
+        $("#confirmCancel").hide();
+    });
+
+    //ToolTips
     $('[data-toggle="tooltip"]').tooltip();
 
     $.material.init();

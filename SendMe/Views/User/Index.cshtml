@@ -50,9 +50,29 @@ else if (Model.ActiveTrip == null && ViewBag.userProfile != ViewBag.currentUser)
 }
 else
 {
-    <div class="row">       
+    <div class="row">
+               
         <div id="editTrip">
             @(Html.Action("RenderPartial", "Trip", new { trip = Model.ActiveTrip.Trip }))
+        </div>
+
+        <div id="confirmCancel">
+            <h2>Are you sure you want to cancel this trip?</h2>
+            <h4>Your school's administrator will be notified and will have the option 
+                to notify all donors of the cancellation. </h4>
+            @using (Html.BeginForm("Cancel", "Trip", new { id = Model.ActiveTrip.Trip.Id }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-actions no-color">
+                    <button type="submit" class="btn btn-danger" id="btnConfirmCancel" value="Cancel">
+                        <span class="glyphicon glyphicon-remove-sign"> Cancel</span>
+                    </button>           
+                    <a href="#" class="btn btn-default" id="dontCancel">
+                        <span class="glyphicon glyphicon-ban-circle"> Don't Cancel</span>
+                    </a>
+                    <br />
+                </div>
+            }
         </div>
 
         <div class="col-md-12" id="tripDetails">
@@ -89,7 +109,7 @@ else
                                     <a href="#" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Cancel" title="" id="cancel">
                                         <i class="material-icons">
                                             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                                                <path fill="#1ABBAC" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12C4,13.85 4.63,15.55 5.68,16.91L16.91,5.68C15.55,4.63 13.85,4 12,4M12,20A8,8 0 0,0 20,12C20,10.15 19.37,8.45 18.32,7.09L7.09,18.32C8.45,19.37 10.15,20 12,20Z" />
+                                                <path fill="#1ABBAC" d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z" />
                                             </svg>
                                         </i>
                                     </a>

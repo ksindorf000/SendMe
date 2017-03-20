@@ -93,7 +93,7 @@ namespace SendMe.Controllers
             updateTrip.TargetAmnt = formData.TargetAmnt;
             updateTrip.StuId = stuId;
 
-            db.Entry(updateTrip).State = EntityState.Modified;            
+            db.Entry(updateTrip).State = EntityState.Modified;
             db.SaveChanges();
 
             string returnUrl = "../send/" + userName;
@@ -107,6 +107,43 @@ namespace SendMe.Controllers
         public PartialViewResult RenderPartial(Trip trip)
         {
             return PartialView("_CreateTrip", trip);
+        }
+
+        //----------------------------
+        //      Cancel Trip
+        //----------------------------        
+        [HttpPost, ActionName("Cancel")]    
+        [ValidateAntiForgeryToken]
+        public ActionResult Cancel(int? id)
+        {
+            string userName = User.Identity.Name;
+            string returnUrl = "../send/" + userName;
+
+            if (id == null)
+            {
+                return RedirectToAction(returnUrl);
+            }
+
+            string userId = User.Identity.GetUserId();
+
+            Trip trip = db.Trips
+                .Where(t => t.Id == id
+                && t.Student.UserId == userId)
+                .FirstOrDefault();
+
+            if (trip == null || trip.Student.UserId != userId)
+            {
+                return RedirectToAction(returnUrl);
+            }
+
+            trip.IsActive = false;
+            db.Entry(trip).State = EntityState.Modified;
+            db.SaveChanges();
+
+            //Send Email to Admin
+
+
+            return RedirectToAction(returnUrl);
         }
     }
 }
