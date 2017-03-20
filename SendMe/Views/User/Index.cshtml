@@ -37,9 +37,8 @@
 </div>
 
 <!------------------------
-   Add Trip Btn & Modal
+   Active Trip
 ------------------------->
-
 @if (Model.ActiveTrip == null && ViewBag.userProfile == ViewBag.currentUser)
 {
     <h3>Add your trip!</h3>
@@ -52,90 +51,117 @@ else if (Model.ActiveTrip == null && ViewBag.userProfile != ViewBag.currentUser)
 else
 {
     <div class="row">
-        <div class="col-md-12">
+               
+        <div id="editTrip">
+            @(Html.Action("RenderPartial", "Trip", new { trip = Model.ActiveTrip.Trip }))
+        </div>
+
+        <div id="confirmCancel">
+            <h2>Are you sure you want to cancel this trip?</h2>
+            <h4>Your school's administrator will be notified and will have the option 
+                to notify all donors of the cancellation. </h4>
+            @using (Html.BeginForm("Cancel", "Trip", new { id = Model.ActiveTrip.Trip.Id }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-actions no-color">
+                    <button type="submit" class="btn btn-danger" id="btnConfirmCancel" value="Cancel">
+                        <span class="glyphicon glyphicon-remove-sign"> Cancel</span>
+                    </button>           
+                    <a href="#" class="btn btn-default" id="dontCancel">
+                        <span class="glyphicon glyphicon-ban-circle"> Don't Cancel</span>
+                    </a>
+                    <br />
+                </div>
+            }
+        </div>
+
+        <div class="col-md-12" id="tripDetails">
             <h3>@Model.ActiveTrip.Trip.Title</h3>
             <sub>@Model.ActiveTrip.Trip.Dates</sub>
             <p>
                 @Model.ActiveTrip.Trip.Desc
             </p>
-            <p>
+            <p id="attachMenu">
                 @Model.ActiveTrip.Trip.Destination <br />
+
+                <div id="map" style="width: 350px; height: 350px; border: 2px solid #1abbac;"></div><br/>
+
                 $@Model.ActiveTrip.Trip.TargetAmnt
+
+                <!----------------------------------------
+                 Trip Menu Buttons
+                    http://codepen.io/apocheau/pen/EKeZgg
+                 ---------------------------------------->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (ViewBag.userProfile == ViewBag.currentUser)
+                            {
+                                <div class="btn-group-sm hidden" id="mini-fab">
+                                    <a href="../Donation/Payment?tripId=@Model.ActiveTrip.Trip.Id" 
+                                       class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Add Donation" title="" id="donate">
+                                        <i class="material-icons">
+                                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                                <path fill="#1ABBAC" d="M11,4.5H13V15.5H11V4.5M13,17.5V19.5H11V17.5H13Z" />
+                                            </svg>
+                                        </i>
+                                    </a>
+                                    <a href="#" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Cancel" title="" id="cancel">
+                                        <i class="material-icons">
+                                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                                <path fill="#1ABBAC" d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z" />
+                                            </svg>
+                                        </i>
+                                    </a>
+                                    <a href="#" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Edit" title="" id="edit">
+                                        <i class="material-icons">
+                                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                                <path fill="#1ABBAC" d="M16.84,2.73C16.45,2.73 16.07,2.88 15.77,3.17L13.65,5.29L18.95,10.6L21.07,8.5C21.67,7.89 21.67,6.94 21.07,6.36L17.9,3.17C17.6,2.88 17.22,2.73 16.84,2.73M12.94,6L4.84,14.11L7.4,14.39L7.58,16.68L9.86,16.85L10.15,19.41L18.25,11.3M4.25,15.04L2.5,21.73L9.2,19.94L8.96,17.78L6.65,17.61L6.47,15.29" />
+                                            </svg>
+                                        </i>
+                                    </a>
+                                </div>
+                                <div class="btn-group">
+                                    <a href="javascript:void(0)" class="btn btn-fab" id="tripMenuMain">
+                                        <i class="material-icons">
+                                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                                <path fill="#FFF" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+                                            </svg>
+                                        </i>
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="btn-group">
+                                    <a href="../Donation/Payment?tripId=@Model.ActiveTrip.Trip.Id" class="btn btn-fab" id="donateMain">
+                                        <i class="material-icons">
+                                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                                <path fill="#FFF" d="M11,4.5H13V15.5H11V4.5M13,17.5V19.5H11V17.5H13Z" />
+                                            </svg>
+                                        </i>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
             </p>
-            @Html.ActionLink("Donate", "Payment", "Donation", new { tripId = @Model.ActiveTrip.Trip.Id }, null)
         </div>
     </div>
 }
 
-<!-- Payment Modal -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Donate</button>
-
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Payment</h4>
-            </div>
-            <div class="modal-body">
-                <form name="DonationForm">
-                    Optional
-                    <div class="group">
-                        <label>
-                            <span>Name</span>
-                            <input name="DonorName" id="DonorName" class="field" type="text" maxlength="30" />
-                        </label>
-                        <label>
-                            <span>Email</span>
-                            <input id="DonorEmail" class="field" type="email" />
-                        </label>
-                        <label>
-                            <span>Phone</span>
-                            <input id="DonorPhoneNumber" class="field" type="tel" min="10" max="10" />
-                        </label>
-                    </div>
-                    Required
-                    <div class="group">
-                        <label>
-                            <span>Amount</span>
-                            <input class="field" id="DonationAmount" type="number" min="0" required />
-                        </label>
-                        <label>
-                            <span>Card</span>
-                            <div id="card-element" class="field"></div>
-                        </label>
-                    </div>
-
-                    <button type="submit">Donate</button>
-                    <div class="outcome">
-                        <div class="alert alert-danger">
-                            <strong class="error"></strong>
-                        </div>
-                    </div>
-                    <script language="JavaScript" type="text/javascript">
-                        var pubKey = '@System.Configuration.ConfigurationManager.AppSettings["PubKey"]';
-                        var tripId = '@Model.ActiveTrip.Trip.Id';
-                    </script>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-----------Map------------->
-<div class=" container">
-    <div id="map" style="width: 350px; height: 350px; border: 2px solid #1abbac;"></div>
-</div>
-
 <!-----------Progress bar------------->
 <script type="text/javascript">
-    var targetAmount = '@ViewBag.TargetAmount';
-    var currentTotal = '@ViewBag.CurrentTotal';
+
+    var targetAmount = @ViewBag.TargetAmount;
+    var currentTotal = @ViewBag.CurrentTotal;
+
 </script>
+
 <div class="container">
-    <div id="goal"></div>
+    <div id="goal">
+    </div>
 </div>
 
 <!-----------Modal for donations------------->
@@ -144,7 +170,6 @@ else
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
         Check Donations
     </button>
-
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -163,15 +188,15 @@ else
                         </p>
                         <p>
                             @if (donation.HaveThanked == false)
-                            {
+                    {
                                 @Ajax.ActionLink("Thank for Donation", "Index", new { donationId = donation.Id },
-                      new AjaxOptions
-                      {
-                          UpdateTargetId = "myModel",
-                          LoadingElementId = "progress",
-                          OnSuccess = "disablelink",
-                      },
-                 new { @class = "btn btn-success" })
+                    new AjaxOptions
+                    {
+                        UpdateTargetId = "myModel",
+                        LoadingElementId = "progress",
+                        OnSuccess = "disablelink",
+                    },
+                    new { @class = "btn btn-success" })
                             }
                         </p>
                     }

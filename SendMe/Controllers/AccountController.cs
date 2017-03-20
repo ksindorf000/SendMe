@@ -91,9 +91,9 @@ namespace SendMe.Controllers
                 + " email in your inbox and click the provided link to confirm and log in.";
                 ModelState.Clear();
                 return View();
-            }            
+            }
 
-                string username = UserHelpers.CreateUserName(model.Email);
+            string username = UserHelpers.CreateUserName(model.Email);
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
@@ -101,19 +101,7 @@ namespace SendMe.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-
-                    bool hasActiveTrip = db.Trips
-                        .Any(t => t.Student.UserId == userid);
-                     
-                    if (!hasActiveTrip)
-                    {
-                        return RedirectToAction("Index", "Manage");
-                    }
-                    else
-                    {
-                        return RedirectToLocal(returnUrl);
-                    }
-
+                    return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -167,7 +155,7 @@ namespace SendMe.Controllers
                     return View(model);
             }
         }
-        
+
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
@@ -202,7 +190,7 @@ namespace SendMe.Controllers
                     + "Please check for typos and ensure that you have selected the correct school. "
                     + "If you believe you received this message in error, please contact your administrator.");
 
-                ViewBag.Schools = new SchoolCollection();                
+                ViewBag.Schools = new SchoolCollection();
 
                 return View(model);
             }

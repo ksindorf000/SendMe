@@ -105,43 +105,40 @@
     });
 
     //------------------------------------------------------
-    //    Render Add Trip Modal
+    //    Trip Menu Buttons
+    //      http://codepen.io/apocheau/pen/EKeZgg
     //------------------------------------------------------
-    $(function () {
-        $.ajaxSetup({ cache: false });
-        $("a[data-modal]").on("click", function (e) {
-            $('#myModalContent').load(this.href, function () {
-                $('#myModal').modal({
-                    keyboard: true
-                }, 'show');
-                bindForm(this);
-            });
-            return false;
-        });
+
+    //Expand Menu
+    $("#tripMenuMain").click(function () {
+        $("#mini-fab").toggleClass('hidden');
     });
 
-    function bindForm(dialog) {
-        $('form', dialog).submit(function () {
-            $('#progress').show();
-            $.ajax({
-                url: this.action,
-                type: this.method,
-                data: $(this).serialize(),
-                success: function (result) {
-                    if (result.success) {
-                        $('#myModal').modal('hide');
-                        $('#progress').hide();
-                        location.reload();
-                    } else {
-                        $('#progress').hide();
-                        $('#myModalContent').html(result);
-                        bindForm();
-                    }
-                }
-            });
-            return false;
-        });
-    }
+    //Edit Trip
+    $("#editTrip").hide();
+
+    $("#edit").click(function () {
+        $("#tripDetails").hide();
+        $("#editTrip").show();
+        $("#mini-fab").toggleClass('hidden');
+    });
+
+    //Cancel Trip 
+    $("#confirmCancel").hide();
+
+    $("#cancel").click(function () {
+        $("#confirmCancel").show();
+        $("#mini-fab").toggleClass('hidden');
+    });
+
+    $("#dontCancel").click(function () {
+        $("#confirmCancel").hide();
+    });
+
+    //ToolTips
+    $('[data-toggle="tooltip"]').tooltip();
+
+    $.material.init();
 
 });
 
