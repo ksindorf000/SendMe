@@ -12,15 +12,19 @@
 
         <!-----------HEADER------------->
         <h1 class="header-h">@Model.Student.FirstName @Model.Student.LastName</h1>
+
         <p>
-            @Model.School.Name
+            <a href="../school/@Model.School.Id">@Model.School.Name</a>
         </p>
+
         @if (ViewBag.userProfile == ViewBag.currentUser)
         {
             <h4 id="manageAcct">
                 @Html.ActionLink("Manage Account", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </h4>
         }
+
+        <!-----------DETAILS------------->
         <p class="header-p">
             @Model.Student.Bio
         </p>
@@ -36,9 +40,8 @@
     </div>
 </div>
 
-<!------------------------
-   Active Trip
-------------------------->
+<!-----------ACTIVE TRIP------------->
+
 @if (Model.ActiveTrip == null && ViewBag.userProfile == ViewBag.currentUser)
 {
     <h3>Add your trip!</h3>

@@ -2,6 +2,16 @@
 
 @{
     ViewBag.Title = "Index";
+
+    if(ViewBag.UserSchId == Model.School.Id && User.IsInRole("Admin"))
+    {
+        ViewBag.logoUrl = "../School/Manage/" + Model.School.Id;
+        ViewBag.logoUrlTitle = "Update School Profile";
+    }
+    else
+    {
+        ViewBag.logoUrl = "#";
+    };
 }
 
 <div class="jumbotron">
@@ -12,7 +22,9 @@
     <div class="col-md-12 text-center marb-35">
         <!-----------HEADER------------->
         <h1 class="header-h">
-            <img class="img-thumbnail img-circle" src="@Model.LogoImg.FilePath" style="max-width: 300px" /> 
+            <a href="@ViewBag.logoUrl" title="@ViewBag.logoUrlTitle">
+                <img class="img-thumbnail img-circle" src="@Model.LogoImg.FilePath" style="max-width: 300px" alt="School Logo" />
+            </a>
             <a href="@Model.School.Website" target="_blank">@Model.School.Name</a>
         </h1>
         @if (User.IsInRole("Admin") && ViewBag.UserSchId == Model.School.Id)
@@ -22,20 +34,58 @@
         @foreach (var student in Model.Students)
         {
             <h2>
-                <img class="img-thumbnail img-circle" src="@student.Upload.FilePath" style="width: 150px; height: 150px" />
+                <a href="../send/@student.Student.User.UserName">
+                    <img class="img-thumbnail img-circle" src="@student.Upload.FilePath" style="width: 150px; height: 150px" />
+                </a>
+
                 @student.Student.FirstName @student.Student.LastName
             </h2>
+            if (student.ActiveTrip != null)
+            {
+                <h3>@student.ActiveTrip.Trip.Title</h3>
+                <sub>@student.ActiveTrip.Trip.Dates</sub>
+                <p>
+                    @student.ActiveTrip.Trip.Desc
+                </p>
+                <p>
+                    @student.ActiveTrip.Trip.Destination <br />
+                    @student.ActiveTrip.Trip.TargetAmnt
+                </p>
 
-            <h3>@student.ActiveTrip.Title</h3>
-            <sub>@student.ActiveTrip.Dates</sub>
-            <p>
-                @student.ActiveTrip.Desc
-            </p>
-            <p>
-                @student.ActiveTrip.Destination <br />
-                @student.ActiveTrip.TargetAmnt
-            </p>
+                if (student.ActiveTrip.Donations.Count > 0)
+                {
+                    <p id="showSchIdxDonations">
+                        Show Donations<br />
+                        <span class="glyphicon glyphicon-chevron-down"> </span>
+                    </p>
+                    <p id="hideSchIdxDonations">
+                        Hide Donations<br />
+                        <span class="glyphicon glyphicon-chevron-up"> </span>
+                    </p>
+
+                    <table id="schIdxDonations">
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Amount</th>
+                        </tr>
+                        @foreach (var donation in student.ActiveTrip.Donations)
+                        {
+                            <tr>
+                                <td>@donation.Donor.Name</td>
+                                <td>@donation.Donor.Email</td>
+                                <td>@donation.Donor.Phone</td>
+                                <td>@donation.Amount</td>
+                            </tr>
+                        }
+                    </table>
+                }
+            }
+            else
+            {
+                <h4>@student.Student.FirstName does not have any active trips.</h4>
+            }
         }
     </div>
 </div>
-

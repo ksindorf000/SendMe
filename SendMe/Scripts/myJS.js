@@ -104,11 +104,29 @@
         }
     });
 
+
+    //----------------------------------------
+    //      School Index Donation Toggle
+    //----------------------------------------
+    $("#hideSchIdxDonations").hide();
+    $("#schIdxDonations").hide();
+
+    $("#showSchIdxDonations").click(function () {
+        $("#hideSchIdxDonations").show();
+        $("#schIdxDonations").show();
+        $("#showSchIdxDonations").hide();
+    });
+
+    $("#hideSchIdxDonations").click(function () {
+        $("#hideSchIdxDonations").hide();
+        $("#schIdxDonations").hide();
+        $("#showSchIdxDonations").show();
+    });
+
     //------------------------------------------------------
     //    Trip Menu Buttons
     //      http://codepen.io/apocheau/pen/EKeZgg
     //------------------------------------------------------
-
     //Expand Menu
     $("#tripMenuMain").click(function () {
         $("#mini-fab").toggleClass('hidden');
@@ -139,6 +157,8 @@
     $('[data-toggle="tooltip"]').tooltip();
 
     $.material.init();
+
+
 
 });
 
