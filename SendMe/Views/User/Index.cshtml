@@ -137,7 +137,7 @@ else
                             else
                             {
                                 <div class="btn-group">
-                                    <a href="../Donation/Payment?tripId=@Model.ActiveTrip.Trip.Id" class="btn btn-fab" id="donateMain">
+                                    <a href="#" class="btn btn-fab" id="donateMain">
                                         <i class="material-icons">
                                             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                                                 <path fill="#FFF" d="M11,4.5H13V15.5H11V4.5M13,17.5V19.5H11V17.5H13Z" />
@@ -213,3 +213,10 @@ else
         </div>
     </div>
 }
+<div id="donateToggle">
+    @Html.Partial("_PaymentPartial")
+    <script language="JavaScript" type="text/javascript">
+        var pubKey = '@System.Configuration.ConfigurationManager.AppSettings["PubKey"]';
+        var tripId = '@ViewBag.ActiveTrip.Trip.Id';
+    </script>
+</div>
