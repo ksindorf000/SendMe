@@ -2214,8 +2214,8 @@ fieldset[disabled] .btn-danger.active {
 
 .btn-success {
   color: #ffffff;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
+  background-color: #1ABBAC;
+  border-color: #1ABBAC;
 }
 
 .btn-success:hover,
@@ -2224,8 +2224,8 @@ fieldset[disabled] .btn-danger.active {
 .btn-success.active,
 .open .dropdown-toggle.btn-success {
   color: #ffffff;
-  background-color: #47a447;
-  border-color: #398439;
+  background-color: darkgrey;
+  border-color: lightgrey;
 }
 
 .btn-success:active,
