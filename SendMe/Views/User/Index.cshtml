@@ -44,8 +44,29 @@
 
 @if (Model.ActiveTrip == null && ViewBag.userProfile == ViewBag.currentUser)
 {
-    <h3>Add your trip!</h3>
-    Html.RenderPartial("_CreateTrip", new SendMe.Models.Trip());
+    if (Model.Trips.Count == 0)
+    {
+        <h3>Add your trip!</h3>
+        Html.RenderPartial("_CreateTrip", new SendMe.Models.Trip());
+    }
+    else
+    {
+        <ul>
+            @foreach (var trip in Model.Trips)
+            {
+                <li>
+                    @trip.Title - @trip.Destination, @trip.Dates   
+                    @using (Html.BeginForm("MakeActive", "Trip", new { id = trip.Id }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-success" id="btnMakeActive" value="MakeActive">
+                                <span class="glyphicon glyphicon-plus-sign"> Make Active</span>
+                            </button>
+                    }
+                </li>
+            }
+        </ul>
+    }
 }
 else if (Model.ActiveTrip == null && ViewBag.userProfile != ViewBag.currentUser)
 {
@@ -103,6 +124,7 @@ else
                             @if (ViewBag.userProfile == ViewBag.currentUser)
                             {
                                 <div class="btn-group-sm hidden" id="mini-fab">
+                                    <!--VIEW DONATIONS-->                                    
                                     <span data-toggle="modal" data-target="#myModal">
                                         <button type="button" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Donation List" id="modalBtn">
                                             <i class="material-icons">
@@ -112,6 +134,7 @@ else
                                             </i>
                                         </button>
                                     </span>
+                                    <!--ADD DONATION-->
                                     <a href="../Donation/Payment?tripId=@Model.ActiveTrip.Trip.Id"
                                        class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Add Donation" title="" id="donate">
                                         <i class="material-icons">
@@ -120,13 +143,15 @@ else
                                             </svg>
                                         </i>
                                     </a>
+                                    <!--CANCEL TRIP-->
                                     <a href="#" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Cancel" title="" id="cancel">
                                         <i class="material-icons">
                                             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                                                 <path fill="#1ABBAC" d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z" />
                                             </svg>
                                         </i>
-                                    </a>
+                                    </a>                                    
+                                    <!--EDIT TRIP-->
                                     <a href="#" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Edit" title="" id="edit">
                                         <i class="material-icons">
                                             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -135,6 +160,7 @@ else
                                         </i>
                                     </a>
                                 </div>
+                                <!--MAIN MENU-->
                                 <div class="btn-group">
                                     <a href="javascript:void(0)" class="btn btn-fab" id="tripMenuMain">
                                         <i class="material-icons">
@@ -147,6 +173,7 @@ else
                             }
                             else
                             {
+                                <!--DONATE-->
                                 <div class="btn-group">
                                     <a href="#" class="btn btn-fab" id="donateMain">
                                         <i class="material-icons">
@@ -220,12 +247,11 @@ else
         </div>
     </div>
 }
-<div id="donateToggle">
+@*<div id="donateToggle">
     @Html.Partial("_PaymentPartial")
     <script language="JavaScript" type="text/javascript">
-        if (@Model.ActiveTrip != null) {
-            var pubKey = '@System.Configuration.ConfigurationManager.AppSettings["PubKey"]';
-            var tripId = '@Model.ActiveTrip.Trip.Id';
-        }
+        var pubKey = '@System.Configuration.ConfigurationManager.AppSettings["PubKey"]';
+        var tripId = '@Model.ActiveTrip.Trip.Id';
     </script>
-</div>
+</div>*@
+

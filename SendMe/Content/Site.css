@@ -34,6 +34,9 @@ textarea {
 
 /*--------------------------------------------------*/
 
+.btn-success {
+    background-color: #1ABBAC;
+}
 
 html {
     height: 100%;
@@ -188,6 +191,7 @@ button {
     height: 50px;
     width: 50px;
     background-color: #1ABBAC;
+    right: 10px;
 }
 
 #donateMain {
@@ -228,3 +232,11 @@ button {
     bottom: 200px;
     margin-bottom: 55px;
 }
+
+
+/*-------------------------------------------------------------------------------
+    Make Active Toggle
+        http://callmenick.com/post/css-toggle-switch-examples
+        Didn't work because of the foreach and all toggles having the same id
+        If time, try to add back in cuz it looks awesome.
+-------------------------------------------------------------------------------*/

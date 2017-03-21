@@ -122,7 +122,7 @@
         $("#schIdxDonations").hide();
         $("#showSchIdxDonations").show();
     });
-
+    
     //------------------------------------------------------
     //    Trip Menu Buttons
     //      http://codepen.io/apocheau/pen/EKeZgg
@@ -166,8 +166,6 @@
     $('[data-toggle="tooltip"]').tooltip();
 
     $.material.init();
-
-
 
 });
 

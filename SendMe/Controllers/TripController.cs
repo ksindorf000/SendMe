@@ -30,6 +30,16 @@ namespace SendMe.Controllers
             return View(model);
         }
 
+
+        //------------------------------------
+        //      Render Trip Form Partial
+        //------------------------------------
+        public PartialViewResult RenderPartial(Trip trip)
+        {
+            return PartialView("_CreateTrip", trip);
+        }
+
+
         //----------------------------
         //      Create Trip
         //----------------------------
@@ -101,14 +111,6 @@ namespace SendMe.Controllers
             return RedirectToAction(returnUrl);
         }
 
-        //------------------------------------
-        //      Render Trip Form Partial
-        //------------------------------------
-        public PartialViewResult RenderPartial(Trip trip)
-        {
-            return PartialView("_CreateTrip", trip);
-        }
-
         //----------------------------
         //      Cancel Trip
         //----------------------------        
@@ -137,6 +139,43 @@ namespace SendMe.Controllers
             }
 
             trip.IsActive = false;
+            db.Entry(trip).State = EntityState.Modified;
+            db.SaveChanges();
+
+            //Send Email to Admin
+
+
+            return RedirectToAction(returnUrl);
+        }
+
+        //----------------------------
+        //      Make Trip Active
+        //----------------------------        
+        [HttpPost, ActionName("MakeActive")]
+        [ValidateAntiForgeryToken]
+        public ActionResult MakeActive(int? id)
+        {
+            string userName = User.Identity.Name;
+            string returnUrl = "../send/" + userName;
+
+            if (id == null)
+            {
+                return RedirectToAction(returnUrl);
+            }
+
+            string userId = User.Identity.GetUserId();
+
+            Trip trip = db.Trips
+                .Where(t => t.Id == id
+                && t.Student.UserId == userId)
+                .FirstOrDefault();
+
+            if (trip == null || trip.Student.UserId != userId)
+            {
+                return RedirectToAction(returnUrl);
+            }
+
+            trip.IsActive = true;
             db.Entry(trip).State = EntityState.Modified;
             db.SaveChanges();
 
