@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
+using SendMe.Helpers;
 using System.Web.Mvc;
 
 namespace SendMe.Controllers
@@ -114,7 +114,7 @@ namespace SendMe.Controllers
         //----------------------------
         //      Cancel Trip
         //----------------------------        
-        [HttpPost, ActionName("Cancel")]    
+        [HttpPost, ActionName("Cancel")]
         [ValidateAntiForgeryToken]
         public ActionResult Cancel(int? id)
         {
@@ -142,8 +142,7 @@ namespace SendMe.Controllers
             db.Entry(trip).State = EntityState.Modified;
             db.SaveChanges();
 
-            //Send Email to Admin
-
+            SendAdminEmail(userId, "cancel", trip.Student.SchoolId);
 
             return RedirectToAction(returnUrl);
         }
@@ -179,10 +178,59 @@ namespace SendMe.Controllers
             db.Entry(trip).State = EntityState.Modified;
             db.SaveChanges();
 
-            //Send Email to Admin
-
+            SendAdminEmail(userId, "activate", trip.Student.SchoolId);
 
             return RedirectToAction(returnUrl);
+        }
+
+        //----------------------------
+        //      Send Admin Emails
+        //---------------------------- 
+        private void SendAdminEmail(string userId, string type, int schId)
+        {
+            /*
+             * SELECT u.Email
+             * FROM User u
+             * INNER JOIN StuProfile sp ON sp.UserId = u.Id
+             * INNER JOIN UserRoles r ON r.UserId = u.Id
+             * WHERE r.UserId = {userId} && r.RoleId = {roleId} && sp.SchoolId = {userSchId}
+             */
+
+            var adminRoleId = db.Roles
+                .Where(r => r.Name == "Admin")
+                .Select(r => r.Id)
+                .FirstOrDefault();
+
+            string adminEmail = (from u in db.Users
+                                 join sp in db.StuProfiles
+                                     on u.Id equals sp.UserId
+                                 where u.Id == userId
+                                 && sp.SchoolId == schId
+                                 && u.Roles.All(r => r.RoleId == adminRoleId)
+                                 select u.Email).FirstOrDefault();
+
+            var adminProf = db.StuProfiles
+                .SingleOrDefault(sp => sp.User.Email == adminEmail);
+
+            string adminName = $"{ adminProf.FirstName} { adminProf.LastName}";
+
+            string userEmail = db.Users
+                .Where(u => u.Id == userId)
+                .Select(u => u.Email)
+                .FirstOrDefault();
+
+            string emailSubject = (type == "cancel") ? "Trip Cancellation" : "Trip Reactivated";
+
+            var stuProf = db.StuProfiles
+               .SingleOrDefault(sp => sp.UserId == userId);
+
+            string stuName = $"{ stuProf.FirstName} { stuProf.LastName}";
+
+            string messageBody = (type == "cancel") ?
+                stuName + " has cancelled their trip! Login to SendMe! to see donor and student contact information."
+                : stuName + " has reactivated a cancelled trip! <a href=\"#\">Login to SendMe!</a> to see donor and student contact information.";
+
+            MailHelper.Execute(messageBody, adminName, adminEmail, stuName, userEmail, emailSubject).Wait();
         }
     }
 }

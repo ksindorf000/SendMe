@@ -227,7 +227,7 @@ else
                         <p>
                             @if (donation.HaveThanked == false)
                     {
-                                @Ajax.ActionLink("Thank for Donation", "Index", new { donationId = donation.Id },
+                                @Ajax.ActionLink("Say Thanks", "Index", new { donationId = donation.Id },
                     new AjaxOptions
                     {
                         UpdateTargetId = "myModel",
