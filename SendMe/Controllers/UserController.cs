@@ -64,7 +64,8 @@ namespace SendMe.Controllers
             {
                 ViewBag.Action = "Create";
             }
-
+            var userName = username;
+            ViewBag.UserName = userName;
             return View(studentVM);
         }          
 
