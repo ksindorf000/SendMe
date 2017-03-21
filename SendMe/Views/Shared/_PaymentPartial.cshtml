@@ -1,4 +1,4 @@
-﻿@model SendMe.Models.StudentViewModel
+﻿<script src="https://js.stripe.com/v3/"></script>
 <form name="DonationForm">
     Optional
     <div class="group">
@@ -32,9 +32,8 @@
         <div class="alert alert-danger">
             <strong class="error"></strong>
         </div>
+        <div class="success">
+            Success! Your Stripe token is <span class="token"></span>
+        </div>
     </div>
-    <script language="JavaScript" type="text/javascript">
-        var pubKey = '@System.Configuration.ConfigurationManager.AppSettings["PubKey"]';
-        var tripId = '@Model.ActiveTrip.Trip.Id';
-    </script>
 </form>

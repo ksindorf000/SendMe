@@ -123,6 +123,15 @@
         $("#mini-fab").toggleClass('hidden');
     });
 
+    //Donation
+    $("#donateToggle").hide();
+
+    $("#donate").click(function () {
+        $("#tripDetails").hide();
+        $("#donateToggle").show();
+        $("#mini-fab").toggleClass('hidden');
+    });
+
     //Cancel Trip 
     $("#confirmCancel").hide();
 
