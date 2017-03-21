@@ -54,22 +54,24 @@ else if (Model.ActiveTrip == null && ViewBag.userProfile != ViewBag.currentUser)
 else
 {
     <div class="row">
-               
+
         <div id="editTrip">
             @(Html.Action("RenderPartial", "Trip", new { trip = Model.ActiveTrip.Trip }))
         </div>
 
         <div id="confirmCancel">
             <h2>Are you sure you want to cancel this trip?</h2>
-            <h4>Your school's administrator will be notified and will have the option 
-                to notify all donors of the cancellation. </h4>
+            <h4>
+                Your school's administrator will be notified and will have the option
+                to notify all donors of the cancellation.
+            </h4>
             @using (Html.BeginForm("Cancel", "Trip", new { id = Model.ActiveTrip.Trip.Id }, FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
                 <div class="form-actions no-color">
                     <button type="submit" class="btn btn-danger" id="btnConfirmCancel" value="Cancel">
                         <span class="glyphicon glyphicon-remove-sign"> Cancel</span>
-                    </button>           
+                    </button>
                     <a href="#" class="btn btn-default" id="dontCancel">
                         <span class="glyphicon glyphicon-ban-circle"> Don't Cancel</span>
                     </a>
@@ -87,7 +89,7 @@ else
             <p id="attachMenu">
                 @Model.ActiveTrip.Trip.Destination <br />
 
-                <div id="map" style="width: 350px; height: 350px; border: 2px solid #1abbac;"></div><br/>
+                <div id="map" style="width: 350px; height: 350px; border: 2px solid #1abbac;"></div><br />
 
                 $@Model.ActiveTrip.Trip.TargetAmnt
 
@@ -101,7 +103,16 @@ else
                             @if (ViewBag.userProfile == ViewBag.currentUser)
                             {
                                 <div class="btn-group-sm hidden" id="mini-fab">
-                                    <a href="../Donation/Payment?tripId=@Model.ActiveTrip.Trip.Id" 
+                                    <span data-toggle="modal" data-target="#myModal">
+                                        <button type="button" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Donation List" id="modalBtn">
+                                            <i class="material-icons">
+                                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                                    <path fill="#1ABBAC" d="M9,5V9H21V5M9,19H21V15H9M9,14H21V10H9M4,9H8V5H4M4,19H8V15H4M4,14H8V10H4V14Z" />
+                                                </svg>
+                                            </i>
+                                        </button>
+                                    </span>
+                                    <a href="../Donation/Payment?tripId=@Model.ActiveTrip.Trip.Id"
                                        class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Add Donation" title="" id="donate">
                                         <i class="material-icons">
                                             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -170,10 +181,6 @@ else
 <!-----------Modal for donations------------->
 @if (Model.User.UserName == User.Identity.Name && Model.ActiveTrip != null)
 {
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-        Check Donations
-    </button>
-
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -216,7 +223,9 @@ else
 <div id="donateToggle">
     @Html.Partial("_PaymentPartial")
     <script language="JavaScript" type="text/javascript">
-        var pubKey = '@System.Configuration.ConfigurationManager.AppSettings["PubKey"]';
-        var tripId = '@ViewBag.ActiveTrip.Trip.Id';
+        if (@Model.ActiveTrip != null) {
+            var pubKey = '@System.Configuration.ConfigurationManager.AppSettings["PubKey"]';
+            var tripId = '@Model.ActiveTrip.Trip.Id';
+        }
     </script>
 </div>

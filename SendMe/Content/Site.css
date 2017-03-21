@@ -159,9 +159,10 @@ button {
     display: none;
 }
 
-/*Trip Menu Buttons
+/*----------------------------------------
+    Trip Menu Buttons
     http://codepen.io/apocheau/pen/EKeZgg
-*/
+------------------------------------------*/
 #attachMenu {
     position: relative;
 }
@@ -221,4 +222,9 @@ button {
 #donate {
     bottom: 160px;
     margin-bottom: 40px;
+}
+
+#modalBtn {
+    bottom: 200px;
+    margin-bottom: 55px;
 }
