@@ -40,6 +40,7 @@ namespace SendMe.Controllers
             }
 
             var userId = User.Identity.GetUserId();
+
             ViewBag.UserSchId = db.StuProfiles
                 .Where(sp => sp.UserId == userId)
                 .Select(sp => sp.SchoolId)
@@ -56,7 +57,13 @@ namespace SendMe.Controllers
         [CustomAuthorize(Roles = "Admin")]
         public ActionResult Manage(int? id)
         {
-            if (id == null)
+            string userId = User.Identity.GetUserId();
+            int uSchId = db.StuProfiles
+                .Where(sp => sp.UserId == userId)
+                .Select(sp => sp.SchoolId)
+                .SingleOrDefault();
+
+            if (id == null || uSchId != id)
             {
                 return RedirectToAction("Index", "School", new { id = id });
             }
