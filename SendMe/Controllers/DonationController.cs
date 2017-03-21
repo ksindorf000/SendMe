@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Web.Configuration;
 using System.Web.Http;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace SendMe.Controllers
 {
@@ -109,7 +110,9 @@ namespace SendMe.Controllers
                     }
                 }
             }
-            return RedirectToAction(userName, "send");
+            string paymentMessage = ViewBag.Message;
+            return RedirectToAction(userName, new RouteValueDictionary(
+            new { controller = "send", action = userName, paymentMsg = paymentMessage }));
 
         }
     }

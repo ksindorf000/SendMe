@@ -68,13 +68,13 @@
             @foreach (var trip in Model.Trips)
             {
                 <li>
-                    @trip.Title - @trip.Destination, @trip.Dates   
+                    @trip.Title - @trip.Destination, @trip.Dates
                     @using (Html.BeginForm("MakeActive", "Trip", new { id = trip.Id }, FormMethod.Post))
                     {
                         @Html.AntiForgeryToken()
-                            <button type="submit" class="btn btn-success" id="btnMakeActive" value="MakeActive">
-                                <span class="glyphicon glyphicon-plus-sign"> Make Active</span>
-                            </button>
+                        <button type="submit" class="btn btn-success" id="btnMakeActive" value="MakeActive">
+                            <span class="glyphicon glyphicon-plus-sign"> Make Active</span>
+                        </button>
                     }
                 </li>
             }
@@ -137,7 +137,7 @@ else
                             @if (ViewBag.userProfile == ViewBag.currentUser)
                             {
                                 <div class="btn-group-sm hidden" id="mini-fab">
-                                    <!--VIEW DONATIONS-->                                    
+                                    <!--VIEW DONATIONS-->
                                     <span data-toggle="modal" data-target="#myModal">
                                         <button type="button" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Donation List" id="modalBtn">
                                             <i class="material-icons">
@@ -162,7 +162,7 @@ else
                                                 <path fill="#1ABBAC" d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z" />
                                             </svg>
                                         </i>
-                                    </a>                                    
+                                    </a>
                                     <!--EDIT TRIP-->
                                     <a href="#" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Edit" title="" id="edit">
                                         <i class="material-icons">
@@ -254,12 +254,20 @@ else
 <!-----------Partial View For Payment------------->
 @if (Model.ActiveTrip != null)
 {
-<div id="donateToggle">
-    @Html.Partial("_PaymentPartial")
-    <script language="JavaScript" type="text/javascript">
-        var pubKey = '@System.Configuration.ConfigurationManager.AppSettings["PubKey"]';
-        var tripId = '@Model.ActiveTrip.Trip.Id';
-        var userName = '@ViewBag.UserName';
-    </script>
-</div>
+    <div id="donateToggle">
+        @Html.Partial("_PaymentPartial")
+        <script language="JavaScript" type="text/javascript">
+            var pubKey = '@System.Configuration.ConfigurationManager.AppSettings["PubKey"]';
+            var tripId = '@Model.ActiveTrip.Trip.Id';
+            var userName = '@ViewBag.UserName';
+        </script>
+    </div>
 }
+
+@if (ViewBag.PaymentMsg != null)
+{
+<h1>@ViewBag.PaymentMsg</h1>
+}
+
+
+

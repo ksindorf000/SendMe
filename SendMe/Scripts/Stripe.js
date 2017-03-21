@@ -61,3 +61,5 @@ document.querySelector('form[name="DonationForm"]').addEventListener('submit', f
     };
     stripe.createToken(card, extraDetails).then(setOutcome);
 });
+
+

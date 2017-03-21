@@ -16,7 +16,7 @@ namespace SendMe.Controllers
         // INDEX: Username
         //--------------------------------
         [Route("send/{username}")]
-        public ActionResult Index(string username, int? donationId)
+        public ActionResult Index(string username, int? donationId, string paymentMsg)
         {   
             if (donationId != null)
             {
@@ -66,6 +66,8 @@ namespace SendMe.Controllers
             }
             var userName = username;
             ViewBag.UserName = userName;
+
+            ViewBag.PaymentMsg = paymentMsg;
             return View(studentVM);
         }          
 
