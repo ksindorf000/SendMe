@@ -195,22 +195,19 @@ namespace SendMe.Controllers
              * INNER JOIN UserRoles r ON r.UserId = u.Id
              * WHERE r.UserId = {userId} && r.RoleId = {roleId} && sp.SchoolId = {userSchId}
              */
-
-            var adminRoleId = db.Roles
-                .Where(r => r.Name == "Admin")
-                .Select(r => r.Id)
-                .FirstOrDefault();
-
-            string adminEmail = (from u in db.Users
-                                 join sp in db.StuProfiles
-                                     on u.Id equals sp.UserId
-                                 where u.Id == userId
-                                 && sp.SchoolId == schId
-                                 && u.Roles.All(r => r.RoleId == adminRoleId)
-                                 select u.Email).FirstOrDefault();
+             
+            ApplicationUser admin = (from role in db.Roles
+                                    where role.Name == "Admin"
+                                    from userRoles in role.Users
+                                    join user in db.Users
+                                        on userRoles.UserId equals user.Id
+                                    join sp in db.StuProfiles
+                                        on user.Id equals sp.UserId
+                                    where user.EmailConfirmed == true
+                                    select user).FirstOrDefault();
 
             var adminProf = db.StuProfiles
-                .SingleOrDefault(sp => sp.User.Email == adminEmail);
+                .SingleOrDefault(sp => sp.User.Email == admin.Email);
 
             string adminName = $"{ adminProf.FirstName} { adminProf.LastName}";
 
@@ -230,7 +227,7 @@ namespace SendMe.Controllers
                 stuName + " has cancelled their trip! Login to SendMe! to see donor and student contact information."
                 : stuName + " has reactivated a cancelled trip! <a href=\"#\">Login to SendMe!</a> to see donor and student contact information.";
 
-            MailHelper.Execute(messageBody, adminName, adminEmail, stuName, userEmail, emailSubject).Wait();
+            MailHelper.Execute(messageBody, adminName, admin.Email, stuName, userEmail, emailSubject);
         }
     }
 }
