@@ -200,6 +200,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Helpers\MailHelper.cs" />
     <Compile Include="Helpers\UserHelpers.cs" />
     <Compile Include="Migrations\201703131328456_AddedSchoolsTable.cs" />
     <Compile Include="Migrations\201703131328456_AddedSchoolsTable.Designer.cs">
