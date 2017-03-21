@@ -57,8 +57,8 @@
       <HintPath>..\packages\Sendgrid.9.0.12\lib\net452\SendGrid.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Stripe.net, Version=7.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stripe.net.7.4.0\lib\net45\Stripe.net.dll</HintPath>
+    <Reference Include="Stripe.net, Version=7.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.7.6.0\lib\net45\Stripe.net.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

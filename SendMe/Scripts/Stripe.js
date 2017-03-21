@@ -41,7 +41,7 @@ function setOutcome(result) {
         var Name = $("#DonorName").val();
         var Email = $("#DonorEmail").val();
         var Phone = $("#DonorPhoneNumber").val();
-        window.location.href = "/Donation/Payment?stripeToken=" + result.token.id + "&amount=" + amount + "&Name=" + Name + "&Email=" + Email + "&Phone=" + Phone + "&tripId=" + tripId;
+        window.location.href = "/Donation/Payment?stripeToken=" + result.token.id + "&amount=" + amount + "&Name=" + Name + "&Email=" + Email + "&Phone=" + Phone + "&tripId=" + tripId + "&userName=" + userName;
 
     } else if (result.error) {
         errorElement.textContent = result.error.message;
@@ -53,9 +53,9 @@ card.on('change', function (event) {
     setOutcome(event);
 });
 
-document.querySelector('form').addEventListener('submit', function (e) {
+document.querySelector('form[name="DonationForm"]').addEventListener('submit', function (e) {
     e.preventDefault();
-    var form = document.querySelector('form');
+    var form = document.querySelector('form[name="DonationForm"]');
     var extraDetails = {
         name: form.querySelector('input[name=DonorName]').value,
     };

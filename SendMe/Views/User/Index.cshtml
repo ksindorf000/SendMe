@@ -40,6 +40,19 @@
     </div>
 </div>
 
+<!-----------Progress bar------------->
+<script type="text/javascript">
+
+    var targetAmount = '@ViewBag.TargetAmount';
+    var currentTotal = '@ViewBag.CurrentTotal';
+
+</script>
+
+<div class="container">
+    <div id="goal">
+    </div>
+</div>
+
 <!-----------ACTIVE TRIP------------->
 
 @if (Model.ActiveTrip == null && ViewBag.userProfile == ViewBag.currentUser)
@@ -112,7 +125,7 @@ else
                                             </i>
                                         </button>
                                     </span>
-                                    <a href="../Donation/Payment?tripId=@Model.ActiveTrip.Trip.Id"
+                                    <a href="#"
                                        class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Add Donation" title="" id="donate">
                                         <i class="material-icons">
                                             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -148,7 +161,7 @@ else
                             else
                             {
                                 <div class="btn-group">
-                                    <a href="#" class="btn btn-fab" id="donateMain">
+                                    <a href="#" class="btn btn-fab" id="donate">
                                         <i class="material-icons">
                                             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                                                 <path fill="#FFF" d="M11,4.5H13V15.5H11V4.5M13,17.5V19.5H11V17.5H13Z" />
@@ -165,18 +178,7 @@ else
     </div>
 }
 
-<!-----------Progress bar------------->
-<script type="text/javascript">
 
-    var targetAmount = '@ViewBag.TargetAmount';
-    var currentTotal = '@ViewBag.CurrentTotal';
-
-</script>
-
-<div class="container">
-    <div id="goal">
-    </div>
-</div>
 
 <!-----------Modal for donations------------->
 @if (Model.User.UserName == User.Identity.Name && Model.ActiveTrip != null)
@@ -220,12 +222,24 @@ else
         </div>
     </div>
 }
+@if (Model.ActiveTrip != null) {
 <div id="donateToggle">
     @Html.Partial("_PaymentPartial")
     <script language="JavaScript" type="text/javascript">
-        if (@Model.ActiveTrip != null) {
+        
             var pubKey = '@System.Configuration.ConfigurationManager.AppSettings["PubKey"]';
             var tripId = '@Model.ActiveTrip.Trip.Id';
-        }
+        
+    </script>
+</div>
+}
+
+<!-----------Partial View For Payment------------->
+<div id="donateToggle">
+    @Html.Partial("_PaymentPartial")
+    <script language="JavaScript" type="text/javascript">
+        var pubKey = '@System.Configuration.ConfigurationManager.AppSettings["PubKey"]';
+        var tripId = '@Model.ActiveTrip.Trip.Id';
+        var userName = '@ViewBag.UserName';
     </script>
 </div>

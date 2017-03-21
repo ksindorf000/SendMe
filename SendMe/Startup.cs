@@ -24,12 +24,12 @@ namespace SendMe
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            if (!roleManager.RoleExists("Admin"))
+           if (!roleManager.RoleExists("Admin"))
             {
                 var role = new IdentityRole();
                 role.Name = "Admin";
-                roleManager.Create(role);
-            }            
+               roleManager.Create(role);
+           }            
         }
     }
 }

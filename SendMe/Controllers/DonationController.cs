@@ -15,7 +15,7 @@ namespace SendMe.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult Payment(string stripeToken, int? amount, string Name, string Email, string Phone, int? tripId)
+        public ActionResult Payment(string stripeToken, int? amount, string Name, string Email, string Phone, int? tripId, string userName)
         {
             if (tripId == null)
             {
@@ -109,7 +109,7 @@ namespace SendMe.Controllers
                     }
                 }
             }
-            return View(ViewBag.TripId);
+            return RedirectToAction(userName, "send");
 
         }
     }
