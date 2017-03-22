@@ -2,6 +2,7 @@
 using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -20,16 +21,22 @@ namespace SendMe.Helpers
                 From = new EmailAddress(from, stuName),
                 Subject = subj,
                 PlainTextContent = body,
-                HtmlContent = "<table><tr>"
-                + "<td style=\"max-height: 200px\">"
-                + "<a href=\"www.google.com\"><img src=\"https://cmeblogspot.files.wordpress.com/2013/11/welcome-email-header-2.png?w=600\"/></a>"
-                + "</td></tr>"
-                + "<tr><td>"
-                + "<p style=\"text-align: center\"> " + body + "</p>"
-                + "</td></tr></table>"
+                HtmlContent = PopulateBody(body)
             };
             msg.AddTo(new EmailAddress(to, adminName));
             var response = await client.SendEmailAsync(msg);
+        }
+
+        
+        private static string PopulateBody(string message)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(HttpContext.Current.Server.MapPath("~/EmailTemplates/GeneralTemplate.html")))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{Message}", message);
+            return body;
         }
     }
 }

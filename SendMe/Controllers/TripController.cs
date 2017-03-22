@@ -187,15 +187,7 @@ namespace SendMe.Controllers
         //      Send Admin Emails
         //---------------------------- 
         private void SendAdminEmail(string userId, string type, int schId)
-        {
-            /*
-             * SELECT u.Email
-             * FROM User u
-             * INNER JOIN StuProfile sp ON sp.UserId = u.Id
-             * INNER JOIN UserRoles r ON r.UserId = u.Id
-             * WHERE r.UserId = {userId} && r.RoleId = {roleId} && sp.SchoolId = {userSchId}
-             */
-             
+        {             
             ApplicationUser admin = (from role in db.Roles
                                     where role.Name == "Admin"
                                     from userRoles in role.Users
@@ -224,7 +216,7 @@ namespace SendMe.Controllers
             string stuName = $"{ stuProf.FirstName} { stuProf.LastName}";
 
             string messageBody = (type == "cancel") ?
-                stuName + " has cancelled their trip! Login to SendMe! to see donor and student contact information."
+                stuName + " has cancelled their trip! <a href=\"#\">Login to SendMe!</a> to see donor and student contact information."
                 : stuName + " has reactivated a cancelled trip! <a href=\"#\">Login to SendMe!</a> to see donor and student contact information.";
 
             MailHelper.Execute(messageBody, adminName, admin.Email, stuName, userEmail, emailSubject);
