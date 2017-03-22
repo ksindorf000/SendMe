@@ -63,10 +63,18 @@ document.querySelector('form[name="DonationForm"]').addEventListener('submit', f
 });
 
 
-$("#paymentMsgModal").hide();
-if(paymentMsg)
-{ $("#paymentMsgModal").modal('show'); }
+$("#successMsgModal").hide();
+$("#failedMsgModal").hide();
+if(paymentMsg.indexOf('Payment Successful') >= 0)
+{ $("#successMsgModal").modal('show'); }
+if(paymentMsg.indexOf('declined') >= 0)
+{ $("#failedMsgModal").modal('show'); }
    
-$("#payMsgBtn").click(function () {
+$("#approveMsgBtn").click(function () {
     window.location.href = "/send/"+userName;
-    });
+});
+$("#declineMsgBtn").click(function () {
+    window.location.href = "/send/" + userName;
+});
+
+

@@ -250,6 +250,10 @@
     <Compile Include="Migrations\201703151504025_RemovedTripVewModelTbl.Designer.cs">
       <DependentUpon>201703151504025_RemovedTripVewModelTbl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703222148017_addedCreatedToDonation.cs" />
+    <Compile Include="Migrations\201703222148017_addedCreatedToDonation.Designer.cs">
+      <DependentUpon>201703222148017_addedCreatedToDonation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Donation.cs" />
@@ -389,6 +393,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703151504025_RemovedTripVewModelTbl.resx">
       <DependentUpon>201703151504025_RemovedTripVewModelTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703222148017_addedCreatedToDonation.resx">
+      <DependentUpon>201703222148017_addedCreatedToDonation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

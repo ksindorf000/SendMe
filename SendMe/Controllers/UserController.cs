@@ -70,13 +70,19 @@ namespace SendMe.Controllers
             ViewBag.UserName = username;
             if(paymentMsg == "Payment Successful")
             {
-                ViewBag.PaymentMsg = $"{paymentMsg}! An electronic receipt has been sent to {email}";
+                ViewBag.PaymentMsg = $"{paymentMsg}! An electronic receipt has been sent to {email}.";
+            }
+            else if(paymentMsg == null)
+            {
+                ViewBag.PaymentMsg = null;
             }
             else
             {
                 ViewBag.PaymentMsg = paymentMsg;
             }
-            return View(studentVM);
+            ViewBag.Email = email;
+            
+                return View(studentVM);
         }          
 
     }

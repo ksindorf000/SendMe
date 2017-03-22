@@ -232,43 +232,39 @@ button {
     bottom: 200px;
     margin-bottom: 55px;
 }
-#payMsgModal {
-    position: fixed;
-    font-family: Arial, Helvetica, sans-serif;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 99999;
-    height: 100%;
-    width: 100%;
-}
-.modal-content {
-    position: absolute;
-    top: 50%;
+
+#successModalContent {
+    top: 10px;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #fff;
+    background: #1ABBAC;
     width: 80%;
     padding: 20px;
 }
-.modal {
-  text-align: center;
-  padding: 0!important;
+
+#failedModalContent {
+    top: 10px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #D63232;
+    width: 80%;
+    padding: 20px;
 }
 
 .modal:before {
-  content: '';
-  display: inline-block;
+
+  height: 100px;
+  max-height: 41%;
+  content:'';
+  display: inline-flex;
   height: 100%;
   vertical-align: middle;
   margin-right: -4px;
 }
 
-.modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
-}
+
+
+
 
 /*-------------------------------------------------------------------------------
     Make Active Toggle

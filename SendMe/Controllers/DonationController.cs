@@ -15,7 +15,7 @@ namespace SendMe.Controllers
     public class DonationController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        public Stripe.StripeCharge result;
         public ActionResult Payment(string stripeToken, int? amount, string Name, string Email, string Phone, int? tripId, string userName)
         {
             if (tripId == null)
@@ -38,7 +38,7 @@ namespace SendMe.Controllers
                     string name = (Name == "" ? "Anonymous" : Name);
 
                     Donor donorInfo = new Donor
-                    { 
+                    {
                         Name = name,
                         Email = Email,
                         Phone = Phone
@@ -54,18 +54,6 @@ namespace SendMe.Controllers
                     attachDonor = existingDonor;
                 }
 
-                //Add donation record
-                var donation = new Donation
-                {
-                    Amount = amount/100,
-                    HaveThanked = false,
-                    TripId = (int)tripId,
-                    Donor = attachDonor
-                };
-
-                db.Donations.Add(donation);
-                db.SaveChanges();
-
                 if (ModelState.IsValid)
                 {
                     var chargeRequest = new StripeChargeCreateOptions()
@@ -77,42 +65,65 @@ namespace SendMe.Controllers
 
                     };
                     var service = new StripeChargeService(WebConfigurationManager.AppSettings["PrivateKey"]);
-                    var result = service.Create(chargeRequest);
-
-                    if (result.Paid)
+                    try
                     {
-                        ViewBag.Message = "Payment Successful";
+                        result = service.Create(chargeRequest);
 
-                        if (tripId != null)
+                        if (result.Paid)
                         {
-                            //Update Percentage for trip
-                            Trip trip = db.Trips.Find(tripId);
-                            var donated = db.Donations
-                                        .Where(d => d.TripId == trip.Id)
-                                        .Sum(d => d.Amount);
-                            double target = trip.TargetAmnt;
-                            trip.PercentOfAmnt = (double)((donated / target) * 100);
-                            db.Entry(trip).State = System.Data.Entity.EntityState.Modified;
+                            //Create a donation in Db
+                            var donation = new Donation
+                            {
+                                Amount = amount / 100,
+                                HaveThanked = false,
+                                TripId = (int)tripId,
+                                Donor = attachDonor,
+                                Created = DateTime.Now,
+                                
+                            };
+                            db.Donations.Add(donation);
                             db.SaveChanges();
-                        }
-                        //var myMessage = new SendGrid.SendGridMessage();
-                        //myMessage.AddTo("test@sendgrid.com");
-                        //myMessage.From = new MailAddress("you@youremail.com", "First Last");
-                        //myMessage.Subject = "Sending with SendGrid is Fun";
-                        //myMessage.Text = "and easy to do anywhere, even with C#";
 
-                        //var transportWeb = new SendGrid.Web("SENDGRID_APIKEY");
-                        //transportWeb.DeliverAsync(myMessage);
+                            ViewBag.Message = "Payment Successful";
+
+                            if (tripId != null)
+                            {
+                                //Update Percentage for trip
+                                Trip trip = db.Trips.Find(tripId);
+                                var donated = db.Donations
+                                            .Where(d => d.TripId == trip.Id)
+                                            .Sum(d => d.Amount);
+                                double target = trip.TargetAmnt;
+                                trip.PercentOfAmnt = (double)((donated / target) * 100);
+                                db.Entry(trip).State = System.Data.Entity.EntityState.Modified;
+                                db.SaveChanges();
+                            }
+                            //var myMessage = new SendGrid.SendGridMessage();
+                            //myMessage.AddTo("test@sendgrid.com");
+                            //myMessage.From = new MailAddress("you@youremail.com", "First Last");
+                            //myMessage.Subject = "Sending with SendGrid is Fun";
+                            //myMessage.Text = "and easy to do anywhere, even with C#";
+
+                            //var transportWeb = new SendGrid.Web("SENDGRID_APIKEY");
+                            //transportWeb.DeliverAsync(myMessage);
+                        }
+                        else
+                        {
+                            ViewBag.Message = result.FailureMessage;
+                        }
                     }
-                    else
+                    catch (StripeException ex)
                     {
-                        ViewBag.Message = result.FailureMessage;
+                        ViewBag.Message = ex.Message;
+
                     }
                 }
+
+
             }
             string paymentMessage = ViewBag.Message;
             return RedirectToAction(userName, new RouteValueDictionary(
-            new { controller = "send", action = userName, paymentMsg = paymentMessage, email = Email}));
+            new { controller = "send", action = userName, paymentMsg = paymentMessage, email = Email }));
 
         }
     }
