@@ -27,8 +27,9 @@ namespace SendMe.Helpers
             var response = await client.SendEmailAsync(msg);
         }
 
-        
-        private static string PopulateBody(string message)
+        //Create body of html email from html template file
+        //https://www.aspsnippets.com/Articles/Send-HTML-Page-File-as-Email-Body-in-ASPNet-using-C-and-VBNet.aspx
+        public static string PopulateBody(string message)
         {
             string body = string.Empty;
             using (StreamReader reader = new StreamReader(HttpContext.Current.Server.MapPath("~/EmailTemplates/GeneralTemplate.html")))
