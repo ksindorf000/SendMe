@@ -244,9 +244,9 @@ namespace SendMe.Controllers
                     /*string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account",
                        new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id,
-                       "Confirm your account", "Please confirm your account by clicking <a href=\""
+                       string body = MailHelper.PopulateBody("Confirm your account", "Please confirm your account by clicking <a href=\""
                        + callbackUrl + "\">here</a>");
+                    await UserManager.SendEmailAsync(user.Id, body);
 
                     ViewBag.SentConf = "A confirmation email was sent to " + model.Email
                     + ". Please look for the confirmation email in your inbox and click the provided link to confirm and log in.";
@@ -307,7 +307,8 @@ namespace SendMe.Controllers
                 // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                string body = MailHelper.PopulateBody("Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", body);
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
