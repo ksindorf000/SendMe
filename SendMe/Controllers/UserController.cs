@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace SendMe.Controllers
 {
@@ -16,8 +17,10 @@ namespace SendMe.Controllers
         // INDEX: Username
         //--------------------------------
         [Route("send/{username}")]
-        public ActionResult Index(string username, int? donationId, string paymentMsg)
-        {   
+        public ActionResult Index(string username, int? donationId, string paymentMsg, string email)
+        {
+            
+
             if (donationId != null)
             {
                 var donationModify =
@@ -64,10 +67,15 @@ namespace SendMe.Controllers
             {
                 ViewBag.Action = "Create";
             }
-            var userName = username;
-            ViewBag.UserName = userName;
-
-            ViewBag.PaymentMsg = paymentMsg;
+            ViewBag.UserName = username;
+            if(paymentMsg == "Payment Successful")
+            {
+                ViewBag.PaymentMsg = $"{paymentMsg}! An electronic receipt has been sent to {email}";
+            }
+            else
+            {
+                ViewBag.PaymentMsg = paymentMsg;
+            }
             return View(studentVM);
         }          
 

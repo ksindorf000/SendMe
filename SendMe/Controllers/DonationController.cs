@@ -81,7 +81,7 @@ namespace SendMe.Controllers
 
                     if (result.Paid)
                     {
-                        ViewBag.Message = "Payment Successful!";
+                        ViewBag.Message = "Payment Successful";
 
                         if (tripId != null)
                         {
@@ -112,7 +112,7 @@ namespace SendMe.Controllers
             }
             string paymentMessage = ViewBag.Message;
             return RedirectToAction(userName, new RouteValueDictionary(
-            new { controller = "send", action = userName, paymentMsg = paymentMessage }));
+            new { controller = "send", action = userName, paymentMsg = paymentMessage, email = Email}));
 
         }
     }

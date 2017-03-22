@@ -63,3 +63,10 @@ document.querySelector('form[name="DonationForm"]').addEventListener('submit', f
 });
 
 
+$("#paymentMsgModal").hide();
+if(paymentMsg)
+{ $("#paymentMsgModal").modal('show'); }
+   
+$("#payMsgBtn").click(function () {
+    window.location.href = "/send/"+userName;
+    });

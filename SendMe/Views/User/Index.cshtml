@@ -209,32 +209,32 @@ else
 <!-----------Modal for donations------------->
 @if (Model.User.UserName == User.Identity.Name && Model.ActiveTrip != null)
 {
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="donationsModal" tabindex="-1" role="dialog" aria-labelledby="donationsLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Donations</h4>
+                    <h4 class="modal-title" id="donationsLabel">Donations</h4>
                 </div>
                 <div class="modal-body">
 
                     @foreach (var donation in Model.ActiveTrip.Donations)
-                {
+                    {
                         <h4>Donor Name : @donation.Donor.Name</h4>
                         <p>
                             Donation Amount:$ @donation.Amount
                         </p>
                         <p>
                             @if (donation.HaveThanked == false)
-                    {
+                            {
                                 @Ajax.ActionLink("Say Thanks", "Index", new { donationId = donation.Id },
-                    new AjaxOptions
-                    {
-                        UpdateTargetId = "myModel",
-                        LoadingElementId = "progress",
-                        OnSuccess = "disablelink",
-                    },
-                    new { @class = "btn btn-success" })
+     new AjaxOptions
+     {
+         UpdateTargetId = "myModel",
+         LoadingElementId = "progress",
+         OnSuccess = "disablelink",
+     },
+     new { @class = "btn btn-success" })
                             }
                         </p>
                     }
@@ -260,14 +260,29 @@ else
             var pubKey = '@System.Configuration.ConfigurationManager.AppSettings["PubKey"]';
             var tripId = '@Model.ActiveTrip.Trip.Id';
             var userName = '@ViewBag.UserName';
+            var paymentMsg = '@ViewBag.PaymentMsg';
+
         </script>
     </div>
 }
 
-@if (ViewBag.PaymentMsg != null)
-{
-<h1>@ViewBag.PaymentMsg</h1>
-}
 
 
-
+            <div id="paymentMsgModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" height="50px"  data-backdrop="static" 
+   data-keyboard="false" >
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Payment Status</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                            @ViewBag.PaymentMsg
+                            </p>
+                            <p>
+                            <button type="button" class="btn btn-default" id="payMsgBtn">Ok</button>
+                            </p>
+                        </div>
+                </div>
+            </div>
+     
