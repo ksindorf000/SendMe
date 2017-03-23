@@ -62,7 +62,7 @@ document.querySelector('form[name="DonationForm"]').addEventListener('submit', f
     stripe.createToken(card, extraDetails).then(setOutcome);
 });
 
-
+//Show and hide the modals for payment success/fail
 $("#successMsgModal").hide();
 $("#failedMsgModal").hide();
 if(paymentMsg.indexOf('Payment Successful') >= 0)
@@ -77,4 +77,13 @@ $("#declineMsgBtn").click(function () {
     window.location.href = "/send/" + userName;
 });
 
+//hides donation partial view
+$("#paymentBackBtn").click(function () {
+    $("#donateToggle").hide();
+    $("#tripDetails").show();
+});
 
+//shows tooltips
+$(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});

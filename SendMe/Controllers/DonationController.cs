@@ -58,6 +58,7 @@ namespace SendMe.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    //Create the charge request to send to stripe
                     var chargeRequest = new StripeChargeCreateOptions()
                     {
                         Amount = amount,
