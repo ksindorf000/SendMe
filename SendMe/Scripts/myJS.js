@@ -131,16 +131,7 @@
     $("#tripMenuMain").click(function () {
         $("#mini-fab").toggleClass('hidden');
     });
-
-    //Edit Trip
-    $("#editTrip").hide();
-
-    $("#edit").click(function () {
-        $("#tripDetails").hide();
-        $("#editTrip").show();
-        $("#mini-fab").toggleClass('hidden');
-    });
-
+    
     //Donation
     $("#donateToggle").hide();
 

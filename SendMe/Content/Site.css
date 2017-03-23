@@ -33,13 +33,34 @@ textarea {
 
 
 /*--------------------------------------------------*/
+.modal {
+    top: 5%;
+    position: fixed;
+}
+
+.modal-body {
+    overflow-y: auto;
+}
+
+.modal-open .modal,.btn:focus{
+    outline:none!important;
+}
+
+#donorTable {
+    margin: 10px;
+}
+
+td {
+    padding: 15px;
+}
+
 
 .btn-success {
     background-color: #1ABBAC;
 }
 
 html {
-    height: 100%;
+    min-height: 100%;
 }
 
 body {
@@ -106,7 +127,7 @@ label > span {
 button {
     float: left;
     display: block;
-    background: #666EE8;
+    background: #1ABBAC;
     color: white;
     box-shadow: 0 7px 14px 0 rgba(49,49,93,0.10), 0 3px 6px 0 rgba(0,0,0,0.08);
     border-radius: 4px;
@@ -121,11 +142,11 @@ button {
 }
 
     button:focus {
-        background: #555ABF;
+        background: #289f94;
     }
 
     button:active {
-        background: #43458B;
+        background: #2c9288;
     }
 
 .outcome {
