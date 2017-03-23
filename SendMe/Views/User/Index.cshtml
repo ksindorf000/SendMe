@@ -226,38 +226,31 @@ else
                                     @donation.Donor.Name
                                 </td>
                                 <td>
-                                    $ @donation.Amount .00
+                                    $@donation.Amount .00
                                 </td>
                                 <td>
                                     @if (donation.HaveThanked == false && donation.Donor.Name != "Anonymous")
                                     {
-                                        <button data-toggle="collapse" data-target="#thanks" class="btn btn-sm">
-                                            <span class="glyphicons glyphicon-envelope"></span>
+                                        <button data-toggle="collapse" data-target="@("#thanks"+donation.Id)" class="btn btn-sm">
+                                            <span class="glyphicon glyphicon-envelope"></span>
                                         </button>
                                     }
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="3">
-                                    <div id="thanks" class="collapse">
-                                        @using (Html.BeginForm("SendThankYou", "User", FormMethod.Post))
+                                    <div id="@("thanks"+donation.Id)" class="collapse">
+                                        @using (Html.BeginForm("SendThankYou", "User", new { donId = donation.Id, stuId = Model.Student.Id }, FormMethod.Post))
                                         {
-                                            @Html.AntiForgeryToken()
-                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                            <div class="form-group">
-                                                <label for="message">Comment:</label>
-                                                <textarea class="form-control" rows="5" id="message"></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-md-4">
-                                                    <button type="submit" id="sendThanks" class="btn btn-toolbar btn-success">
-                                                        <span class="glyphicon glyphicon-send"></span>
-                                                    </button>
-                                                </div>
+                                            <div class="form-actions no-color">
+                                                <label for="#thnksMsg">Add a personal message!</label>
+                                                <textarea rows="5" id="thanksMsg"></textarea>
+                                                <button type="submit" class="btn btn-success" id="sendThanksBtn" value="sendThanks">
+                                                    <span class="glyphicon glyphicon-send"> Send</span>
+                                                </button>
                                             </div>
                                         }
                                     </div>
-
                                 </td>
                             </tr>
                         }

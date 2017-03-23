@@ -84,20 +84,22 @@ namespace SendMe.Controllers
             ViewBag.Email = email;
             
                 return View(studentVM);
-        }          
+        }
 
 
         //-----------------------------------
         //      Send Thank You Email
-        //----------------------------------- 
-        private ActionResult SendThankYou(StudentViewModel student, string message, int? donationId)
+        //-----------------------------------         
+        [HttpPost]
+        public ActionResult SendThankYou(int? donId, int? stuId, string message)
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            
 
+            Donation donation = db.Donations.Find(donId);
+            Trip trip = db.Trips.Find(donation.TripId);
+            StuProfile stuProf = db.StuProfiles.Find(stuId);
+            StudentViewModel student = new StudentViewModel(stuProf);
             string picPath = student.Upload.FilePath;
-            Trip trip = student.ActiveTrip.Trip;
-            Donation donation = db.Donations.Find(donationId);
 
             string subj = "Thank you for helping send me to " + trip.Destination + "!";
 
@@ -109,7 +111,7 @@ namespace SendMe.Controllers
 
             MailHelper.Execute(body, donation.Donor.Name, donation.Donor.Email, student.Student.FirstName, student.Student.User.Email, subj);
 
-            return RedirectToRoute("/send/", student.User.UserName);
+            return Json("{ \"Message:\" }" + message, JsonRequestBehavior.AllowGet);
         }
 
     }

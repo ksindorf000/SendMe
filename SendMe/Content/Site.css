@@ -48,6 +48,7 @@ textarea {
 
 #donorTable {
     margin: 10px;
+    min-width: 100%;
 }
 
 td {
