@@ -1,6 +1,13 @@
-﻿body {
+﻿html {
+    min-height: 100%;
+}
+
+body {
+    margin-top: 2rem;
     padding-top: 50px;
     padding-bottom: 20px;
+    font-size: 2em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -23,16 +30,9 @@ textarea {
     max-width: 280px;
 }
 
-/*{
-  font-family: "Helvetica Neue", Helvetica;
-  font-size: 15px;
-  font-variant: normal;
-  padding: 0;
-  margin: 0;
-}*/
-
 
 /*--------------------------------------------------*/
+
 .modal {
     top: 5%;
     position: fixed;
@@ -42,8 +42,8 @@ textarea {
     overflow-y: auto;
 }
 
-.modal-open .modal,.btn:focus{
-    outline:none!important;
+.modal-open .modal, .btn:focus {
+    outline: none !important;
 }
 
 #donorTable {
@@ -58,10 +58,28 @@ td {
 
 .btn-success {
     background-color: #1ABBAC;
+    border-color: #fff;
 }
 
-html {
-    min-height: 100%;
+.btn-primary {
+    background-color: #1ABBAC;
+    border-color: #fff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  color: #ffffff;
+  background-color: #2c9288;
+  border-color: #fff;
+}
+
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  background-image: none;
 }
 
 body {
@@ -184,9 +202,117 @@ button {
     display: none;
 }
 
+h1 {
+    color: #2c9288;
+}
+
+.body-content {
+    min-width: 90%;
+    margin: 1% 5% 5% 5%;
+}
+
+/*---------------------------------
+          Color Palette
+---------------------------------*/
+
+.primary-color {
+    background-color: #1ABBAC;
+}
+
+.dark-primary-color {
+    background-color: #2c9288;
+}
+
+.medium-primary-color {
+    background-color: #289f94;
+}
+
+.accent-color {
+    background-color: #fff;
+}
+
+.dark-accent-color {
+    background-color: #556080;
+}
+
+.medium-accent-color {
+    background-color: #DADEE0;
+}
+
+/*-----------------------
+
+      Profile Card
+
+------------------------*/
+
+.profile-pic {
+    border-radius: 50%;
+    z-index: -1;
+    display: block;
+}
+
+.profile-card {
+    background-color: #fff;
+    width: 50%;
+    min-width: 100%;
+    max-height: 25%;
+    margin: 0 auto 100px;
+    box-shadow: 
+        0 2px 5px 0 rgba(0,0,0,.16), 
+        0 2px 10px 0 rgba(0,0,0,.12);
+    border-radius: 5px;
+}
+
+.card:first-child {
+      opacity: .99; 
+}
+
+.card-img-top {
+    position: relative;
+    z-index: -1;
+    border-radius: 5px 5px 0 0;
+    min-height: 350px;
+    max-width: 100%;
+    overflow: hidden;
+    background-image: url(/Img/globe-bg.jpg);
+    background-position: 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.card-prof-pic {
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    z-index: -1;
+    border-radius: 50%;
+    max-width: 250px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.15);
+}
+
+.card-prof-pic:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card-block {
+    padding: 2rem;
+    margin-top: 5%;
+}
+
+.card-title, .card-subtitle {
+    text-align: center;
+}
+
+.bio {
+    margin: 25px 0 25px 15%;
+}
+
+
 /*----------------------------------------
+
     Trip Menu Buttons
     http://codepen.io/apocheau/pen/EKeZgg
+
 ------------------------------------------*/
 #attachMenu {
     position: relative;
@@ -248,6 +374,11 @@ button {
 #donate {
     bottom: 160px;
     margin-bottom: 40px;
+    border-radius: 50%;
+    padding: 12px 2px;
+    height: 50px;
+    width: 50px;
+    background-color: #1ABBAC;
 }
 
 #modalBtn {
@@ -255,7 +386,107 @@ button {
     margin-bottom: 55px;
 }
 
-/*css for donation success/fail*/
+/*---------------------------
+
+    Customized Navbar
+
+---------------------------*/
+
+.logo-nav {
+    max-height: 50px;
+}
+
+.navbar-default {
+    background-color: #1abbac;
+    border-color: #2c9288;
+}
+
+    .navbar-default .navbar-brand {
+        color: #ffffff;
+    }
+
+        .navbar-default .navbar-brand:hover,
+        .navbar-default .navbar-brand:focus {
+            color: #ffffff;
+        }
+
+    .navbar-default .navbar-text {
+        color: #ffffff;
+    }
+
+    .navbar-default .navbar-nav > li > a {
+        color: #ffffff;
+    }
+
+        .navbar-default .navbar-nav > li > a:hover,
+        .navbar-default .navbar-nav > li > a:focus {
+            color: #ffffff;
+        }
+
+    .navbar-default .navbar-nav > .active > a,
+    .navbar-default .navbar-nav > .active > a:hover,
+    .navbar-default .navbar-nav > .active > a:focus {
+        color: #ffffff;
+        background-color: #2c9288;
+    }
+
+    .navbar-default .navbar-nav > .open > a,
+    .navbar-default .navbar-nav > .open > a:hover,
+    .navbar-default .navbar-nav > .open > a:focus {
+        color: #ffffff;
+        background-color: #2c9288;
+    }
+
+    .navbar-default .navbar-toggle {
+        border-color: #2c9288;
+    }
+
+        .navbar-default .navbar-toggle:hover,
+        .navbar-default .navbar-toggle:focus {
+            background-color: #2c9288;
+        }
+
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: #ffffff;
+        }
+
+    .navbar-default .navbar-collapse,
+    .navbar-default .navbar-form {
+        border-color: #ffffff;
+    }
+
+    .navbar-default .navbar-link {
+        color: #ffffff;
+    }
+
+        .navbar-default .navbar-link:hover {
+            color: #ffffff;
+        }
+
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #ffffff;
+    }
+
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+            color: #ffffff;
+        }
+
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #ffffff;
+        background-color: #2c9288;
+    }
+}
+
+/*---------------------------
+
+css for donation success/fail
+
+---------------------------*/
+
 #successModalContent {
     top: 10px;
     left: 50%;
@@ -275,24 +506,27 @@ button {
 }
 
 .modal:before {
-
-  height: 100px;
-  max-height: 41%;
-  content:'';
-  display: inline-flex;
-  height: 100%;
-  vertical-align: middle;
-  margin-right: -4px;
+    height: 100px;
+    max-height: 41%;
+    content: '';
+    display: inline-flex;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
 }
 
-/*donation back button*/
+/*---------------------------
+
+   donation back button
+
+---------------------------*/
 .btn-circle {
     width: 50px;
-  height: 50px;
-  padding: 10px 16px;
-  font-size: 18px;
-  line-height: 1.33;
-  border-radius: 25px;
+    height: 50px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 25px;
 }
 
 
