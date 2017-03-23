@@ -91,7 +91,7 @@ namespace SendMe.Controllers
         //      Send Thank You Email
         //-----------------------------------         
         [HttpPost]
-        public ActionResult SendThankYou(int? donId, int? stuId, string message)
+        public ActionResult SendThankYou(int? donId, int? stuId, string thxMsg)
         {
             ApplicationDbContext db = new ApplicationDbContext();
 
@@ -105,13 +105,15 @@ namespace SendMe.Controllers
 
             string body = "<table><tr><td style=\"padding: 20px\"><img src=\"" + picPath
                 + "\" style = \"width: 150px; height: 150px; border-radius: 50%\" ></td >"
-                + "<td style=\"padding: 20px: text-align: left\">" + message + "</td></tr></table>";
+                + "<td style=\"padding: 20px: text-align: left\">" + thxMsg + "</td></tr></table>";
 
             string fromEmail = ConfigurationManager.AppSettings["SendEmailsFrom"];
 
             MailHelper.Execute(body, donation.Donor.Name, donation.Donor.Email, student.Student.FirstName, student.Student.User.Email, subj);
 
-            return Json("{ \"Message:\" }" + message, JsonRequestBehavior.AllowGet);
+            string returnUrl = "../send/" + student.User.UserName;
+
+            return RedirectToAction(returnUrl);
         }
 
     }
