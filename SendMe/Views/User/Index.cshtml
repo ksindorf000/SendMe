@@ -88,11 +88,6 @@ else if (Model.ActiveTrip == null && ViewBag.userProfile != ViewBag.currentUser)
 else
 {
     <div class="row">
-
-        <div id="editTrip">
-            @(Html.Action("RenderPartial", "Trip", new { trip = Model.ActiveTrip.Trip }))
-        </div>
-
         <div id="confirmCancel">
             <h2>Are you sure you want to cancel this trip?</h2>
             <h4>
@@ -138,7 +133,7 @@ else
                             {
                                 <div class="btn-group-sm hidden" id="mini-fab">
                                     <!--VIEW DONATIONS-->
-                                    <span data-toggle="modal" data-target="#myModal">
+                                    <span data-toggle="modal" data-target="#donationsModal">
                                         <button type="button" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Donation List" id="modalBtn">
                                             <i class="material-icons">
                                                 <svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -165,13 +160,15 @@ else
                                         </i>
                                     </a>
                                     <!--EDIT TRIP-->
-                                    <a href="#" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Edit" title="" id="edit">
-                                        <i class="material-icons">
-                                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                                                <path fill="#1ABBAC" d="M16.84,2.73C16.45,2.73 16.07,2.88 15.77,3.17L13.65,5.29L18.95,10.6L21.07,8.5C21.67,7.89 21.67,6.94 21.07,6.36L17.9,3.17C17.6,2.88 17.22,2.73 16.84,2.73M12.94,6L4.84,14.11L7.4,14.39L7.58,16.68L9.86,16.85L10.15,19.41L18.25,11.3M4.25,15.04L2.5,21.73L9.2,19.94L8.96,17.78L6.65,17.61L6.47,15.29" />
-                                            </svg>
-                                        </i>
-                                    </a>
+                                    <span data-toggle="modal" data-target="#editTripModal">
+                                        <button type="button" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Edit" id="edit">
+                                            <i class="material-icons">
+                                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                                    <path fill="#1ABBAC" d="M16.84,2.73C16.45,2.73 16.07,2.88 15.77,3.17L13.65,5.29L18.95,10.6L21.07,8.5C21.67,7.89 21.67,6.94 21.07,6.36L17.9,3.17C17.6,2.88 17.22,2.73 16.84,2.73M12.94,6L4.84,14.11L7.4,14.39L7.58,16.68L9.86,16.85L10.15,19.41L18.25,11.3M4.25,15.04L2.5,21.73L9.2,19.94L8.96,17.78L6.65,17.61L6.47,15.29" />
+                                                </svg>
+                                            </i>
+                                        </button>
+                                    </span>
                                 </div>
                                 <!--MAIN MENU-->
                                 <div class="btn-group">
@@ -205,8 +202,6 @@ else
     </div>
 }
 
-
-
 <!-----------Modal for donations------------->
 @if (Model.User.UserName == User.Identity.Name && Model.ActiveTrip != null)
 {
@@ -218,55 +213,80 @@ else
                     <h4 class="modal-title" id="donationsLabel">Donations</h4>
                 </div>
                 <div class="modal-body">
-
-                    @foreach (var donation in Model.ActiveTrip.Donations)
-                    {
-                        <h4>Donor Name : @donation.Donor.Name</h4>
-                        <p>
-                            Donation Amount:$ @donation.Amount
-                        </p>
-                        if (donation.HaveThanked == false && donation.Donor.Email != null)
+                    <table id="donorTable">
+                        <tr>
+                            <th>Donor Name</th>
+                            <th>Amount Donated</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                        @foreach (var donation in Model.ActiveTrip.Donations)
                         {
-                            <button data-toggle="collapse" data-target="#thanks">
-                                <span class="glyphicons glyphicons-message-new"></span>
-                            </button>
-
-                            <div id="thanks" class="collapse">
-                                @using (Html.BeginForm("SendThankYou", "User", FormMethod.Post))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                    <div class="form-group">
-                                        <label for="message">Comment:</label>
-                                        <textarea class="form-control" rows="5" id="message"></textarea>
+                            <tr>
+                                <td>
+                                    @donation.Donor.Name
+                                </td>
+                                <td>
+                                    $ @donation.Amount .00
+                                </td>
+                                <td>
+                                    @if (donation.HaveThanked == false && donation.Donor.Name != "Anonymous")
+                                    {
+                                        <button data-toggle="collapse" data-target="#thanks" class="btn btn-sm">
+                                            <span class="glyphicons glyphicon-envelope"></span>
+                                        </button>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div id="thanks" class="collapse">
+                                        @using (Html.BeginForm("SendThankYou", "User", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                <label for="message">Comment:</label>
+                                                <textarea class="form-control" rows="5" id="message"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-4">
+                                                    <button type="submit" id="sendThanks" class="btn btn-toolbar btn-success">
+                                                        <span class="glyphicon glyphicon-send"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
-                                    <div class="form-group">
-                                        <div class="col-md-4">
-                                            <button type="submit" id="sendThanks" class="btn btn-toolbar btn-success">
-                                                <span class="glyphicon glyphicon-send"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
 
-                            @*@Ajax.ActionLink("Send", "SendThankYou", new { student = Model, donationId = donation.Id, message = msg.val },
-                                new AjaxOptions
-                                {
-                                    UpdateTargetId = "myModel",
-                                    LoadingElementId = "progress",
-                                    OnSuccess = "disablelink",
-                                },
-                                new { @class = "btn btn-success" })*@
+                                </td>
+                            </tr>
                         }
-                    }
-
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 }
 
+<!-----------Edit Trip Modal------------->
+@if (Model.User.UserName == User.Identity.Name && Model.ActiveTrip != null)
+{
+    <div class="modal fade" id="editTripModal" tabindex="-1" role="dialog" aria-labelledby="editTripModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="editTripLabel">Edit Trip</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="editTrip">
+                        @(Html.Action("RenderPartial", "Trip", new { trip = Model.ActiveTrip.Trip }))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 
 
 <!-----------Partial View For Payment------------->
@@ -297,7 +317,7 @@ else
                 </div>
                 <div class="modal-body">
                     <div class="modal-body">
-                        <h4 class="display-3" >
+                        <h4 class="display-3">
                             @ViewBag.PaymentMsg
                         </h4>
                         <p>
@@ -309,8 +329,8 @@ else
                 </div>
             </div>
         </div>
-        </div>
     </div>
+</div>
 
 <!-----------Failed Payment Message------------->
 <div id="failedMsgModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" height="50px" data-backdrop="static"

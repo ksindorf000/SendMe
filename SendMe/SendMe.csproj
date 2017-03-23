@@ -265,7 +265,6 @@
     <Compile Include="ViewModels\StudentViewModel.cs" />
     <Compile Include="Models\StuProfile.cs" />
     <Compile Include="Models\Trip.cs" />
-    <Compile Include="ViewModels\ThankYouViewModel.cs" />
     <Compile Include="ViewModels\TripViewModel.cs" />
     <Compile Include="Models\Upload.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -348,7 +347,6 @@
     <Content Include="Views\School\Manage.cshtml" />
     <Content Include="Views\Shared\_CreateTrip.cshtml" />
     <Content Include="Views\Shared\_PaymentPartial.cshtml" />
-    <Content Include="Views\User\ThankYou.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
