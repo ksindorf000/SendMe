@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
+using SendMe.Helpers;
 using SendMe.Models;
+using SendMe.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -19,8 +22,6 @@ namespace SendMe.Controllers
         [Route("send/{username}")]
         public ActionResult Index(string username, int? donationId, string paymentMsg, string email)
         {
-            
-
             if (donationId != null)
             {
                 var donationModify =
@@ -84,6 +85,32 @@ namespace SendMe.Controllers
             
                 return View(studentVM);
         }          
+
+
+        //-----------------------------------
+        //      Send Thank You Email
+        //----------------------------------- 
+        private ActionResult SendThankYou(StudentViewModel student, string message, int? donationId)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            
+
+            string picPath = student.Upload.FilePath;
+            Trip trip = student.ActiveTrip.Trip;
+            Donation donation = db.Donations.Find(donationId);
+
+            string subj = "Thank you for helping send me to " + trip.Destination + "!";
+
+            string body = "<table><tr><td style=\"padding: 20px\"><img src=\"" + picPath
+                + "\" style = \"width: 150px; height: 150px; border-radius: 50%\" ></td >"
+                + "<td style=\"padding: 20px: text-align: left\">" + message + "</td></tr></table>";
+
+            string fromEmail = ConfigurationManager.AppSettings["SendEmailsFrom"];
+
+            MailHelper.Execute(body, donation.Donor.Name, donation.Donor.Email, student.Student.FirstName, student.Student.User.Email, subj);
+
+            return RedirectToRoute("/send/", student.User.UserName);
+        }
 
     }
 }

@@ -147,6 +147,7 @@ else
                                             </i>
                                         </button>
                                     </span>
+                                    <!--ADD DONATION-->
                                     <a href="#"
                                        class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Add Donation" title="" id="donate">
                                         <i class="material-icons">
@@ -224,26 +225,43 @@ else
                         <p>
                             Donation Amount:$ @donation.Amount
                         </p>
-                        <p>
-                            @if (donation.HaveThanked == false)
-                            {
-                                @Ajax.ActionLink("Say Thanks", "Index", new { donationId = donation.Id },
-     new AjaxOptions
-     {
-         UpdateTargetId = "myModel",
-         LoadingElementId = "progress",
-         OnSuccess = "disablelink",
-     },
-     new { @class = "btn btn-success" })
-                            }
-                        </p>
+                        if (donation.HaveThanked == false && donation.Donor.Email != null)
+                        {
+                            <button data-toggle="collapse" data-target="#thanks">
+                                <span class="glyphicons glyphicons-message-new"></span>
+                            </button>
+
+                            <div id="thanks" class="collapse">
+                                @using (Html.BeginForm("SendThankYou", "User", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        <label for="message">Comment:</label>
+                                        <textarea class="form-control" rows="5" id="message"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <button type="submit" id="sendThanks" class="btn btn-toolbar btn-success">
+                                                <span class="glyphicon glyphicon-send"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                            @*@Ajax.ActionLink("Send", "SendThankYou", new { student = Model, donationId = donation.Id, message = msg.val },
+                                new AjaxOptions
+                                {
+                                    UpdateTargetId = "myModel",
+                                    LoadingElementId = "progress",
+                                    OnSuccess = "disablelink",
+                                },
+                                new { @class = "btn btn-success" })*@
+                        }
                     }
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-
             </div>
         </div>
     </div>

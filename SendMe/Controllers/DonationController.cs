@@ -125,6 +125,9 @@ namespace SendMe.Controllers
 
         }
 
+        //----------------------------
+        //      Send Receipt Email
+        //---------------------------- 
         private static void SendReceiptEmail(string toEmail, int? amount, string name, int? tripId)
         {
             ApplicationDbContext db = new ApplicationDbContext();
