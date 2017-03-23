@@ -1,4 +1,4 @@
-﻿
+﻿//stripe payment start
 var stripe = Stripe(pubKey);
 var elements = stripe.elements();
 function checkEmail(emailAddress) {
@@ -61,6 +61,7 @@ document.querySelector('form[name="DonationForm"]').addEventListener('submit', f
     };
     stripe.createToken(card, extraDetails).then(setOutcome);
 });
+//stripe payment end
 
 //Show and hide the modals for payment success/fail
 $("#successMsgModal").hide();

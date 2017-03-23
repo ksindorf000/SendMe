@@ -23,9 +23,9 @@ namespace SendMe
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/myJS.js",
+                       "~/Scripts/goalProgress.js",
                        "~/Scripts/Stripe.js",
                        "~/Scripts/jquery.unobtrusive-ajax.min.js",
-                       "~/Scripts/goalProgress.js",
                        "~/Scripts/map.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
