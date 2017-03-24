@@ -87,6 +87,7 @@ $("#declineMsgBtn").click(function () {
 $("#paymentBackBtn").click(function () {
     $("#donateToggle").hide();
     $("#tripDetails").show();
+    $("#map").show();
 });
 
 //shows tooltips

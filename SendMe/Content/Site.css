@@ -16,6 +16,7 @@ body {
     padding-right: 15px;
     min-width: 90%;
     margin: 5%;
+    padding-bottom: 2%;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -137,7 +138,7 @@ button {
     float: left;
     display: block;
     background: #1ABBAC;
-    color: white; 
+    color: white;
     box-shadow: 0 7px 14px 0 rgba(49,49,93,0.10), 0 3px 6px 0 rgba(0,0,0,0.08);
     border-radius: 4px;
     border: 0;
@@ -196,6 +197,10 @@ h1 {
     color: #2c9288;
 }
 
+.row {
+    margin: 0;
+}
+
 
 /*---------------------------------
 
@@ -227,6 +232,10 @@ h1 {
     background-color: #DADEE0;
 }
 
+.dark-text-color {
+    color: #1a5b55;
+}
+
 /*-----------------------
 
    Footer
@@ -235,8 +244,10 @@ h1 {
 .wrapper {
     width: 100%;
 }
+
 .footer {
     position: absolute;
+    margin-top: 2%;
     right: 0;
     bottom: 0;
     left: 0;
@@ -388,9 +399,9 @@ h1 {
         min-height: 50px;
     }
 
-    .footer-logo {
-        max-height: 200px;
-    }
+.footer-logo {
+    max-height: 200px;
+}
 
 /* If you don't want the footer to be responsive, remove these media queries */
 
@@ -447,24 +458,21 @@ h1 {
 
 /*-----------------------
 
-      Profile Card
+      General Card
+        Settings
 
 ------------------------*/
-
-.profile-pic {
-    border-radius: 50%;
-    z-index: -1;
-    display: block;
+.card {
+    margin-bottom: 3%;
 }
 
-.profile-card {
-    background-color: #fff;
-    width: 50%;
-    min-width: 100%;
-    max-height: 25%;
-    margin: 0 auto 100px;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-    border-radius: 5px;
+.card-block {
+    padding: 2rem;
+    margin-top: 3%;
+}
+
+.card-title, .card-subtitle {
+    text-align: center;
 }
 
 .card:first-child {
@@ -484,13 +492,35 @@ h1 {
     background-repeat: no-repeat;
 }
 
+/*-----------------------
+
+      Profile Card
+
+------------------------*/
+
+.profile-pic {
+    border-radius: 50%;
+    z-index: -1;
+    display: block;
+}
+
+.profile-card {
+    background-color: #fff;
+    min-width: 100%;
+    max-width: 100%;
+    max-height: 25%;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    border-radius: 5px;
+    left: 0;
+}
+
 .card-prof-pic {
+    top: 20%;
+    left: 33%;
     position: absolute;
-    top: 45%;
-    left: 40%;
     z-index: -1;
     border-radius: 50%;
-    max-width: 250px;
+    max-width: 200px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.15);
 }
 
@@ -498,17 +528,41 @@ h1 {
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     }
 
-.card-block {
-    padding: 2rem;
-    margin-top: 10%;
-}
-
-.card-title, .card-subtitle {
-    text-align: center;
-}
-
 .bio {
     margin: 25px 0 25px 15%;
+}
+
+
+/*-----------------------
+
+      Trip Card
+
+------------------------*/
+
+.trip-card {
+    background-color: #fff;
+    min-width: 100%;
+    max-width: 100%;
+    max-height: 25%;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    border-radius: 5px;
+    left: 0;
+}
+
+
+/*----------------------------------------
+
+    Main Donation Button
+
+------------------------------------------*/
+#donateMain {
+    bottom: 25px;
+    border-radius: 50%;
+    padding: 12px 2px;
+    height: 50px;
+    width: 50px;
+    background-color: #1ABBAC;
+    float: left;
 }
 
 
@@ -546,15 +600,6 @@ h1 {
     right: 10px;
 }
 
-#donateMain {
-    bottom: 25px;
-    border-radius: 50%;
-    padding: 12px 2px;
-    height: 50px;
-    width: 50px;
-    background-color: #1ABBAC;
-}
-
 .miniMenu {
     border-radius: 50%;
     padding: 12px 2px;
@@ -580,19 +625,6 @@ h1 {
     margin-bottom: 40px;
 }
 
-#donateBtnLO {
-    bottom: 160px;
-    margin-bottom: 40px;
-    border-radius: 50%;
-    padding: 12px 2px;
-    height: 50px;
-    width: 50px;
-    border-color: #1ABBAC;
-    background-color: #1ABBAC;
-    border-width: 2px;
-   
-}
-
 #viewDonationsBtn {
     bottom: 200px;
     margin-bottom: 55px;
@@ -606,7 +638,7 @@ h1 {
 .landing-img {
     max-width: 100%;
     max-height: 100%;
-    margin: 0!important;
+    margin: 0 !important;
 }
 
 /*---------------------------
@@ -635,11 +667,11 @@ h1 {
         }
 
     .navbar-default .navbar-text {
-        color: #ffffff;
+        color: #1a5b55;
     }
 
     .navbar-default .navbar-nav > li > a {
-        color: #ffffff;
+        color: #1a5b55;
     }
 
         .navbar-default .navbar-nav > li > a:hover,
@@ -752,9 +784,33 @@ css for donation success/fail
     line-height: 1.33;
     border-radius: 25px;
 }
+/*---------------------------
+
+   donations list css
+
+---------------------------*/
+@media (min-width: 768px) {
+    #left {
+        position: relative;
+        overflow-y: scroll;
+    }
 
 
-/*-------------------------------------------------------------------------------
+
+    #left {
+        height: 50%;
+        background-color: #4FC1E9;
+        text-align: center;
+    }
+
+    #right {
+        height: 50%;
+        background-color: #4FC1E9;
+        text-align: center;
+    }
+
+
+    /*-------------------------------------------------------------------------------
     Make Active Toggle
         http://callmenick.com/post/css-toggle-switch-examples
         Didn't work because of the foreach and all toggles having the same id

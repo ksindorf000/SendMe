@@ -134,11 +134,13 @@
     
     //Donation logged in
     $("#donateToggle").hide();
+    $("#map").show();
 
-    $("#donateBtn").click(function () {
+    $("#donateBtn, #donateMain").click(function () {
         $("#tripDetails").hide();
         $("#donateToggle").show();
         $("#mini-fab").toggleClass('hidden');
+        $("#map").hide();
     });
 
     //Donation logged out
