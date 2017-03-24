@@ -18,6 +18,7 @@ function initialize() {
         center: centerPos,
         zoom: 2,
         mapTypeId: 'terrain',
+        scrollwheel: false,
         disableDefaultUI: true
     });
     var infowindow = new google.maps.InfoWindow({
