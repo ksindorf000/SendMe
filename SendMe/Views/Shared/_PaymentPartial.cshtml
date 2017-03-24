@@ -13,6 +13,7 @@
             <span>Card</span>
             <div id="card-element" class="field"></div>
         </label>
+        <strong class="error"></strong>
     </div>
      Optional
      <div class="group">
@@ -24,10 +25,17 @@
              <span>Phone</span>
              <input id="DonorPhoneNumber" class="field" placeholder="(555)-555-5555" type="tel" min="10" max="10" />
          </label>
-     </div>
-     <strong class="error"></strong>
-     <div class="btn-group btn-group-lg" role="group">
-         <button id="paymentBackBtn" type="button" class="btn btn-danger btn-circle" data-toggle="tooltip" data-placement="left" title="Go Back"><i class="glyphicon glyphicon-arrow-left"></i></button>
-         <button type="submit" class="btn btn-success btn-circle" data-toggle="tooltip" data-placement="right" title="Submit Donation"><i class="glyphicon glyphicon-ok"></i></button>
+         <div class="container">
+             <div class="container">
+                 <label for="comment">Message:</label>
+                 <textarea class="field" rows="5" id="comment" style="width:600px; border: 5px solid #DADEE0;"></textarea>
+             </div>
+         </div>
+         <div class="container">
+             <div class="btn-group btn-group-lg" role="group">
+                 <button id="paymentBackBtn" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Go Back"><i class="glyphicon glyphicon-arrow-left"></i> Back</button>
+                 <button type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Submit Donation"><i class="glyphicon glyphicon-ok"></i> Submid Donation</button>
+             </div>
+         </div>
      </div>
 </form>
