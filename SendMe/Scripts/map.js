@@ -7,6 +7,7 @@ var contentString1 = '<div id="content">' +
       '<p>Info here</p>' +
       '</div>';
 //lat long
+var centerPos = { lat: 14.5994, lng: -28.6731 };
 var pos1 = { lat: 33.980796, lng: -80.962908 };
 var pos2 = { lat: -12.046374, lng: -77.042793 };
 
@@ -14,8 +15,8 @@ var pos2 = { lat: -12.046374, lng: -77.042793 };
 window.onload = initialize;
 function initialize() {
     var map = new google.maps.Map(document.getElementById('map'), {
-        center: pos1,
-        zoom: 3,
+        center: centerPos,
+        zoom: 2,
         mapTypeId: 'terrain',
         disableDefaultUI: true
     });

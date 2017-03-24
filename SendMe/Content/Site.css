@@ -137,7 +137,7 @@ button {
     float: left;
     display: block;
     background: #1ABBAC;
-    color: white;
+    color: white; 
     box-shadow: 0 7px 14px 0 rgba(49,49,93,0.10), 0 3px 6px 0 rgba(0,0,0,0.08);
     border-radius: 4px;
     border: 0;
@@ -737,7 +737,31 @@ css for donation success/fail
     line-height: 1.33;
     border-radius: 25px;
 }
+/*---------------------------
 
+   donations list css
+
+---------------------------*/
+@media (min-width: 768px){
+  #left {
+    position: relative;
+  
+    overflow-y: scroll; 
+  }
+  
+
+
+#left {
+ height:50%;
+  background-color: #4FC1E9;
+  text-align: center;
+}
+
+#right {
+  height:50%;
+  background-color: #4FC1E9;
+  text-align: center;
+}
 
 
 /*-------------------------------------------------------------------------------
