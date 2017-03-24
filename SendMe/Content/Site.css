@@ -578,6 +578,18 @@ h1 {
 #donateBtn {
     bottom: 160px;
     margin-bottom: 40px;
+}
+
+#donateBtnLO {
+    bottom: 160px;
+    margin-bottom: 40px;
+    border-radius: 50%;
+    padding: 12px 2px;
+    height: 50px;
+    width: 50px;
+    border-color: #1ABBAC;
+    background-color: #1ABBAC;
+    border-width: 2px;
    
 }
 
@@ -739,31 +751,6 @@ css for donation success/fail
     font-size: 18px;
     line-height: 1.33;
     border-radius: 25px;
-}
-/*---------------------------
-
-   donations list css
-
----------------------------*/
-@media (min-width: 768px){
-  #left {
-    position: relative;
-  
-    overflow-y: scroll; 
-  }
-  
-
-
-#left {
- height:50%;
-  background-color: #4FC1E9;
-  text-align: center;
-}
-
-#right {
-  height:50%;
-  background-color: #4FC1E9;
-  text-align: center;
 }
 
 

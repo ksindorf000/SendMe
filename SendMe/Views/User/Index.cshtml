@@ -51,7 +51,7 @@
             {
             <!--DONATE-->
                 <div class="btn-group">
-                    <a href="#" class="btn btn-fab" id="donateBtn">
+                    <a class="btn btn-fab" id="donateBtnLO">
                         <i class="material-icons">
                             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                                 <path fill="#FFF" d="M11,4.5H13V15.5H11V4.5M13,17.5V19.5H11V17.5H13Z" />
@@ -153,7 +153,7 @@
                                                     </button>
                                                 </span>
                                                 <!--ADD DONATION-->
-                                                <a href="#"
+                                                <a 
                                                    class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Add Donation" title="" id="donateBtn">
                                                     <i class="material-icons">
                                                         <svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -215,16 +215,14 @@
                     </script>
                 </div>
             }
-            <!-----------View Donations Partial------------->
-            <div id="viewDonationsToggle">
-                @Html.Partial("_ViewDonationsPartial")
-            </div>
-
         </div>
     </div>
 </div>
 <!--/.Card-->
-
+ <!-----------View Donations Partial------------->
+<div id="viewDonationsToggle">
+    @Html.Partial("_ViewDonationsPartial")
+</div>
 <!-----------Successful Payment Message------------->
 <div id="paymentSuccessToggle">
     @Html.Partial("_PaymentSuccessPartial")

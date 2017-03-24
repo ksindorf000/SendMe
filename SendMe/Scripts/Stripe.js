@@ -65,11 +65,14 @@ document.querySelector('form[name="DonationForm"]').addEventListener('submit', f
 
 //Show and hide the modals for payment success/fail
 $("#paymentSuccessToggle").hide();
+$("#successMsgModal").modal('hide');
 $("#paymentFailedToggle").hide();
 
 if(paymentMsg.indexOf('Payment Successful') >= 0)
-{ $("#paymentSuccessToggle").modal('show'); }
-
+{
+    $("#paymentSuccessToggle").modal('show');
+    $("#successMsgModal").modal('show');
+}
 if(paymentMsg.indexOf('declined') >= 0)
 { $("#paymentFailedToggle").modal('show'); }
    

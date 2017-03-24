@@ -132,10 +132,17 @@
         $("#mini-fab").toggleClass('hidden');
     });
     
-    //Donation
+    //Donation logged in
     $("#donateToggle").hide();
 
     $("#donateBtn").click(function () {
+        $("#tripDetails").hide();
+        $("#donateToggle").show();
+        $("#mini-fab").toggleClass('hidden');
+    });
+
+    //Donation logged out
+    $("#donateBtnLO").click(function () {
         $("#tripDetails").hide();
         $("#donateToggle").show();
         $("#mini-fab").toggleClass('hidden');
