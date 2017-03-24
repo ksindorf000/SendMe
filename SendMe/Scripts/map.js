@@ -17,7 +17,7 @@ function initialize() {
     var map = new google.maps.Map(document.getElementById('map'), {
         center: centerPos,
         zoom: 2,
-        mapTypeId: 'terrain',
+        mapTypeId: 'hybrid',
         scrollwheel: false,
         disableDefaultUI: true
     });

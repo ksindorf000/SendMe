@@ -46,6 +46,7 @@
             <div class="container">
                 <div id="goal"></div>
             </div>
+            <br />
             @if (ViewBag.userProfile != ViewBag.currentUser)
             {
             <!--DONATE-->
@@ -198,7 +199,7 @@
                 </div>
             }
 
-          
+
             <!-----------Partial View For Payment------------->
             @if (Model.ActiveTrip != null)
             {
@@ -219,16 +220,16 @@
                 @Html.Partial("_ViewDonationsPartial")
             </div>
 
-            </div>
+        </div>
     </div>
 </div>
 <!--/.Card-->
-     <!-----------Successful Payment Message------------->
+<!-----------Successful Payment Message------------->
 <div id="paymentSuccessToggle">
     @Html.Partial("_PaymentSuccessPartial")
 </div>
 
- <!-----------Failed Payment Message------------->
+<!-----------Failed Payment Message------------->
 <div id="paymentFailedToggle">
     @Html.Partial("_PaymentFailedPartial")
 </div>
