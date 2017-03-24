@@ -135,9 +135,27 @@
     //Donation
     $("#donateToggle").hide();
 
-    $("#donate").click(function () {
+    $("#donateBtn").click(function () {
         $("#tripDetails").hide();
         $("#donateToggle").show();
+        $("#mini-fab").toggleClass('hidden');
+    });
+
+    //ViewDonations
+    $("#viewDonationsToggle").hide();
+
+    $("#viewDonationsBtn").click(function () {
+        $("#tripDetails").hide();
+        $("#viewDonationsToggle").show();
+        $("#mini-fab").toggleClass('hidden');
+    });
+
+    //ViewDonations
+    $("#editTripToggle").hide();
+
+    $("#editTripBtn").click(function () {
+        $("#tripDetails").hide();
+        $("#editTripToggle").show();
         $("#mini-fab").toggleClass('hidden');
     });
 

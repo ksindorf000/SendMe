@@ -1,0 +1,18 @@
+﻿@if (Model.User.UserName == User.Identity.Name && Model.ActiveTrip != null)
+            {
+    <div class="modal fade" id="editTripModal" tabindex="-1" role="dialog" aria-labelledby="editTripModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="editTripLabel">Edit Trip</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="editTrip">
+                        @(Html.Action("RenderPartial", "Trip", new { trip = Model.ActiveTrip.Trip }))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

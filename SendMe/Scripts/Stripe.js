@@ -64,12 +64,14 @@ document.querySelector('form[name="DonationForm"]').addEventListener('submit', f
 //stripe payment end
 
 //Show and hide the modals for payment success/fail
-$("#successMsgModal").hide();
-$("#failedMsgModal").hide();
+$("#paymentSuccessToggle").hide();
+$("#paymentFailedToggle").hide();
+
 if(paymentMsg.indexOf('Payment Successful') >= 0)
-{ $("#successMsgModal").modal('show'); }
+{ $("#paymentSuccessToggle").modal('show'); }
+
 if(paymentMsg.indexOf('declined') >= 0)
-{ $("#failedMsgModal").modal('show'); }
+{ $("#paymentFailedToggle").modal('show'); }
    
 $("#approveMsgBtn").click(function () {
     window.location.href = "/send/"+userName;

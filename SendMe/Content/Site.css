@@ -35,18 +35,7 @@ textarea {
 
 /*--------------------------------------------------*/
 
-.modal {
-    top: 5%;
-    position: fixed;
-}
 
-.modal-body {
-    overflow-y: auto;
-}
-
-.modal-open .modal, .btn:focus {
-    outline: none !important;
-}
 
 #donorTable {
     margin: 10px;
@@ -576,7 +565,7 @@ h1 {
     border-width: 2px;
 }
 
-#edit {
+#editTripBtn {
     bottom: 75px;
     margin-bottom: 15px;
 }
@@ -586,17 +575,13 @@ h1 {
     margin-bottom: 25px;
 }
 
-#donate {
+#donateBtn {
     bottom: 160px;
     margin-bottom: 40px;
-    border-radius: 50%;
-    padding: 12px 2px;
-    height: 50px;
-    width: 50px;
-    background-color: #1ABBAC;
+   
 }
 
-#modalBtn {
+#viewDonationsBtn {
     bottom: 200px;
     margin-bottom: 55px;
 }

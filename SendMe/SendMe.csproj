@@ -350,6 +350,10 @@
     <Content Include="Views\School\Manage.cshtml" />
     <Content Include="Views\Shared\_CreateTrip.cshtml" />
     <Content Include="Views\Shared\_PaymentPartial.cshtml" />
+    <Content Include="Views\Shared\_PaymentSuccessPartial.cshtml" />
+    <Content Include="Views\Shared\_PaymentFailedPartial.cshtml" />
+    <Content Include="Views\Shared\_ViewDonationsPartial.cshtml" />
+    <Content Include="Views\Shared\_EditTripPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
