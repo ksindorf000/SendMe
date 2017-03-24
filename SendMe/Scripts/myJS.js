@@ -178,7 +178,7 @@
 
 });
 
-//Donation partial list accordian show earch/ hide each
+//Donation partial list accordian show earch/ hide each/back button
 var j = [];
 for (i = 0; i <= Di; i++) {
     $("#collapseAcc_" + i).hide();
@@ -189,4 +189,9 @@ j.forEach(function (num) {
     $("#accBtn_" + num).click(function () {
         $("#collapseAcc_" + num).show();
 });
+});
+
+$("#viewDonBackBtn").click(function () {
+    $("#viewDonationsToggle").hide();
+    $("#tripDetails").show();
 });
