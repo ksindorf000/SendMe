@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Index";
 
-    if(ViewBag.UserSchId == Model.School.Id && User.IsInRole("Admin"))
+    if (ViewBag.UserSchId == Model.School.Id && User.IsInRole("Admin"))
     {
         ViewBag.logoUrl = "../School/Manage/" + Model.School.Id;
         ViewBag.logoUrlTitle = "Update School Profile";
@@ -13,10 +13,24 @@
         ViewBag.logoUrl = "#";
     };
 }
-
-<div class="jumbotron">
-    <img class="cover" style="max-width: 100%" src="@Model.CoverImg.FilePath" />
+<div class="profile-card">
+    <div class="card">
+        <div class="card-img-top" style="background-image: url(@Model.CoverImg.FilePath)"></div>
+        <img class="card-prof-pic" src="@Model.LogoImg.FilePath" />
+        <div class="card-block">
+            <h1 class="card-title"><a href="@Model.School.Website" target="_blank">@Model.School.Name</a></h1>
+            <h6 class="card-subtitle text-muted"><a href="../school/@Model.School.Id">@Model.School.Name</a></h6>            
+        </div>
+        <div class="card-block">
+            @if (User.IsInRole("Admin") && ViewBag.UserSchId == Model.School.Id)
+            {
+                @Html.ActionLink("Edit", "Manage", new { id = Model.School.Id })
+            }
+        </div>
+    </div>
 </div>
+
+
 
 <div class="row profile-header">
     <div class="col-md-12 text-center marb-35">
@@ -43,14 +57,14 @@
             if (student.ActiveTrip != null)
             {
                 <h3>@student.ActiveTrip.Trip.Title</h3>
-                <sub>@student.ActiveTrip.Trip.Dates</sub>
-                <p>
-                    @student.ActiveTrip.Trip.Desc
-                </p>
-                <p>
-                    @student.ActiveTrip.Trip.Destination <br />
-                    @student.ActiveTrip.Trip.TargetAmnt
-                </p>
+                            <sub>@student.ActiveTrip.Trip.Dates</sub>
+                            <p>
+                                @student.ActiveTrip.Trip.Desc
+                            </p>
+                            <p>
+                                @student.ActiveTrip.Trip.Destination <br />
+                                @student.ActiveTrip.Trip.TargetAmnt
+                            </p>
 
                 if (student.ActiveTrip.Donations.Count > 0)
                 {
@@ -58,28 +72,28 @@
                         Show Donations<br />
                         <span class="glyphicon glyphicon-chevron-down"> </span>
                     </p>
-                    <p id="hideSchIdxDonations">
-                        Hide Donations<br />
-                        <span class="glyphicon glyphicon-chevron-up"> </span>
-                    </p>
+                                <p id="hideSchIdxDonations">
+                                    Hide Donations<br />
+                                    <span class="glyphicon glyphicon-chevron-up"> </span>
+                                </p>
 
-                    <table id="schIdxDonations">
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Amount</th>
-                        </tr>
-                        @foreach (var donation in student.ActiveTrip.Donations)
+                                <table id="schIdxDonations">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                    @foreach (var donation in student.ActiveTrip.Donations)
                         {
-                            <tr>
-                                <td>@donation.Donor.Name</td>
-                                <td>@donation.Donor.Email</td>
-                                <td>@donation.Donor.Phone</td>
-                                <td>@donation.Amount</td>
-                            </tr>
-                        }
-                    </table>
+                                        <tr>
+                                            <td>@donation.Donor.Name</td>
+                                            <td>@donation.Donor.Email</td>
+                                            <td>@donation.Donor.Phone</td>
+                                            <td>@donation.Amount</td>
+                                        </tr>
+                                    }
+                                </table>
                 }
             }
             else

@@ -475,7 +475,7 @@ h1 {
     position: relative;
     z-index: -1;
     border-radius: 5px 5px 0 0;
-    min-height: 350px;
+    min-height: 400px;
     max-width: 100%;
     overflow: hidden;
     background-image: url(/Img/globe-bg.jpg);
@@ -486,7 +486,7 @@ h1 {
 
 .card-prof-pic {
     position: absolute;
-    top: 30%;
+    top: 45%;
     left: 40%;
     z-index: -1;
     border-radius: 50%;
@@ -500,7 +500,7 @@ h1 {
 
 .card-block {
     padding: 2rem;
-    margin-top: 5%;
+    margin-top: 10%;
 }
 
 .card-title, .card-subtitle {
@@ -587,11 +587,14 @@ h1 {
 }
 
 /*--------------------------
+
         Landing Page
+
 --------------------------*/
 .landing-img {
-    min-width: 100%;
-    background-image: url(/Img/SendMeBanner-WhtTxt.png);
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0!important;
 }
 
 /*---------------------------
