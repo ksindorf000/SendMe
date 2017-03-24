@@ -84,32 +84,36 @@ namespace SendMe.Controllers
             ViewBag.Email = email;
             
                 return View(studentVM);
-        }          
+        }
 
 
         //-----------------------------------
         //      Send Thank You Email
-        //----------------------------------- 
-        private ActionResult SendThankYou(StudentViewModel student, string message, int? donationId)
+        //-----------------------------------         
+        [HttpPost]
+        public ActionResult SendThankYou(int? donId, int? stuId, string thxMsg)
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            
 
+            Donation donation = db.Donations.Find(donId);
+            Trip trip = db.Trips.Find(donation.TripId);
+            StuProfile stuProf = db.StuProfiles.Find(stuId);
+            StudentViewModel student = new StudentViewModel(stuProf);
             string picPath = student.Upload.FilePath;
-            Trip trip = student.ActiveTrip.Trip;
-            Donation donation = db.Donations.Find(donationId);
 
             string subj = "Thank you for helping send me to " + trip.Destination + "!";
 
             string body = "<table><tr><td style=\"padding: 20px\"><img src=\"" + picPath
                 + "\" style = \"width: 150px; height: 150px; border-radius: 50%\" ></td >"
-                + "<td style=\"padding: 20px: text-align: left\">" + message + "</td></tr></table>";
+                + "<td style=\"padding: 20px: text-align: left\">" + thxMsg + "</td></tr></table>";
 
             string fromEmail = ConfigurationManager.AppSettings["SendEmailsFrom"];
 
             MailHelper.Execute(body, donation.Donor.Name, donation.Donor.Email, student.Student.FirstName, student.Student.User.Email, subj);
 
-            return RedirectToRoute("/send/", student.User.UserName);
+            string returnUrl = "../send/" + student.User.UserName;
+
+            return RedirectToAction(returnUrl);
         }
 
     }

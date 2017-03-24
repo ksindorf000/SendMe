@@ -121,8 +121,8 @@
         $("#hideSchIdxDonations").hide();
         $("#schIdxDonations").hide();
         $("#showSchIdxDonations").show();
-    });
-    
+    });  
+
     //------------------------------------------------------
     //    Trip Menu Buttons
     //      http://codepen.io/apocheau/pen/EKeZgg

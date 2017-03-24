@@ -10,6 +10,7 @@ namespace SendMe.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.DisplayFootLogo = false;
             return View();
         }
 

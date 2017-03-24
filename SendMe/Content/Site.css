@@ -1,12 +1,21 @@
-﻿body {
+﻿html {
+    min-height: 100%;
+}
+
+body {
+    margin-top: 2rem;
     padding-top: 50px;
     padding-bottom: 20px;
+    font-size: 2em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    min-width: 90%;
+    margin: 5%;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -23,16 +32,9 @@ textarea {
     max-width: 280px;
 }
 
-/*{
-  font-family: "Helvetica Neue", Helvetica;
-  font-size: 15px;
-  font-variant: normal;
-  padding: 0;
-  margin: 0;
-}*/
-
 
 /*--------------------------------------------------*/
+
 .modal {
     top: 5%;
     position: fixed;
@@ -42,12 +44,13 @@ textarea {
     overflow-y: auto;
 }
 
-.modal-open .modal,.btn:focus{
-    outline:none!important;
+.modal-open .modal, .btn:focus {
+    outline: none !important;
 }
 
 #donorTable {
     margin: 10px;
+    min-width: 100%;
 }
 
 td {
@@ -57,11 +60,29 @@ td {
 
 .btn-success {
     background-color: #1ABBAC;
+    border-color: #fff;
 }
 
-html {
-    min-height: 100%;
+.btn-primary {
+    background-color: #1ABBAC;
+    border-color: #fff;
 }
+
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active,
+    .btn-primary.active,
+    .open .dropdown-toggle.btn-primary {
+        color: #ffffff;
+        background-color: #2c9288;
+        border-color: #fff;
+    }
+
+    .btn-primary:active,
+    .btn-primary.active,
+    .open .dropdown-toggle.btn-primary {
+        background-image: none;
+    }
 
 body {
     background: #E6EBF1;
@@ -73,7 +94,6 @@ body {
 
 form {
     width: 480px;
-    margin: 20px 0;
 }
 
 .group {
@@ -183,9 +203,331 @@ button {
     display: none;
 }
 
+h1 {
+    color: #2c9288;
+}
+
+
+/*---------------------------------
+
+          Color Palette
+
+---------------------------------*/
+
+.primary-color {
+    background-color: #1ABBAC;
+}
+
+.dark-primary-color {
+    background-color: #2c9288;
+}
+
+.medium-primary-color {
+    background-color: #289f94;
+}
+
+.accent-color {
+    background-color: #fff;
+}
+
+.dark-accent-color {
+    background-color: #556080;
+}
+
+.medium-accent-color {
+    background-color: #DADEE0;
+}
+
+/*-----------------------
+
+   Footer
+     http://tutorialzine.com/2015/01/freebie-5-responsive-footer-templates/
+------------------------*/
+.wrapper {
+    width: 100%;
+}
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+}
+
+.footer-distributed {
+    background-color: #1ABBAC;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+    width: 100%;
+    font: bold 16px sans-serif;
+    text-align: left;
+    padding: 50px 60px 40px;
+    margin-top: 80px;
+    overflow: hidden;
+}
+
+    /* Footer left */
+
+    .footer-distributed .footer-left {
+        float: left;
+    }
+
+    /* The company logo */
+
+    .footer-distributed h3 {
+        color: #ffffff;
+        font: normal 36px 'Cookie', cursive;
+        margin: 0 0 10px;
+    }
+
+        .footer-distributed h3 span {
+            color: #5383d3;
+        }
+
+    /* Footer links */
+
+    .footer-distributed .footer-links {
+        color: #ffffff;
+        margin: 0 0 10px;
+        padding: 0;
+    }
+
+        .footer-distributed .footer-links a {
+            display: inline-block;
+            line-height: 1.8;
+            text-decoration: none;
+            color: inherit;
+        }
+
+    .footer-distributed .footer-company-name {
+        color: #8f9296;
+        font-size: 14px;
+        font-weight: normal;
+        margin: 0;
+    }
+
+    /* Footer social icons */
+
+    .footer-distributed .footer-icons {
+        margin-top: 40px;
+    }
+
+        .footer-distributed .footer-icons a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            background-color: #2c9288;
+            border-radius: 2px;
+            font-size: 20px;
+            color: #ffffff;
+            text-align: center;
+            line-height: 35px;
+            margin-right: 3px;
+            margin-bottom: 5px;
+        }
+
+    /* Footer Right */
+
+    .footer-distributed .footer-right {
+        float: right;
+    }
+
+        .footer-distributed .footer-right p {
+            display: inline-block;
+            vertical-align: top;
+            margin: 15px 42px 0 0;
+            color: #ffffff;
+        }
+
+    /* The contact form */
+
+    .footer-distributed form {
+        display: inline-block;
+    }
+
+        .footer-distributed form input,
+        .footer-distributed form textarea {
+            display: block;
+            border-radius: 3px;
+            box-sizing: border-box;
+            background-color: #2c9288;
+            box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1);
+            border: none;
+            resize: none;
+            font: inherit;
+            font-size: 14px;
+            font-weight: normal;
+            color: #dadee0;
+            width: 400px;
+            padding: 18px;
+        }
+
+    .footer-distributed ::-webkit-input-placeholder {
+        color: #dadee0;
+    }
+
+    .footer-distributed ::-moz-placeholder {
+        color: #dadee0;
+        opacity: 1;
+    }
+
+    .footer-distributed :-ms-input-placeholder {
+        color: #dadee0;
+    }
+
+
+    .footer-distributed form input {
+        height: 55px;
+        margin-bottom: 15px;
+    }
+
+    .footer-distributed form textarea {
+        height: 100px;
+        margin-bottom: 20px;
+    }
+
+    .footer-distributed form button {
+        border-radius: 3px;
+        background-color: #2c9288;
+        color: #ffffff;
+        border: 0;
+        padding: 5px;
+        font-weight: bold;
+        float: left;
+        max-width: 100px;
+        min-height: 50px;
+    }
+
+    .footer-logo {
+        max-height: 200px;
+    }
+
+/* If you don't want the footer to be responsive, remove these media queries */
+
+@media (max-width: 1000px) {
+
+    .footer-distributed {
+        font: bold 14px sans-serif;
+    }
+
+        .footer-distributed .footer-company-name {
+            font-size: 12px;
+        }
+
+        .footer-distributed form input,
+        .footer-distributed form textarea {
+            width: 250px;
+        }
+
+        .footer-distributed form button {
+            padding: 10px 35px;
+        }
+}
+
+@media (max-width: 800px) {
+
+    .footer-distributed {
+        padding: 30px;
+    }
+
+        .footer-distributed .footer-left,
+        .footer-distributed .footer-right {
+            float: none;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .footer-distributed .footer-left {
+            margin-bottom: 40px;
+        }
+
+        .footer-distributed form {
+            margin-top: 30px;
+        }
+
+        .footer-distributed form {
+            display: block;
+        }
+
+            .footer-distributed form button {
+                float: none;
+            }
+}
+
+
+/*-----------------------
+
+      Profile Card
+
+------------------------*/
+
+.profile-pic {
+    border-radius: 50%;
+    z-index: -1;
+    display: block;
+}
+
+.profile-card {
+    background-color: #fff;
+    width: 50%;
+    min-width: 100%;
+    max-height: 25%;
+    margin: 0 auto 100px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    border-radius: 5px;
+}
+
+.card:first-child {
+    opacity: .99;
+}
+
+.card-img-top {
+    position: relative;
+    z-index: -1;
+    border-radius: 5px 5px 0 0;
+    min-height: 350px;
+    max-width: 100%;
+    overflow: hidden;
+    background-image: url(/Img/globe-bg.jpg);
+    background-position: 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.card-prof-pic {
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    z-index: -1;
+    border-radius: 50%;
+    max-width: 250px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.15);
+}
+
+    .card-prof-pic:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+.card-block {
+    padding: 2rem;
+    margin-top: 5%;
+}
+
+.card-title, .card-subtitle {
+    text-align: center;
+}
+
+.bio {
+    margin: 25px 0 25px 15%;
+}
+
+
 /*----------------------------------------
+
     Trip Menu Buttons
     http://codepen.io/apocheau/pen/EKeZgg
+
 ------------------------------------------*/
 #attachMenu {
     position: relative;
@@ -247,6 +589,11 @@ button {
 #donate {
     bottom: 160px;
     margin-bottom: 40px;
+    border-radius: 50%;
+    padding: 12px 2px;
+    height: 50px;
+    width: 50px;
+    background-color: #1ABBAC;
 }
 
 #modalBtn {
@@ -254,7 +601,116 @@ button {
     margin-bottom: 55px;
 }
 
-/*css for donation success/fail*/
+/*--------------------------
+        Landing Page
+--------------------------*/
+.landing-img {
+    min-width: 100%;
+    background-image: url(/Img/SendMeBanner-WhtTxt.png);
+}
+
+/*---------------------------
+
+    Customized Navbar
+
+---------------------------*/
+
+.logo-nav {
+    max-height: 50px;
+    padding: 5px;
+}
+
+.navbar-default {
+    background-color: #1abbac;
+    border-color: #2c9288;
+}
+
+    .navbar-default .navbar-brand {
+        color: #ffffff;
+    }
+
+        .navbar-default .navbar-brand:hover,
+        .navbar-default .navbar-brand:focus {
+            color: #ffffff;
+        }
+
+    .navbar-default .navbar-text {
+        color: #ffffff;
+    }
+
+    .navbar-default .navbar-nav > li > a {
+        color: #ffffff;
+    }
+
+        .navbar-default .navbar-nav > li > a:hover,
+        .navbar-default .navbar-nav > li > a:focus {
+            color: #ffffff;
+        }
+
+    .navbar-default .navbar-nav > .active > a,
+    .navbar-default .navbar-nav > .active > a:hover,
+    .navbar-default .navbar-nav > .active > a:focus {
+        color: #ffffff;
+        background-color: #2c9288;
+    }
+
+    .navbar-default .navbar-nav > .open > a,
+    .navbar-default .navbar-nav > .open > a:hover,
+    .navbar-default .navbar-nav > .open > a:focus {
+        color: #ffffff;
+        background-color: #2c9288;
+    }
+
+    .navbar-default .navbar-toggle {
+        border-color: #2c9288;
+    }
+
+        .navbar-default .navbar-toggle:hover,
+        .navbar-default .navbar-toggle:focus {
+            background-color: #2c9288;
+        }
+
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: #ffffff;
+        }
+
+    .navbar-default .navbar-collapse,
+    .navbar-default .navbar-form {
+        border-color: #ffffff;
+    }
+
+    .navbar-default .navbar-link {
+        color: #ffffff;
+    }
+
+        .navbar-default .navbar-link:hover {
+            color: #ffffff;
+        }
+
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #ffffff;
+    }
+
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+            color: #ffffff;
+        }
+
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+        color: #ffffff;
+        background-color: #2c9288;
+    }
+}
+
+/*---------------------------
+
+css for donation success/fail
+
+---------------------------*/
+
 #successModalContent {
     top: 10px;
     left: 50%;
@@ -274,24 +730,27 @@ button {
 }
 
 .modal:before {
-
-  height: 100px;
-  max-height: 41%;
-  content:'';
-  display: inline-flex;
-  height: 100%;
-  vertical-align: middle;
-  margin-right: -4px;
+    height: 100px;
+    max-height: 41%;
+    content: '';
+    display: inline-flex;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
 }
 
-/*donation back button*/
+/*---------------------------
+
+   donation back button
+
+---------------------------*/
 .btn-circle {
     width: 50px;
-  height: 50px;
-  padding: 10px 16px;
-  font-size: 18px;
-  line-height: 1.33;
-  border-radius: 25px;
+    height: 50px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 25px;
 }
 
 
