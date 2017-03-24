@@ -3,7 +3,7 @@
 	padding: 5px;
 }
 div.progressBar {
-	background: #1ABBAC;
+    background-color: #1ABBAC;
 	color: #fff;
 	font-size: 1.5em;
 	font-family: 'helvetica neue', helvetica, arial, sans-serif;
@@ -12,7 +12,8 @@ div.progressBar {
 	padding: 10px;
 	display: block;
 	overflow: hidden;
-	width: 60px;
+	width: 25%
+
 }
 span.goalAmount {
 	display: none;
