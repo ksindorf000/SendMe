@@ -1,14 +1,15 @@
 ﻿@model SendMe.Models.Trip
 
+@{ ViewBag.DefaultDeadline = DateTime.Today.Date.AddDays(7); }
+
 @if (ViewBag.userProfile == ViewBag.currentUser)
 {
     string action = (ViewBag.Action == null) ? "Update" : ViewBag.Action;
 
-    <div id="tripPartial">
-        @using (Html.BeginForm(action, "Trip", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            <hr />
+    using (Html.BeginForm(action, "Trip", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -45,7 +46,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Deadline, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Deadline, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Deadline, new { htmlAttributes = new { @Value = ViewBag.DefaultDeadline, @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -63,16 +64,15 @@
                     <button type="submit" id="tripCreate" class="btn btn-toolbar btn-success">
                         <span class="glyphicon glyphicon-check"></span>
                     </button>
+                    </div>
+                <div class="col-md-4" style="padding-top: 25px;">
+                    @if (action == "Update")
+                    {
+                        <a href="@User.Identity.Name" class="btn btn-toolbar btn-danger">
+                            <span class="glyphicon glyphicon-ban-circle"></span>
+                        </a>
+                    }
                 </div>
-                @if (action == "Update")
-                {
-                <div class="col-md-4">
-                    <a href="@User.Identity.Name" class="btn btn-toolbar btn-danger">
-                        <span class="glyphicon glyphicon-ban-circle"></span>
-                    </a>
-                </div>
-                }
             </div>
-        }
-    </div>
+    }
 }
