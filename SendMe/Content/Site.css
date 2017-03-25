@@ -37,7 +37,9 @@ textarea {
 
 /*--------------------------------------------------*/
 
-
+.wrapper {
+    min-width: 100%;
+}
 
 #donorTable {
     margin: 10px;
@@ -334,6 +336,53 @@ h1 {
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
     border-radius: 5px;
     left: 0;
+}
+
+/*-----------------------
+
+   Small Student Card
+  (school profile page)
+
+------------------------*/
+.card-prof-pic-sm {
+    top: 50px;
+    left: 33%;
+    position: absolute;
+    z-index: -1;
+    border-radius: 50%;
+    max-width: 150px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.15);
+}
+
+    .card-prof-pic-sm:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+.sm-prof-card .card-img-top {
+    min-height: 200px;
+}
+
+/*---------------------------------------
+
+         School Profile Card
+
+---------------------------------------*/
+.school-card .card-prof-pic-sch {
+    top: 45%;
+    left: 40%;
+    position: absolute;
+    z-index: -1;
+    border-radius: 50%;
+    max-width: 250px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.15);
+}
+
+    .school-card .card-prof-pic:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+.school-card .card-block {
+    margin-top: 5%;
 }
 
 /*----------------------------------------
