@@ -121,7 +121,7 @@
         $("#hideSchIdxDonations").hide();
         $("#schIdxDonations").hide();
         $("#showSchIdxDonations").show();
-    });  
+    });
 
     //------------------------------------------------------
     //    Trip Menu Buttons
@@ -131,7 +131,7 @@
     $("#tripMenuMain").click(function () {
         $("#mini-fab").toggleClass('hidden');
     });
-    
+
     //Donation logged in
     $("#donateToggle").hide();
     $("#map").show();
@@ -159,6 +159,11 @@
         $("#mini-fab").toggleClass('hidden');
     });
 
+    $("#viewDonBackBtn").click(function () {
+        $("#viewDonationsToggle").hide();
+        $("#tripDetails").show();
+    });
+
     //ViewDonations
     $("#editTripToggle").hide();
 
@@ -174,10 +179,17 @@
     $("#cancel").click(function () {
         $("#confirmCancel").show();
         $("#mini-fab").toggleClass('hidden');
+        $("#map").hide();
     });
 
     $("#dontCancel").click(function () {
         $("#confirmCancel").hide();
+        $("#map").show();
+    });
+
+    //Edit Trip
+    $("#editTripBtn").click(function () {
+        $("#editTripToggle").show();
     });
 
     //ToolTips
@@ -197,10 +209,6 @@ for (i = 0; i <= Di; i++) {
 j.forEach(function (num) {
     $("#accBtn_" + num).click(function () {
         $("#collapseAcc_" + num).show();
-});
+    });
 });
 
-$("#viewDonBackBtn").click(function () {
-    $("#viewDonationsToggle").hide();
-    $("#tripDetails").show();
-});

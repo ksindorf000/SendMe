@@ -1,5 +1,11 @@
-﻿ <form name="DonationForm">
-    Required
+﻿<p>    
+    If you wish to remain anonymous, leave the "Name" field blank 
+    and your email will be used to send a donation receipt only.
+</p>
+<hr />
+
+<form name="DonationForm">
+    <h4>Required</h4>
     <div class="group">
         <label>
             <span>Email</span>
@@ -15,27 +21,28 @@
         </label>
         <strong class="error"></strong>
     </div>
-     Optional
-     <div class="group">
-         <label>
-             <span>Name</span>
-             <input name="DonorName" id="DonorName" class="field" placeholder="Mic Anderson" type="text" maxlength="30" />
-         </label>
-         <label>
-             <span>Phone</span>
-             <input id="DonorPhoneNumber" class="field" placeholder="(555)-555-5555" type="tel" min="10" max="10" />
-         </label>
-         <div class="container">
-             <div class="container">
-                 <label for="comment">Message:</label>
-                 <textarea class="field" rows="5" id="comment" style="width:600px; border: 5px solid #DADEE0;"></textarea>
-             </div>
-         </div>
-         <div class="container">
-             <div class="btn-group btn-group-lg" role="group">
-                 <button id="paymentBackBtn" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Go Back"><i class="glyphicon glyphicon-arrow-left"></i> Back</button>
-                 <button type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Submit Donation"><i class="glyphicon glyphicon-ok"></i> Submid Donation</button>
-             </div>
-         </div>
-     </div>
+    <h4>Optional</h4>
+    <div class="group">
+        <label>
+            <span>Name</span>
+            <input name="DonorName" id="DonorName" class="field" placeholder="Mic Anderson" type="text" maxlength="30" />
+        </label>
+        <label>
+            <span>Phone</span>
+            <input id="DonorPhoneNumber" class="field" placeholder="(555)-555-5555" type="tel" min="10" max="10" />
+        </label>
+        <div class="container">
+            <label for="comment">Add a personal message:</label>
+            <textarea class="field" rows="5" id="comment" style="width:100%; border: 5px solid #DADEE0;"></textarea>
+
+            <div class="btn-group btn-group-sm" role="group">
+                <div class="col-lg-5 paymentBtn">
+                    <button id="paymentBackBtn" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Go Back"><i class="glyphicon glyphicon-arrow-left"></i> Back</button>
+                </div>
+                <div class="col-lg-5 paymentBtn">
+                    <button type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="right" title="Submit Donation"><i class="glyphicon glyphicon-ok"></i> Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>

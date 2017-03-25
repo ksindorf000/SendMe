@@ -1,11 +1,12 @@
 ﻿@model SendMe.Models.Trip
 
+@{ ViewBag.DefaultDeadline = DateTime.Today.Date.AddDays(7); }
+
 @if (ViewBag.userProfile == ViewBag.currentUser)
 {
     string action = (ViewBag.Action == null) ? "Update" : ViewBag.Action;
 
-    <div id="tripPartial">
-        @using (Html.BeginForm(action, "Trip", FormMethod.Post))
+        using (Html.BeginForm(action, "Trip", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
             <hr />
@@ -45,7 +46,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Deadline, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Deadline, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Deadline, new { htmlAttributes = new { @Value = ViewBag.DefaultDeadline, @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -74,5 +75,4 @@
                 }
             </div>
         }
-    </div>
 }

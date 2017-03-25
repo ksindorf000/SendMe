@@ -8,6 +8,7 @@ body {
     padding-bottom: 20px;
     font-size: 2em;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 100%;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -15,7 +16,7 @@ body {
     padding-left: 15px;
     padding-right: 15px;
     min-width: 90%;
-    margin: 5%;
+    margin: 3%;
     padding-bottom: 2%;
 }
 
@@ -236,225 +237,6 @@ h1 {
     color: #1a5b55;
 }
 
-/*-----------------------
-
-   Footer
-     http://tutorialzine.com/2015/01/freebie-5-responsive-footer-templates/
-------------------------*/
-.wrapper {
-    width: 100%;
-}
-
-.footer {
-    position: absolute;
-    margin-top: 2%;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
-}
-
-.footer-distributed {
-    background-color: #1ABBAC;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
-    box-sizing: border-box;
-    width: 100%;
-    font: bold 16px sans-serif;
-    text-align: left;
-    padding: 50px 60px 40px;
-    margin-top: 80px;
-    overflow: hidden;
-}
-
-    /* Footer left */
-
-    .footer-distributed .footer-left {
-        float: left;
-    }
-
-    /* The company logo */
-
-    .footer-distributed h3 {
-        color: #ffffff;
-        font: normal 36px 'Cookie', cursive;
-        margin: 0 0 10px;
-    }
-
-        .footer-distributed h3 span {
-            color: #5383d3;
-        }
-
-    /* Footer links */
-
-    .footer-distributed .footer-links {
-        color: #ffffff;
-        margin: 0 0 10px;
-        padding: 0;
-    }
-
-        .footer-distributed .footer-links a {
-            display: inline-block;
-            line-height: 1.8;
-            text-decoration: none;
-            color: inherit;
-        }
-
-    .footer-distributed .footer-company-name {
-        color: #8f9296;
-        font-size: 14px;
-        font-weight: normal;
-        margin: 0;
-    }
-
-    /* Footer social icons */
-
-    .footer-distributed .footer-icons {
-        margin-top: 40px;
-    }
-
-        .footer-distributed .footer-icons a {
-            display: inline-block;
-            width: 35px;
-            height: 35px;
-            cursor: pointer;
-            background-color: #2c9288;
-            border-radius: 2px;
-            font-size: 20px;
-            color: #ffffff;
-            text-align: center;
-            line-height: 35px;
-            margin-right: 3px;
-            margin-bottom: 5px;
-        }
-
-    /* Footer Right */
-
-    .footer-distributed .footer-right {
-        float: right;
-    }
-
-        .footer-distributed .footer-right p {
-            display: inline-block;
-            vertical-align: top;
-            margin: 15px 42px 0 0;
-            color: #ffffff;
-        }
-
-    /* The contact form */
-
-    .footer-distributed form {
-        display: inline-block;
-    }
-
-        .footer-distributed form input,
-        .footer-distributed form textarea {
-            display: block;
-            border-radius: 3px;
-            box-sizing: border-box;
-            background-color: #2c9288;
-            box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1);
-            border: none;
-            resize: none;
-            font: inherit;
-            font-size: 14px;
-            font-weight: normal;
-            color: #dadee0;
-            width: 400px;
-            padding: 18px;
-        }
-
-    .footer-distributed ::-webkit-input-placeholder {
-        color: #dadee0;
-    }
-
-    .footer-distributed ::-moz-placeholder {
-        color: #dadee0;
-        opacity: 1;
-    }
-
-    .footer-distributed :-ms-input-placeholder {
-        color: #dadee0;
-    }
-
-
-    .footer-distributed form input {
-        height: 55px;
-        margin-bottom: 15px;
-    }
-
-    .footer-distributed form textarea {
-        height: 100px;
-        margin-bottom: 20px;
-    }
-
-    .footer-distributed form button {
-        border-radius: 3px;
-        background-color: #2c9288;
-        color: #ffffff;
-        border: 0;
-        padding: 5px;
-        font-weight: bold;
-        float: left;
-        max-width: 100px;
-        min-height: 50px;
-    }
-
-.footer-logo {
-    max-height: 200px;
-}
-
-/* If you don't want the footer to be responsive, remove these media queries */
-
-@media (max-width: 1000px) {
-
-    .footer-distributed {
-        font: bold 14px sans-serif;
-    }
-
-        .footer-distributed .footer-company-name {
-            font-size: 12px;
-        }
-
-        .footer-distributed form input,
-        .footer-distributed form textarea {
-            width: 250px;
-        }
-
-        .footer-distributed form button {
-            padding: 10px 35px;
-        }
-}
-
-@media (max-width: 800px) {
-
-    .footer-distributed {
-        padding: 30px;
-    }
-
-        .footer-distributed .footer-left,
-        .footer-distributed .footer-right {
-            float: none;
-            max-width: 300px;
-            margin: 0 auto;
-        }
-
-        .footer-distributed .footer-left {
-            margin-bottom: 40px;
-        }
-
-        .footer-distributed form {
-            margin-top: 30px;
-        }
-
-        .footer-distributed form {
-            display: block;
-        }
-
-            .footer-distributed form button {
-                float: none;
-            }
-}
-
 
 /*-----------------------
 
@@ -464,6 +246,7 @@ h1 {
 ------------------------*/
 .card {
     margin-bottom: 3%;
+    min-height: 50%;
 }
 
 .card-block {
@@ -532,6 +315,9 @@ h1 {
     margin: 25px 0 25px 15%;
 }
 
+#tripPartial {
+    position: relative;
+}
 
 /*-----------------------
 
@@ -544,11 +330,11 @@ h1 {
     min-width: 100%;
     max-width: 100%;
     max-height: 25%;
+    min-height: 700px;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
     border-radius: 5px;
     left: 0;
 }
-
 
 /*----------------------------------------
 
@@ -556,13 +342,15 @@ h1 {
 
 ------------------------------------------*/
 #donateMain {
-    bottom: 25px;
     border-radius: 50%;
     padding: 12px 2px;
     height: 50px;
     width: 50px;
     background-color: #1ABBAC;
-    float: left;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 
@@ -572,9 +360,6 @@ h1 {
     http://codepen.io/apocheau/pen/EKeZgg
 
 ------------------------------------------*/
-#attachMenu {
-    position: relative;
-}
 
 .btn-group-sm .btn-fab {
     padding-top: 10px;
@@ -618,11 +403,13 @@ h1 {
 #cancel {
     bottom: 120px;
     margin-bottom: 25px;
+    box-shadow: 0 7px 14px 0 rgba(49,49,93,0.10), 0 3px 6px 0 rgba(0,0,0,0.08);
 }
 
 #donateBtn {
     bottom: 160px;
     margin-bottom: 40px;
+    box-shadow: 0 7px 14px 0 rgba(49,49,93,0.10), 0 3px 6px 0 rgba(0,0,0,0.08);
 }
 
 #viewDonationsBtn {
@@ -644,6 +431,7 @@ h1 {
 /*---------------------------
 
     Customized Navbar
+    https://work.smarchal.com/twbscolor/
 
 ---------------------------*/
 
@@ -773,16 +561,13 @@ css for donation success/fail
 
 /*---------------------------
 
-   donation back button
+   payment button
 
 ---------------------------*/
-.btn-circle {
-    width: 50px;
-    height: 50px;
-    padding: 10px 16px;
-    font-size: 18px;
-    line-height: 1.33;
-    border-radius: 25px;
+.paymentBtn {
+    padding: 2px;
+    width: 50%;
+    margin-bottom: 5px;
 }
 /*---------------------------
 
