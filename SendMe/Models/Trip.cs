@@ -12,6 +12,9 @@ namespace SendMe.Models
         public string Title { get; set; }
         public string Desc { get; set; }
         public string Destination { get; set; }
+        public string DestinationCountry { get; set; }
+        public string DestinationState { get; set; }
+        public string DestinationCity { get; set; }
         public string DestLongLat { get; set; }
         public string Dates { get; set; }
         public DateTime Deadline { get; set; }

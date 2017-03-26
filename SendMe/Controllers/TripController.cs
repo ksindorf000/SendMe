@@ -61,7 +61,10 @@ namespace SendMe.Controllers
                 Desc = formData.Desc,
                 Dates = formData.Dates,
                 Deadline = formData.Deadline,
-                Destination = formData.Destination,
+                DestinationCountry = Request.Form["country"].ToString(),
+                DestinationCity = Request.Form["city"].ToString(),
+                DestinationState= Request.Form["state"].ToString(),
+                Destination = Request.Form["country"].ToString() +", " + Request.Form["city"].ToString(),
                 TargetAmnt = formData.TargetAmnt,
                 StuId = stuId,
                 IsActive = true
@@ -99,7 +102,10 @@ namespace SendMe.Controllers
             updateTrip.Desc = formData.Desc;
             updateTrip.Dates = formData.Dates;
             updateTrip.Deadline = formData.Deadline;
-            updateTrip.Destination = formData.Destination;
+            updateTrip.DestinationCountry = Request.Form["country"].ToString();
+            updateTrip.DestinationCity = Request.Form["city"].ToString();
+            updateTrip.DestinationState = Request.Form["state"].ToString();
+            updateTrip.Destination = Request.Form["country"].ToString() + ", " + Request.Form["city"].ToString();
             updateTrip.TargetAmnt = formData.TargetAmnt;
             updateTrip.StuId = stuId;
 

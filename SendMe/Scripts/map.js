@@ -7,9 +7,9 @@ var contentString1 = '<div id="content">' +
       '<p>Info here</p>' +
       '</div>';
 //lat long
+var address = currentCountry +", "+ currentCity;
 var centerPos = { lat: 14.5994, lng: -28.6731 };
 var pos1 = { lat: 33.980796, lng: -80.962908 };
-var pos2 = { lat: -12.046374, lng: -77.042793 };
 
 //Create map
 window.onload = initialize;
@@ -43,13 +43,21 @@ function initialize() {
         infowindow.open(map, marker1);
     });
 
-    //Drop Marker 2
-    marker2 = new google.maps.Marker({
-        map: map,
-        draggable: false,
-        animation: google.maps.Animation.DROP,
-        position: pos2,
-        icon: pinIcon,
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({
+        'address': address
+    },
+    function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            marker2 = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location,
+                animation: google.maps.Animation.DROP,
+                draggable: false,
+                icon: pinIcon,
+            });
+            map.setCenter(results[0].geometry.location);
+        }
     });
 
     //The Plane
@@ -87,3 +95,4 @@ function animate(plane) {
         plane.set('icons', icons);
     }, 100);
 }
+

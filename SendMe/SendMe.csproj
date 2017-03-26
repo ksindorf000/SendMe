@@ -254,6 +254,14 @@
     <Compile Include="Migrations\201703222148017_addedCreatedToDonation.Designer.cs">
       <DependentUpon>201703222148017_addedCreatedToDonation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703252334442_addedDestinationCountryandCityToTrip.cs" />
+    <Compile Include="Migrations\201703252334442_addedDestinationCountryandCityToTrip.Designer.cs">
+      <DependentUpon>201703252334442_addedDestinationCountryandCityToTrip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703260107481_addedDestinationStateToTrip.cs" />
+    <Compile Include="Migrations\201703260107481_addedDestinationStateToTrip.Designer.cs">
+      <DependentUpon>201703260107481_addedDestinationStateToTrip.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Donation.cs" />
@@ -406,6 +414,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703222148017_addedCreatedToDonation.resx">
       <DependentUpon>201703222148017_addedCreatedToDonation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703252334442_addedDestinationCountryandCityToTrip.resx">
+      <DependentUpon>201703252334442_addedDestinationCountryandCityToTrip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703260107481_addedDestinationStateToTrip.resx">
+      <DependentUpon>201703260107481_addedDestinationStateToTrip.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
