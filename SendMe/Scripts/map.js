@@ -10,6 +10,8 @@ var contentString1 = '<div id="content">' +
 var address = currentCountry +", "+ currentCity;
 var centerPos = { lat: 14.5994, lng: -28.6731 };
 var pos1 = { lat: 33.980796, lng: -80.962908 };
+var pos2;
+var plane;
 
 //Create map
 window.onload = initialize;
@@ -56,8 +58,26 @@ function initialize() {
                 draggable: false,
                 icon: pinIcon,
             });
-            map.setCenter(results[0].geometry.location);
         }
+        var latString = results[0].geometry.location.lat().toString();
+        var lngString = results[0].geometry.location.lng().toString();
+        var lat = Number(latString)
+        var lng = Number(lngString)
+        pos2 = { lat: lat, lng: lng };
+
+            plane = new google.maps.Polyline({
+            path: [pos1, pos2],
+            icons: [{
+                icon: planeSymbol,
+                offset: '100%',
+                strokeWeight: 3,
+                fillOpacity: 3,
+                geodesic: true
+            }],
+            map: map
+        });
+
+        animate(plane);
     });
 
     //The Plane
@@ -70,19 +90,7 @@ function initialize() {
         strokeWeight: 0
     };
     //The Line
-    var plane = new google.maps.Polyline({
-        path: [pos1, pos2],
-        icons: [{
-            icon: planeSymbol,
-            offset: '100%',
-            strokeWeight: 3,
-            fillOpacity: 3,
-            geodesic: true
-        }],
-        map: map
-    });
-
-    animate(plane);
+    
 }
 //The animation
 function animate(plane) {
