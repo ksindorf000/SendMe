@@ -690,8 +690,14 @@ css for donation success/fail
         background-color: #4FC1E9;
         text-align: center;
     }
+    /*---------------------------
 
+   progress bar css
 
+---------------------------*/
+.progress-bar{
+    background-color:#1ABBAC;
+}
     /*-------------------------------------------------------------------------------
     Make Active Toggle
         http://callmenick.com/post/css-toggle-switch-examples

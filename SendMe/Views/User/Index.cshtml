@@ -113,10 +113,23 @@
 
                                             <div id="tripDetails">
                                                 <!-------------MAP------------>
-                                                <div id="map" style="width: 500px; height: 300px; border: 5px solid #DADEE0;"></div><br />
+                                                <div class="container">
+                                                    <div id="map" style="width: 500px; height: 300px; border: 5px solid #DADEE0;"></div><br />
+
+                                                    <h3>
+                                                        <strong id="currentTotal"></strong> out of
+                                                        <span id="targetAmount"></span>
+                                                    </h3>
+                                                    <div class="progress">
+                                                        <div id="progress-bar" class="progress-bar" role="progressbar"
+                                                             aria-valuemin="0" aria-valuemax="100">
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                                 <!-----------Progress bar------------->
                                                 <script type="text/javascript">
+
 
                                                     var targetAmount = '@ViewBag.TargetAmount';
                                                     var currentTotal = '@ViewBag.CurrentTotal';
@@ -124,12 +137,8 @@
                                                     var currentCity = '@Model.ActiveTrip.Trip.DestinationCity';
 
                                                 </script>
-                                                <div class="row">
-                                                    <div class="col-sm-10">
-                                                        <div class="container">
-                                                            <div id="goal"></div>
-                                                        </div>
-                                                    </div>
+
+                                               
 
                                                     <!----------------------------------------
                                                     Trip Menu Buttons

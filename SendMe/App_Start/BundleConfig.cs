@@ -23,7 +23,7 @@ namespace SendMe
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/myJS.js",
-                       "~/Scripts/goalProgress.js",
+                       "~/Scripts/progressBar.js",
                        "~/Scripts/Stripe.js",
                        "~/Scripts/jquery.unobtrusive-ajax.min.js",
                        "~/Scripts/map.js"));
