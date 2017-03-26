@@ -262,6 +262,10 @@
     <Compile Include="Migrations\201703260107481_addedDestinationStateToTrip.Designer.cs">
       <DependentUpon>201703260107481_addedDestinationStateToTrip.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703262140204_addedDonationMsgToDonationModel.cs" />
+    <Compile Include="Migrations\201703262140204_addedDonationMsgToDonationModel.Designer.cs">
+      <DependentUpon>201703262140204_addedDonationMsgToDonationModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Donation.cs" />
@@ -419,6 +423,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703260107481_addedDestinationStateToTrip.resx">
       <DependentUpon>201703260107481_addedDestinationStateToTrip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703262140204_addedDonationMsgToDonationModel.resx">
+      <DependentUpon>201703262140204_addedDonationMsgToDonationModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

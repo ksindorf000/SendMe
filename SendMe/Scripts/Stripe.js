@@ -41,7 +41,8 @@ function setOutcome(result) {
         var Name = $("#DonorName").val();
         var Email = $("#DonorEmail").val();
         var Phone = $("#DonorPhoneNumber").val();
-        window.location.href = "/Donation/Payment?stripeToken=" + result.token.id + "&amount=" + amount + "&Name=" + Name + "&Email=" + Email + "&Phone=" + Phone + "&tripId=" + tripId + "&userName=" + userName;
+        var donationMsg = $("#donationMsg").val();
+        window.location.href = "/Donation/Payment?stripeToken=" + result.token.id + "&amount=" + amount + "&Name=" + Name + "&Email=" + Email + "&Phone=" + Phone + "&tripId=" + tripId + "&userName=" + userName + "&donationMsg=" + donationMsg;
 
     } else if (result.error) {
         errorElement.textContent = result.error.message;

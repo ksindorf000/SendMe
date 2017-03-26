@@ -18,7 +18,7 @@ namespace SendMe.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         public Stripe.StripeCharge result;
-        public ActionResult Payment(string stripeToken, int? amount, string Name, string Email, string Phone, int? tripId, string userName)
+        public ActionResult Payment(string stripeToken, int? amount, string Name, string Email, string Phone, int? tripId, string userName, string donationMsg)
         {
             if (tripId == null)
             {
@@ -74,14 +74,19 @@ namespace SendMe.Controllers
 
                         if (result.Paid)
                         {
-                            //Create a donation in Db
-                            var donation = new Donation
+                            if (string.IsNullOrEmpty(donationMsg))
+                            {
+                                donationMsg = "No Message";
+                            }
+                                //Create a donation in Db
+                                var donation = new Donation
                             {
                                 Amount = amount / 100,
                                 HaveThanked = false,
                                 TripId = (int)tripId,
                                 Donor = attachDonor,
                                 Created = DateTime.Now,
+                                DonationMsg = donationMsg,
                                 
                             };
                             db.Donations.Add(donation);

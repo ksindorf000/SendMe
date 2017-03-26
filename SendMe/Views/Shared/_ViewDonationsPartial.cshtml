@@ -28,6 +28,10 @@
                                 <div id="collapseAcc_@i" class="panel-collapse glyphicon-collapse-in" role="tabpanel" aria-labelledby="headingOne">
                                     <div class="panel-body" id="accPanalBody">
                                         @donation.Donor.Name donated $@donation.Amount .00 on @donation.Created
+                                        @if(@donation.DonationMsg != "No Message")
+                                        { 
+                                            @donation.DonationMsg
+                                        }
                                         @if (donation.HaveThanked == false && donation.Donor.Name != "Anonymous")
                                         {
                                             <button data-toggle="collapse" data-target="@("#thanks" + donation.Id)" class="btn btn-sm">

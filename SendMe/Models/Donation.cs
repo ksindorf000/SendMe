@@ -13,6 +13,7 @@ namespace SendMe.Models
         public bool HaveThanked { get; set; }
         public int TripId { get; set; }
         public int DonorId { get; set; }
+        public string DonationMsg { get; set; }
         public DateTime Created { get; set; }
 
         [ForeignKey("DonorId")]
