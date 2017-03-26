@@ -239,6 +239,21 @@ h1 {
     color: #1a5b55;
 }
 
+/*----------------------
+
+      About Page
+
+-----------------------*/
+.about-content {
+    margin: 5%;
+    background-color: #fff;
+    color: #1a5b55;
+}
+
+.about-title {
+    max-height: 200px;
+    margin-left: 30%;
+}
 
 /*-----------------------
 
