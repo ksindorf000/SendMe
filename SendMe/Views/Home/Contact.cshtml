@@ -1,17 +1,39 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+@using (Html.BeginForm("Contact", "Home", null, FormMethod.Post))
+{
+    @Html.ValidationSummary()
+    <div class="about-content">
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+        <h2><strong>Say Hello!</strong></h2>
+        <hr />
+
+        <fieldset>
+            <div class="form-div-1">
+                <label class="name">
+                    Your Name
+                </label>
+                <input type="text" name="name" />
+            </div>
+            <div class="form-div-2">
+                <label class="email">
+                    Your Email
+                </label>
+                <input type="email" name="email" />
+            </div>
+            <div>
+                <label class="message">
+                    Your Message
+                </label>
+                <input type="text" rows="3" name="contactMsg" />
+            </div>
+            <div class="button-wrapper">
+                <input type="submit" value="Send" name="submit" class="btn btn-success">
+                <input type="reset" value="Reset" name="MFReset" class="btn btn-danger">
+            </div>
+        </fieldset>
+
+    </div>
+}

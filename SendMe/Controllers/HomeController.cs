@@ -1,7 +1,9 @@
-﻿using System;
+﻿using SendMe.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 namespace SendMe.Controllers
@@ -23,9 +25,26 @@ namespace SendMe.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
+        }
+
+        //----------------------------
+        //    Send Contact Emails
+        //---------------------------- 
+        [HttpPost]
+        public ActionResult Contact(string name, string email, string contactMsg)
+        {
+            string messageBody = "<p>" + this.Request.Form["contactMsg"] + "</p>";
+            string fromEmail = "<p>" + this.Request.Form["email"] + "</p>";
+            string fromName = "<p>" + this.Request.Form["name"] + "</p>";
+
+            string emailSubject = "SendMe! Contact form submission";
+
+            string toEmail = WebConfigurationManager.AppSettings["SendEmailsFrom"];
+
+            MailHelper.Execute(messageBody, "SendMeAdmin", toEmail, fromName, fromEmail, emailSubject);
+
+            return RedirectToAction("Contact");
         }
     }
 }

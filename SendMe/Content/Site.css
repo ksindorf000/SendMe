@@ -204,6 +204,9 @@ h1 {
     margin: 0;
 }
 
+#contact_success_message {
+    display: none;
+}
 
 /*---------------------------------
 
@@ -239,20 +242,50 @@ h1 {
     color: #1a5b55;
 }
 
-/*----------------------
+/*-----------------------------
 
-      About Page
+      About/Contact Page
 
------------------------*/
+-----------------------------*/
 .about-content {
-    margin: 5%;
+    margin: 5% 60%;
     background-color: #fff;
     color: #1a5b55;
+    padding: 5%;
+    border: rgba(0,0,0,0.08);
+    border-radius: 15px;
+    box-shadow: 0 7px 14px 0 rgba(49,49,93,0.10), 0 3px 6px 0 rgba(0,0,0,0.08);
 }
+
+    .about-content h2 {
+        text-align: center;
+    }
+
+    .about-content li {
+        padding-bottom: 5px;
+    }
 
 .about-title {
     max-height: 200px;
-    margin-left: 30%;
+    margin-left: 25%;
+}
+
+.about-content .form-div-1 {
+    margin-top: 5%;
+}
+
+form .about-content {
+    min-width: 600px;
+    min-height: 400px;
+    text-align: center;
+}
+
+.about-content .button-wrapper {
+    margin-top: 20px;
+}
+
+.about-content input {
+    border-radius: 5px;
 }
 
 /*-----------------------
@@ -392,9 +425,9 @@ h1 {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.15);
 }
 
-    .school-card .card-prof-pic:hover {
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    }
+.school-card .card-prof-pic:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
 
 .school-card .card-block {
     margin-top: 5%;
