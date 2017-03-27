@@ -204,6 +204,10 @@ h1 {
     margin: 0;
 }
 
+*:focus {
+    outline: none;
+}
+
 #contact_success_message {
     display: none;
 }
@@ -240,6 +244,16 @@ h1 {
 
 .dark-text-color {
     color: #1a5b55;
+}
+
+
+#donationsPanel .col-md-4 {
+    padding: 0;
+    border-radius: 0;
+}
+
+#donationsPanel .form-actions .no-color {
+    max-width: 100%;
 }
 
 /*-----------------------------

@@ -89,6 +89,7 @@
                                     }
                                     else
                                     {
+                                    <!--Trip Cancellation-->
                                         <div class="row">
                                             <div id="confirmCancel">
                                                 <h2>Are you sure you want to cancel this trip?</h2>
@@ -111,25 +112,31 @@
                                                 }
                                             </div>
 
+                                            <!----------------------------------------
+                                                        Active Trip Details
+                                            ---------------------------------------->
+
                                             <div id="tripDetails">
+
                                                 <!-------------MAP------------>
                                                 <div class="container">
                                                     <div id="map" style="width: 500px; height: 300px; border: 5px solid #DADEE0;"></div><br />
+                                                </div>
 
-                                                    <h3>
-                                                        <strong id="currentTotal"></strong> out of
-                                                        <span id="targetAmount"></span>
-                                                    </h3>
+                                                <!-----------Progress bar------------->
+                                                <div class="col-sm-10">
                                                     <div class="progress">
                                                         <div id="progress-bar" class="progress-bar" role="progressbar"
                                                              aria-valuemin="0" aria-valuemax="100">
                                                         </div>
                                                     </div>
+                                                    <h3>
+                                                        <strong id="currentTotal"></strong> out of
+                                                        <span id="targetAmount"></span>
+                                                    </h3>
                                                 </div>
 
-                                                <!-----------Progress bar------------->
                                                 <script type="text/javascript">
-
 
                                                     var targetAmount = '@ViewBag.TargetAmount';
                                                     var currentTotal = '@ViewBag.CurrentTotal';
@@ -138,101 +145,101 @@
 
                                                 </script>
 
-                                               
-
-                                                    <!----------------------------------------
-                                                    Trip Menu Buttons
-                                                        http://codepen.io/apocheau/pen/EKeZgg
-                                                    ---------------------------------------->
-                                                    <div class="col-sm-2">
-                                                        <div class="container-fluid">
-                                                            <!-----DONATION BUTTON------>
-                                                            @if (ViewBag.userProfile != ViewBag.currentUser)
-                                                            {
-                                                                <div class="btn-group">
-                                                                    <a href="#" class="btn btn-fab" data-toggle="tooltip" data-placement="left" data-original-title="Add Donation" title="" id="donateMain">
+                                                <!----------------------------------------
+                                                Trip Menu Buttons
+                                                    http://codepen.io/apocheau/pen/EKeZgg
+                                                ---------------------------------------->
+                                                <div class="col-sm-2">
+                                                    <div class="container-fluid">
+                                                        <!-----DONATION BUTTON------>
+                                                        @if (ViewBag.userProfile != ViewBag.currentUser)
+                                                        {
+                                                            <div class="btn-group">
+                                                                <a href="#" class="btn btn-fab" data-toggle="tooltip" data-placement="left" data-original-title="Add Donation" title="" id="donateMain">
+                                                                    <i class="material-icons">
+                                                                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                                                            <path fill="#FFF" d="M11,4.5H13V15.5H11V4.5M13,17.5V19.5H11V17.5H13Z" />
+                                                                        </svg>
+                                                                    </i>
+                                                                </a>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="btn-group-sm hidden" id="mini-fab">
+                                                                <!--VIEW DONATIONS-->
+                                                                <span data-toggle="modal" data-target="#donationsModal">
+                                                                    <button type="button" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Donation List" id="viewDonationsBtn">
                                                                         <i class="material-icons">
                                                                             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                                                                                <path fill="#FFF" d="M11,4.5H13V15.5H11V4.5M13,17.5V19.5H11V17.5H13Z" />
+                                                                                <path fill="#1ABBAC" d="M9,5V9H21V5M9,19H21V15H9M9,14H21V10H9M4,9H8V5H4M4,19H8V15H4M4,14H8V10H4V14Z" />
                                                                             </svg>
                                                                         </i>
-                                                                    </a>
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
-                                                                <div class="btn-group-sm hidden" id="mini-fab">
-                                                                    <!--VIEW DONATIONS-->
-                                                                    <span data-toggle="modal" data-target="#donationsModal">
-                                                                        <button type="button" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Donation List" id="viewDonationsBtn">
-                                                                            <i class="material-icons">
-                                                                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                                                                                    <path fill="#1ABBAC" d="M9,5V9H21V5M9,19H21V15H9M9,14H21V10H9M4,9H8V5H4M4,19H8V15H4M4,14H8V10H4V14Z" />
-                                                                                </svg>
-                                                                            </i>
-                                                                        </button>
-                                                                    </span>
-                                                                    <!--ADD DONATION-->
-                                                                    <a href="#" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Add Donation" title="" id="donateBtn">
-                                                                        <i class="material-icons">
-                                                                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                                                                                <path fill="#1ABBAC" d="M11,4.5H13V15.5H11V4.5M13,17.5V19.5H11V17.5H13Z" />
-                                                                            </svg>
-                                                                        </i>
-                                                                    </a>
-                                                                    <!--CANCEL TRIP-->
-                                                                    <a href="#" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Cancel" title="" id="cancel">
-                                                                        <i class="material-icons">
-                                                                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                                                                                <path fill="#1ABBAC" d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z" />
-                                                                            </svg>
-                                                                        </i>
-                                                                    </a>
-                                                                    <!--EDIT TRIP-->
-                                                                    <a href="#" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Edit" title="" id="editTripBtn">
-                                                                        <i class="material-icons">
-                                                                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                                                                                <path fill="#1ABBAC" d="M16.84,2.73C16.45,2.73 16.07,2.88 15.77,3.17L13.65,5.29L18.95,10.6L21.07,8.5C21.67,7.89 21.67,6.94 21.07,6.36L17.9,3.17C17.6,2.88 17.22,2.73 16.84,2.73M12.94,6L4.84,14.11L7.4,14.39L7.58,16.68L9.86,16.85L10.15,19.41L18.25,11.3M4.25,15.04L2.5,21.73L9.2,19.94L8.96,17.78L6.65,17.61L6.47,15.29" />
-                                                                            </svg>
-                                                                        </i>
-                                                                    </a>
-                                                                </div>
+                                                                    </button>
+                                                                </span>
+                                                                <!--ADD DONATION-->
+                                                                <a href="#" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Add Donation" title="" id="donateBtn">
+                                                                    <i class="material-icons">
+                                                                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                                                            <path fill="#1ABBAC" d="M11,4.5H13V15.5H11V4.5M13,17.5V19.5H11V17.5H13Z" />
+                                                                        </svg>
+                                                                    </i>
+                                                                </a>
+                                                                <!--CANCEL TRIP-->
+                                                                <a href="#" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Cancel" title="" id="cancel">
+                                                                    <i class="material-icons">
+                                                                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                                                            <path fill="#1ABBAC" d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z" />
+                                                                        </svg>
+                                                                    </i>
+                                                                </a>
+                                                                <!--EDIT TRIP-->
+                                                                <a href="#" class="btn btn-fab miniMenu" data-toggle="tooltip" data-placement="left" data-original-title="Edit" title="" id="editTripBtn">
+                                                                    <i class="material-icons">
+                                                                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                                                            <path fill="#1ABBAC" d="M16.84,2.73C16.45,2.73 16.07,2.88 15.77,3.17L13.65,5.29L18.95,10.6L21.07,8.5C21.67,7.89 21.67,6.94 21.07,6.36L17.9,3.17C17.6,2.88 17.22,2.73 16.84,2.73M12.94,6L4.84,14.11L7.4,14.39L7.58,16.68L9.86,16.85L10.15,19.41L18.25,11.3M4.25,15.04L2.5,21.73L9.2,19.94L8.96,17.78L6.65,17.61L6.47,15.29" />
+                                                                        </svg>
+                                                                    </i>
+                                                                </a>
+                                                            </div>
                                                     <!--MAIN MENU-->
-                                                                <div class="btn-group">
-                                                                    <a href="javascript:void(0)" class="btn btn-fab" data-toggle="tooltip" data-placement="left" data-original-title="Trip Menu" id="tripMenuMain">
-                                                                        <i class="material-icons">
-                                                                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                                                                                <path fill="#FFF" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
-                                                                            </svg>
-                                                                        </i>
-                                                                    </a>
-                                                                </div>
-                                                            }
-                                                        </div>
+                                                            <div class="btn-group">
+                                                                <a href="javascript:void(0)" class="btn btn-fab" data-toggle="tooltip" data-placement="left" data-original-title="Trip Menu" id="tripMenuMain">
+                                                                    <i class="material-icons">
+                                                                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                                                            <path fill="#FFF" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+                                                                        </svg>
+                                                                    </i>
+                                                                </a>
+                                                            </div>
+                                                        }
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
 
-                                                <div class="row">
-                                                    <!-------Details------>
-                                                    <h3>@Model.ActiveTrip.Trip.Title</h3>
-                                                    <sub>@Model.ActiveTrip.Trip.Dates</sub>
-                                                    <p>
-                                                        @Model.ActiveTrip.Trip.Desc
-                                                    </p>
-                                                    <p>
-                                                        @Model.ActiveTrip.Trip.Destination
-                                                        <br />
-                                                        $@Model.ActiveTrip.Trip.TargetAmnt
-                                                    </p>
-                                                </div>
+                                        <div class="row">
+                                            <!-------Details------>
+                                            <h3>@Model.ActiveTrip.Trip.Title</h3>
+                                            <sub>@Model.ActiveTrip.Trip.Dates</sub>
+                                            <p>
+                                                @Model.ActiveTrip.Trip.Desc
+                                            </p>
+                                            <p>
+                                                @Model.ActiveTrip.Trip.Destination
+                                            </p>
+                                        </div>
+
+                                        <!-------------------------
+                                               Edit Trip Form
+                                        -------------------------->
+                                        <div id="editTripToggle">
+                                            <div id="tripPartial">
+                                                <h1>Edit Your Trip</h1>
+                                                @{Html.RenderPartial("_CreateTrip", Model.ActiveTrip.Trip);}
                                             </div>
-                                            <div id="editTripToggle">
-                                                <div id="tripPartial">
-                                                    <h1>Edit Your Trip</h1>
-                                                    @{Html.RenderPartial("_CreateTrip", Model.ActiveTrip.Trip);}
-                                                </div>
-                                            </div>
-                                                        }
+                                        </div>
+                            }
 
 
                     <!-----------Partial View For Payment------------->
@@ -260,8 +267,8 @@
         </div>
     </div>
 </div>
-</div>
-      <!-----------Successful Payment Message------------->
+    </div>
+<!-----------Successful Payment Message------------->
 <div id="paymentSuccessToggle">
     @Html.Partial("_PaymentSuccessPartial")
 </div>

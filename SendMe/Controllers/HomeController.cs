@@ -35,8 +35,8 @@ namespace SendMe.Controllers
         public ActionResult Contact(string name, string email, string contactMsg)
         {
             string messageBody = "<p>" + this.Request.Form["contactMsg"] + "</p>";
-            string fromEmail = "<p>" + this.Request.Form["email"] + "</p>";
-            string fromName = "<p>" + this.Request.Form["name"] + "</p>";
+            string fromEmail = this.Request.Form["email"];
+            string fromName = this.Request.Form["name"];
 
             string emailSubject = "SendMe! Contact form submission";
 
