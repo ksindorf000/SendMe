@@ -1,61 +1,59 @@
-﻿
-@if (Model.User.UserName == User.Identity.Name && Model.ActiveTrip != null)
+﻿@*@if (Model.User.UserName == User.Identity.Name && Model.ActiveTrip != null)
 {
     <div class="container">
         <button id="viewDonBackBtn" type="button" class="btn btn-danger btn-circle" data-toggle="tooltip" data-placement="left" title="Go Back"><i class="glyphicon glyphicon-arrow-left"></i></button>
     </div>
-    <div>
+    <div id="donationsPanel">
         @{int i = 0;}
         @{int r = 0;}
         @foreach (var donation in Model.ActiveTrip.Donations)
         {
-            r++;
-            if (r == 3)
-            { 
-                @Html.Raw("<div class=row>");
-            }
-                        <div class="col-md-4">
-                        <script> var Di = @i;</script>
-                        <div class="panel-group" id="accordion_@i" role="tablist" aria-multiselectable="true">
-                            <div class="panel panel-default" id="panel_@i">
-                                <div class="panel-heading" role="tab" id="headingOne">
-                                    <h4 class="panel-title">
-                                        <a role="button" data-toggle="collapse" id="accBtn_@i" data-parent="#accordion_@i" aria-expanded="true" aria-controls="collapseAcc_@i" data-target="#collapseAcc_@i">
-                                            <h3> $@donation.Amount .00</h3>
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseAcc_@i" class="panel-collapse glyphicon-collapse-in" role="tabpanel" aria-labelledby="headingOne">
-                                    <div class="panel-body" id="accPanalBody">
-                                        @donation.Donor.Name donated $@donation.Amount .00 on @donation.Created
-                                        @if(@donation.DonationMsg != "No Message")
-                                        { 
-                                            @donation.DonationMsg
-                                        }
-                                        @if (donation.HaveThanked == false && donation.Donor.Name != "Anonymous")
+            @*r++;
+                if (r == 3)
+                {
+                    @Html.Raw("<div class=row>");
+                }*@
+            @*<div class="col-sm-12">
+                <script> var Di = @i;</script>
+                <div class="panel-group" id="accordion_@i" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default" id="panel_@i">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" id="accBtn_@i" data-parent="#accordion_@i" aria-expanded="true" aria-controls="collapseAcc_@i" data-target="#collapseAcc_@i">
+                                    <h5>
+                                        $@donation.Amount.00 from @donation.Donor.Name
+                                        @donation.Created.ToString("dd MMM yyyy")
+                                    </h5>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseAcc_@i" class="panel-collapse glyphicon-collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body" id="accPanalBody">
+                                @if (@donation.DonationMsg != null)
+                                {
+                                    <p>@donation.Donor.Name says " @donation.DonationMsg "</p>
+                                }
+                                @if (donation.HaveThanked == false && donation.Donor.Name != "Anonymous")
+                                {
+                                    <div id="@("thanks" + donation.Id)">
+                                        @using (Html.BeginForm("SendThankYou", "User", new { donId = donation.Id, stuId = Model.Student.Id }, FormMethod.Post))
                                         {
-                                            <button data-toggle="collapse" data-target="@("#thanks" + donation.Id)" class="btn btn-sm">
-                                                <span class="glyphicon glyphicon-envelope"></span>
-                                            </button>
-                                            <div id="@("thanks" + donation.Id)" class="collapse">
-                                                @using (Html.BeginForm("SendThankYou", "User", new { donId = donation.Id, stuId = Model.Student.Id }, FormMethod.Post))
-                                                {
-                                                    <div class="form-actions no-color">
-                                                        <label for="#thnksMsg">Add a personal message!</label>
-                                                        <textarea rows="5" id="thanksMsg" name="thxMsg"></textarea>
-                                                        <button type="submit" class="btn btn-success" id="sendThanksBtn" value="sendThanks">
-                                                            <span class="glyphicon glyphicon-send"> Send</span>
-                                                        </button>
-                                                    </div>
-                                                }
-                                            </div>
-
-                                        }
+                                            @*<div class="form-actions no-color">*@
+                                            @*<label for="#thnksMsg">Send a thank you note!</label>
+                                                <textarea rows="5" id="thanksMsg" name="thxMsg"></textarea>
+                                                <button type="submit" class="btn btn-success" id="sendThanksBtn" value="sendThanks">
+                                                    <span class="glyphicon glyphicon-send"> Send</span>
+                                                </button>*@
+                                                @*</div>*@
+                                        @*}
                                     </div>
-                                </div>
+
+                                }
                             </div>
                         </div>
-                            </div>
+                    </div>
+                </div>
+            </div>
             i++;
             if (r == 3)
             {
@@ -64,62 +62,86 @@
             if (r == 3)
             { r = 0; }
         }
-        </div>
-            }
-            //OLD MODEL
-        @*@if (Model.User.UserName == User.Identity.Name && Model.ActiveTrip != null)
-                        {
-                <div class="modal fade" id="donationsModal" tabindex="-1" role="dialog" aria-labelledby="donationsLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            </div>
-                            <div class="modal-body">
-                                <table id="donorTable">
-                                    <tr>
-                                        <th>Donor Name</th>
-                                        <th>Amount Donated</th>
-                                        <th>&nbsp;</th>
-                                    </tr>
-                                    @foreach (var donation in Model.ActiveTrip.Donations)
-                                    {
-                                        <tr>
-                                            <td>
-                                                @donation.Donor.Name
-                                            </td>
-                                            <td>
-                                                $@donation.Amount .00
-                                            </td>
-                                            <td>
-                                                @if (donation.HaveThanked == false && donation.Donor.Name != "Anonymous")
-                                                {
-                                                    <button data-toggle="collapse" data-target="@("#thanks"+donation.Id)" class="btn btn-sm">
-                                                        <span class="glyphicon glyphicon-envelope"></span>
-                                                    </button>
-                                                }
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="3">
-                                                <div id="@("thanks"+donation.Id)" class="collapse">
-                                                    @using (Html.BeginForm("SendThankYou", "User", new { donId = donation.Id, stuId = Model.Student.Id }, FormMethod.Post))
-                                                    {
-                                                        <div class="form-actions no-color">
-                                                            <label for="#thnksMsg">Add a personal message!</label>
-                                                            <textarea rows="5" id="thanksMsg" name="thxMsg"></textarea>
-                                                            <button type="submit" class="btn btn-success" id="sendThanksBtn" value="sendThanks">
-                                                                <span class="glyphicon glyphicon-send"> Send</span>
-                                                            </button>
-                                                        </div>
-                                                    }
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    }
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    </div>
             }*@
+
+
+@if (Model.User.UserName == User.Identity.Name && Model.ActiveTrip != null)
+{
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>Donations</h3></div>
+            <div class="panel-body">
+                <table class="table table-condensed" style="border-collapse:collapse;">
+
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Donation Amount</th>
+                            <th>Donor Name</th>
+                            <th>Donation Date/Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int i = 0;}
+                        @foreach (var donation in Model.ActiveTrip.Donations)
+                        {
+                            
+                            <tr data-toggle="collapse" data-target="#collapse_@i" class="accordion-toggle">
+                                <td><button class="btn btn-default btn-sm"><span class="glyphicon glyphicon-chevron-down"></span></button></td>
+                                <td>$@donation.Amount .00</td>
+                                <td>@donation.Donor.Name</td>
+                                <td>@donation.Created</td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" class="hiddenRow">
+                                    <div class="accordian-body collapse" id="collapse_@i">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr><th>Donation Message</th><th>Thank The Donor</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        @donation.DonationMsg
+                                                    <script> var Di = @i;</script>
+                                                    </td>
+                                                    <td>
+                                                        <div class="container">
+                                                            @if (donation.HaveThanked == false && donation.Donor.Name != "Anonymous")
+                                                            {
+                                                                <button data-toggle="collapse" data-target="@("#thanks" + donation.Id)" class="btn btn-sm">
+                                                                    <span class="glyphicon glyphicon-envelope"></span>
+                                                                </button>
+                                                                <div id="@("thanks" + donation.Id)" class="collapse">
+                                                                    @using (Html.BeginForm("SendThankYou", "User", new { donId = donation.Id, stuId = Model.Student.Id }, FormMethod.Post))
+                                                                    {
+                                                                        <div class="form-actions no-color">
+                                                                            <label for="#thnksMsg">Add a personal message!</label>
+                                                                            <textarea rows="5" id="thanksMsg" name="thxMsg"></textarea>
+                                                                            <button type="submit" class="btn btn-success" id="sendThanksBtn" value="sendThanks">
+                                                                                <span class="glyphicon glyphicon-send"> Send</span>
+                                                                            </button>
+                                                                        </div>
+                                                                    }
+                                                                </div>
+
+                                                            }
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+}

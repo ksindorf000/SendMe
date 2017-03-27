@@ -270,12 +270,14 @@ $(document).ready(function () {
 var j = [];
 for (i = 0; i <= Di; i++) {
     $("#collapseAcc_" + i).hide();
+    $("#accBody_" + i).hide();
     j.push(i);
 }
 
 j.forEach(function (num) {
     $("#accBtn_" + num).click(function () {
         $("#collapseAcc_" + num).show();
+       
     });
 });
 

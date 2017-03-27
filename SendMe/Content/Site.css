@@ -698,6 +698,14 @@ css for donation success/fail
 .progress-bar{
     background-color:#1ABBAC;
 }
+    /*---------------------------
+
+   Donations Table css
+
+---------------------------*/
+.table-condensed{
+    font-size:14px;
+}
     /*-------------------------------------------------------------------------------
     Make Active Toggle
         http://callmenick.com/post/css-toggle-switch-examples
