@@ -33,70 +33,76 @@
 
 <div class="container-fluid">
     <div class="row-fluid">
+        <div class="card-group">
 
-        <!-------------STUDENT DETAILS------------->
-        @foreach (var student in Model.Students)
+            <!-------------STUDENT DETAILS------------->
+            @foreach (var student in Model.Students)
             {
-            <div class="col-sm-12 col-lg-4">
-                <div class="profile-card sm-prof-card">
-                    <div class="card">
-                        <div class="card-img-top"></div>
-                        <a href="../send/@student.Student.User.UserName">
-                            <img class="card-prof-pic-sm" src="@student.Upload.FilePath" />
-                        </a>
-                        <div class="card-text">
-                            <h2 class="card-title">
-                                @student.Student.FirstName @student.Student.LastName
-                            </h2>
-                        </div>
-                        <div class="card-block">
-                            @if (student.ActiveTrip != null)
-                            {
-                                <h3>@student.ActiveTrip.Trip.Title</h3>
-                                <sub>@student.ActiveTrip.Trip.Dates</sub>
-                                <p>
-                                    @student.ActiveTrip.Trip.Destination <br />
-                                    @student.ActiveTrip.Trip.TargetAmnt
-                                </p>
-                                if (User.IsInRole("Admin") && ViewBag.UserSchId == Model.School.Id)
+                <div class="col-sm-12 col-lg-4">
+                    <div class="profile-card sm-prof-card">
+                        <div class="card">
+                            <div class="card-img-top"></div>
+                            <a href="../send/@student.Student.User.UserName">
+                                <img class="card-prof-pic-sm image-fluid" src="@student.Upload.FilePath" />
+                            </a>
+                            <div class="card-text">
+                                <h2 class="card-title">
+                                    @student.Student.FirstName @student.Student.LastName
+                                </h2>
+                            </div>
+                            <div class="card-block">
+                                @if (student.ActiveTrip != null)
                                 {
-                                    if (student.ActiveTrip.Donations.Count > 0)
+                                    <h3>@student.ActiveTrip.Trip.Title</h3>
+                                    <sup>@student.ActiveTrip.Trip.Dates</sup>
+                                    <br />
+                                    <p>
+                                        @student.ActiveTrip.Trip.DestinationCity in
+                                        @student.ActiveTrip.Trip.DestinationState,
+                                        @student.ActiveTrip.Trip.DestinationCountry
+                                        <br />
+                                        @student.ActiveTrip.Trip.PercentOfAmnt% Raised
+                                    </p>
+                                    if (User.IsInRole("Admin") && ViewBag.UserSchId == Model.School.Id)
                                     {
-                                        <p id="showSchIdxDonations">
-                                            <button data-toggle="collapse" data-target="@("#show" + student.Id)">
-                                                <span class="glyphicon glyphicon-chevron-down">Donations</span>
-                                            </button>
-                                        </p>
-                                        <div id="@("show" + student.Id)" class="collapse">
-                                            <table id="schIdxDonations">
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Phone</th>
-                                                    <th>Amount</th>
-                                                </tr>
-                                                @foreach (var donation in student.ActiveTrip.Donations)
-                                                {
+                                        if (student.ActiveTrip.Donations.Count > 0)
+                                        {
+                                            <p id="showSchIdxDonations">
+                                                <button data-toggle="collapse" data-target="@("#show" + student.Id)">
+                                                    <span class="glyphicon glyphicon-chevron-down">Donations</span>
+                                                </button>
+                                            </p>
+                                            <div id="@("show" + student.Id)" class="collapse">
+                                                <table id="schIdxDonations">
                                                     <tr>
-                                                        <td>@donation.Donor.Name</td>
-                                                        <td>@donation.Donor.Email</td>
-                                                        <td>@donation.Donor.Phone</td>
-                                                        <td>@donation.Amount</td>
+                                                        <th>Name</th>
+                                                        <th>Email</th>
+                                                        <th>Phone</th>
+                                                        <th>Amount</th>
                                                     </tr>
-                                                }
-                                            </table>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <h4>@student.Student.FirstName does not have any active trips.</h4>
+                                                    @foreach (var donation in student.ActiveTrip.Donations)
+                                                    {
+                                                        <tr>
+                                                            <td>@donation.Donor.Name</td>
+                                                            <td>@donation.Donor.Email</td>
+                                                            <td>@donation.Donor.Phone</td>
+                                                            <td>@donation.Amount</td>
+                                                        </tr>
+                                                    }
+                                                </table>
+                                            </div>
+                                        }
                                     }
                                 }
-                            }
+                                else
+                                {
+                                    <h4>@student.Student.FirstName does not have any active trips.</h4>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 </div>

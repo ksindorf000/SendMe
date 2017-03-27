@@ -137,7 +137,7 @@
     $("#map").show();
 
     $("#donateBtn, #donateMain").click(function () {
-        $("#tripDetails").hide();
+        $(".tripDetails").hide();
         $("#donateToggle").show();
         $("#mini-fab").toggleClass('hidden');
         $("#map").hide();
@@ -145,7 +145,7 @@
 
     //Donation logged out
     $("#donateBtnLO").click(function () {
-        $("#tripDetails").hide();
+        $(".tripDetails").hide();
         $("#donateToggle").show();
         $("#mini-fab").toggleClass('hidden');
     });
@@ -154,21 +154,21 @@
     $("#viewDonationsToggle").hide();
 
     $("#viewDonationsBtn").click(function () {
-        $("#tripDetails").hide();
+        $(".tripDetails").hide();
         $("#viewDonationsToggle").show();
         $("#mini-fab").toggleClass('hidden');
     });
 
     $("#viewDonBackBtn").click(function () {
         $("#viewDonationsToggle").hide();
-        $("#tripDetails").show();
+        $(".tripDetails").show();
     });
 
     //ViewDonations
     $("#editTripToggle").hide();
 
     $("#editTripBtn").click(function () {
-        $("#tripDetails").hide();
+        $(".tripDetails").hide();
         $("#editTripToggle").show();
         $("#mini-fab").toggleClass('hidden');
     });

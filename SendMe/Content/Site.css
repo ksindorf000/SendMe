@@ -37,6 +37,10 @@ textarea {
 
 /*--------------------------------------------------*/
 
+a {
+    color: #1a5b55;
+}
+
 .wrapper {
     min-width: 100%;
 }
@@ -50,11 +54,6 @@ td {
     padding: 15px;
 }
 
-
-.btn-success {
-    background-color: #1ABBAC;
-    border-color: #fff;
-}
 
 .btn-primary {
     background-color: #1ABBAC;
@@ -212,6 +211,7 @@ h1 {
     display: none;
 }
 
+
 /*---------------------------------
 
           Color Palette
@@ -246,14 +246,23 @@ h1 {
     color: #1a5b55;
 }
 
+/*-----------------------
+
+    Donations Panel
+
+-----------------------*/
 
 #donationsPanel .col-md-4 {
     padding: 0;
     border-radius: 0;
 }
 
-#donationsPanel .form-actions .no-color {
+#donationsPanel {
     max-width: 100%;
+}
+
+select {
+    border-radius: 5px;
 }
 
 /*-----------------------------
@@ -264,7 +273,7 @@ h1 {
 .about-content {
     margin: 5%;
     background-color: #fff;
-    color: #1a5b55;
+    color: #020202;
     padding: 5%;
     border: rgba(0,0,0,0.08);
     border-radius: 15px;
@@ -273,6 +282,7 @@ h1 {
 
     .about-content h2 {
         text-align: center;
+        color: #289f94;
     }
 
     .about-content li {
@@ -302,12 +312,20 @@ form .about-content {
     border-radius: 5px;
 }
 
-#loginForm {
-    margin-left: 45%;
-}
-
 #loginForm .form-group {
     margin-left: 5%;
+}
+
+.contactForm {
+    margin-left: 25%;
+}
+
+#regForm {
+    margin-left: 35%;
+}
+
+#loginForm {
+    margin-left: 45%;
 }
 
 /*-----------------------
@@ -391,6 +409,7 @@ form .about-content {
     position: relative;
 }
 
+
 /*-----------------------
 
       Trip Card
@@ -406,6 +425,15 @@ form .about-content {
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
     border-radius: 5px;
     left: 0;
+}
+
+#inactiveTrips li {
+    list-style: none;
+}
+
+#inactiveTrips button {
+    margin-top: 0;
+    margin-bottom: 20px;
 }
 
 /*-----------------------
@@ -432,12 +460,16 @@ form .about-content {
     min-height: 200px;
 }
 
+.sm-prof-card {
+    min-height: 490px;
+}
+
 /*---------------------------------------
 
          School Profile Card
 
 ---------------------------------------*/
-.school-card .card-prof-pic-sch {
+.school-card .card-prof-pic {
     top: 45%;
     left: 40%;
     position: absolute;
@@ -708,6 +740,7 @@ css for donation success/fail
         background-color: #4FC1E9;
         text-align: center;
     }
+
     /*---------------------------
 
    progress bar css
@@ -716,6 +749,7 @@ css for donation success/fail
 .progress-bar{
     background-color:#1ABBAC;
 }
+
     /*---------------------------
 
    Donations Table css

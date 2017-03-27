@@ -6,14 +6,14 @@
 {
     string action = (ViewBag.Action == null) ? "Update" : ViewBag.Action;
 
-    using (Html.BeginForm(action, "Trip", FormMethod.Post))
+    using (Html.BeginForm(action, "Trip", new { id = Model.Id }, FormMethod.Post, null))
     {
         @Html.AntiForgeryToken()
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-offset-2 col-md-10">
                 @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
@@ -21,21 +21,27 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Desc, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-offset-2 col-md-10">
                 @Html.EditorFor(model => model.Desc, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Desc, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="col-md-10">
-            <label>Destination</label>
             <div class="form-group">
-                <select name="country" class="countries" id="countryId">
-                    <option value="">Select Country</option>
-                </select>
+                <label>Destination</label>
+                <div class="col-md-offset-2 col-md-10">
+                    @if (Model.DestinationCountry != null)
+                    {
+                        <sup>Currently @Model.DestinationCity in @Model.DestinationState, @Model.DestinationCountry.</sup>
+                    }
+                    <select name="country" class="countries" id="countryId">
+                        <option value="">Select Country</option>
+                    </select>
+                </div>
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-offset-2 col-md-10">
             <br />
             <div class="form-group">
                 <select name="state" class="states" id="stateId">
@@ -43,52 +49,52 @@
                 </select>
             </div>
         </div>
-                    <div class="col-md-10">
-                        <br />
-                        <div class="form-group">
-                            <select name="city" class="cities" id="cityId">
-                                <option value="">Select City</option>
-                            </select>
-                        </div>
-                    </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Dates, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Dates, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Dates, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+        <div class="col-md-offset-2 col-md-10">
+            <br />
+            <div class="form-group">
+                <select name="city" class="cities" id="cityId">
+                    <option value="">Select City</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Dates, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-offset-2 col-md-10">
+                @Html.EditorFor(model => model.Dates, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Dates, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Deadline, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Deadline, new { htmlAttributes = new { @Value = ViewBag.DefaultDeadline, @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Deadline, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-offset-2 col-md-10">
+                @Html.EditorFor(model => model.Deadline, new { htmlAttributes = new { @Value = ViewBag.DefaultDeadline, @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.TargetAmnt, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.TargetAmnt, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.TargetAmnt, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.TargetAmnt, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-offset-2 col-md-10">
+                @Html.EditorFor(model => model.TargetAmnt, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TargetAmnt, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-                        <div class="form-group">
-                            <div class="col-md-4">
-                                <button type="submit" id="tripCreate" class="btn btn-toolbar btn-success">
-                                    <span class="glyphicon glyphicon-check"></span>
-                                </button>
-                            </div>
-                            <div class="col-md-4" style="padding-top: 25px;">
-                                @if (action == "Update")
+        <div class="form-group">
+            <div class="col-md-4">
+                <button type="submit" id="tripCreate" class="btn btn-toolbar btn-primary">
+                    <span class="glyphicon glyphicon-check"></span>
+                </button>
+            </div>
+            <div class="col-md-4" style="padding-top: 25px;">
+                @if (action == "Update")
                     {
-                                    <a href="@User.Identity.Name" class="btn btn-toolbar btn-danger">
-                                        <span class="glyphicon glyphicon-ban-circle"></span>
-                                    </a>
-                                }
-                            </div>
-                        </div>
+                    <a href="@User.Identity.Name" class="btn btn-toolbar btn-danger">
+                        <span class="glyphicon glyphicon-ban-circle"></span>
+                    </a>
+                }
+            </div>
+        </div>
     }
 }
