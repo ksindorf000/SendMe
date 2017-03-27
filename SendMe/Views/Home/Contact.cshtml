@@ -2,7 +2,7 @@
     ViewBag.Title = "Contact";
 }
 
-@using (Html.BeginForm("Contact", "Home", null, FormMethod.Post))
+@using (Html.BeginForm("Contact", "Home", null, FormMethod.Post, new { @class = "contactForm" }))
 {
     @Html.ValidationSummary()
     <div class="about-content">
@@ -30,7 +30,7 @@
                 <input type="text" rows="3" name="contactMsg" />
             </div>
             <div class="button-wrapper">
-                <input type="submit" value="Send" name="submit" class="btn btn-success">
+                <input type="submit" value="Send" name="submit" class="btn btn-primary">
                 <input type="reset" value="Reset" name="MFReset" class="btn btn-danger">
             </div>
         </fieldset>

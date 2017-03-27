@@ -56,7 +56,7 @@
                                 <sub>@student.ActiveTrip.Trip.Dates</sub>
                                 <p>
                                     @student.ActiveTrip.Trip.Destination <br />
-                                    @student.ActiveTrip.Trip.TargetAmnt
+                                    @student.ActiveTrip.Trip.PercentOfAmnt% Raised
                                 </p>
                                 if (User.IsInRole("Admin") && ViewBag.UserSchId == Model.School.Id)
                                 {
@@ -87,11 +87,11 @@
                                             </table>
                                         </div>
                                     }
-                                    else
-                                    {
-                                        <h4>@student.Student.FirstName does not have any active trips.</h4>
-                                    }
                                 }
+                            }
+                            else
+                            {
+                                <h4>@student.Student.FirstName does not have any active trips.</h4>
                             }
                         </div>
                     </div>

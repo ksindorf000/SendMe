@@ -41,7 +41,7 @@
                                             @*<div class="form-actions no-color">*@
                                             @*<label for="#thnksMsg">Send a thank you note!</label>
                                                 <textarea rows="5" id="thanksMsg" name="thxMsg"></textarea>
-                                                <button type="submit" class="btn btn-success" id="sendThanksBtn" value="sendThanks">
+                                                <button type="submit" class="btn btn-primary" id="sendThanksBtn" value="sendThanks">
                                                     <span class="glyphicon glyphicon-send"> Send</span>
                                                 </button>*@
                                                 @*</div>*@
@@ -107,7 +107,7 @@
                                                     <script> var Di = @i;</script>
                                                     </td>
                                                     <td>
-                                                        <div class="container">
+                                                        <div id="donationsPanel" class="container">
                                                             @if (donation.HaveThanked == false && donation.Donor.Name != "Anonymous")
                                                             {
                                                                 <button data-toggle="collapse" data-target="@("#thanks" + donation.Id)" class="btn btn-sm">
@@ -119,7 +119,7 @@
                                                                         <div class="form-actions no-color">
                                                                             <label for="#thnksMsg">Add a personal message!</label>
                                                                             <textarea rows="5" id="thanksMsg" name="thxMsg"></textarea>
-                                                                            <button type="submit" class="btn btn-success" id="sendThanksBtn" value="sendThanks">
+                                                                            <button type="submit" class="btn btn-primary" id="sendThanksBtn" value="sendThanks">
                                                                                 <span class="glyphicon glyphicon-send"> Send</span>
                                                                             </button>
                                                                         </div>

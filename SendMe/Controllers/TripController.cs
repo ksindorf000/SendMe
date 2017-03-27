@@ -63,8 +63,8 @@ namespace SendMe.Controllers
                 Deadline = formData.Deadline,
                 DestinationCountry = Request.Form["country"].ToString(),
                 DestinationCity = Request.Form["city"].ToString(),
-                DestinationState= Request.Form["state"].ToString(),
-                Destination = Request.Form["country"].ToString() +", " + Request.Form["city"].ToString(),
+                DestinationState = Request.Form["state"].ToString(),
+                Destination = Request.Form["country"].ToString() + ", " + Request.Form["city"].ToString(),
                 TargetAmnt = formData.TargetAmnt,
                 StuId = stuId,
                 IsActive = true
@@ -88,31 +88,47 @@ namespace SendMe.Controllers
         public ActionResult Update(Trip formData)
         {
             string userName = User.Identity.Name;
+            string returnUrl = "../send/" + userName;
+
             string userId = User.Identity.GetUserId();
             int stuId = db.StuProfiles
                         .Where(sp => sp.UserId == userId)
                         .Select(sp => sp.Id)
                         .FirstOrDefault();
 
-            Trip updateTrip = db.Trips
-                .Where(t => t.StuId == stuId)
-                .FirstOrDefault();
+            Trip updateTrip = db.Trips.Find(formData.Id);
+            if (updateTrip == null)
+            {
+                return RedirectToAction(returnUrl);
+            }
 
             updateTrip.Title = formData.Title;
             updateTrip.Desc = formData.Desc;
             updateTrip.Dates = formData.Dates;
             updateTrip.Deadline = formData.Deadline;
-            updateTrip.DestinationCountry = Request.Form["country"].ToString();
-            updateTrip.DestinationCity = Request.Form["city"].ToString();
-            updateTrip.DestinationState = Request.Form["state"].ToString();
-            updateTrip.Destination = Request.Form["country"].ToString() + ", " + Request.Form["city"].ToString();
+
+            string country = Request.Form["country"].ToString();
+            string city = Request.Form["city"].ToString();
+            string state = Request.Form["state"].ToString();
+
+            if (country != "")
+            {
+                updateTrip.DestinationCountry = country;
+            }
+            if (city != "")
+            {
+                updateTrip.DestinationCity = city;
+            }
+            if (state != "")
+            {
+                updateTrip.DestinationState = state;
+            }
+            
             updateTrip.TargetAmnt = formData.TargetAmnt;
             updateTrip.StuId = stuId;
 
             db.Entry(updateTrip).State = EntityState.Modified;
             db.SaveChanges();
-
-            string returnUrl = "../send/" + userName;
 
             return RedirectToAction(returnUrl);
         }
@@ -193,16 +209,16 @@ namespace SendMe.Controllers
         //      Send Admin Emails
         //---------------------------- 
         private void SendAdminEmail(string userId, string type, int schId)
-        {             
+        {
             ApplicationUser admin = (from role in db.Roles
-                                    where role.Name == "Admin"
-                                    from userRoles in role.Users
-                                    join user in db.Users
-                                        on userRoles.UserId equals user.Id
-                                    join sp in db.StuProfiles
-                                        on user.Id equals sp.UserId
-                                    where user.EmailConfirmed == true
-                                    select user).FirstOrDefault();
+                                     where role.Name == "Admin"
+                                     from userRoles in role.Users
+                                     join user in db.Users
+                                         on userRoles.UserId equals user.Id
+                                     join sp in db.StuProfiles
+                                         on user.Id equals sp.UserId
+                                     where user.EmailConfirmed == true
+                                     select user).FirstOrDefault();
 
             var adminProf = db.StuProfiles
                 .SingleOrDefault(sp => sp.User.Email == admin.Email);
