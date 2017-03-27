@@ -656,7 +656,11 @@ css for donation success/fail
     transform: translate(-50%, -50%);
     background: #1ABBAC;
     width: 80%;
+    min-width:425px;
     padding: 20px;
+}
+.modal-backdrop{
+    z-index:-1;
 }
 
 #failedModalContent {
@@ -665,18 +669,10 @@ css for donation success/fail
     transform: translate(-50%, -50%);
     background: #D63232;
     width: 80%;
+    min-width:425px;
     padding: 20px;
 }
 
-.modal:before {
-    height: 100px;
-    max-height: 41%;
-    content: '';
-    display: inline-flex;
-    height: 100%;
-    vertical-align: middle;
-    margin-right: -4px;
-}
 
 /*---------------------------
 
@@ -725,8 +721,28 @@ css for donation success/fail
    Donations Table css
 
 ---------------------------*/
+   
 .table-condensed{
     font-size:14px;
+}
+
+.modal {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
 }
     /*-------------------------------------------------------------------------------
     Make Active Toggle
