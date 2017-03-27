@@ -1,19 +1,5 @@
 ﻿@model SendMe.ViewModels.SchoolViewModel
 
-@{
-    ViewBag.Title = "Index";
-
-    if (ViewBag.UserSchId == Model.School.Id && User.IsInRole("Admin"))
-    {
-        ViewBag.logoUrl = "../School/Manage/" + Model.School.Id;
-        ViewBag.logoUrlTitle = "Update School Profile";
-    }
-    else
-    {
-        ViewBag.logoUrl = "#";
-    };
-}
-
 <!--------SCHOOL DETAILS---------->
 <div class="profile-card school-card">
     <div class="card">

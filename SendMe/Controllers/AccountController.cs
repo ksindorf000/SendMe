@@ -228,7 +228,13 @@ namespace SendMe.Controllers
                     //---------------------------------------------------
                     //   Create Student Profile & Add Placeholder Pic
                     //---------------------------------------------------
+
                     StuProfile stuProfile = new StuProfile(user, model.SchoolId);
+                    if (User.IsInRole("Admin"))
+                    {
+                        stuProfile.FirstName = "Admin";
+                        stuProfile.LastName = "Admin";
+                    }
                     db.StuProfiles.Add(stuProfile);
 
                     Upload placeholder = new Upload
@@ -240,6 +246,7 @@ namespace SendMe.Controllers
                     db.Uploads.Add(placeholder);
 
                     db.SaveChanges();
+
 
                     //---------------------------------------------------
                     //          Send Confirmation Email

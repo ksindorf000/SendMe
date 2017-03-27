@@ -86,6 +86,11 @@ namespace SendMe.Controllers
                 .Where(sp => sp.UserId == userId)
                 .FirstOrDefault();
 
+            School school = db.Schools.Find(profile.SchoolId);
+            ViewBag.AdminSchool = school;
+            ViewBag.CoverPath = GetExistingImage("schCover", school.Id.ToString());
+            ViewBag.LogoPath = GetExistingImage("schLogo", school.Id.ToString());
+
             return View(new Tuple<StuProfile, IndexViewModel>(profile, indexVM));
         }
 

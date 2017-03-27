@@ -27,7 +27,9 @@ namespace SendMe.ViewModels
                 .Where(sp => sp.SchoolId == school.Id)
                 .OrderBy(sp => sp.LastName)
                 .ToList();
+
             Students = new List<StudentViewModel>();
+
             foreach(var student in spList)
             {
                 var userRoles = db.Roles.Where(r => r.Users.Select(u => u.UserId).Contains(student.UserId));

@@ -3,12 +3,17 @@
     ViewBag.Title = "Register";
 }
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal about-content", id="regForm", role = "form" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal about-content", id = "regForm", role = "form" }))
 {
-    @Html.AntiForgeryToken()
     <h2>Welcome!</h2>
     <hr />
-    <h4>Create a new account. Be sure to use your school email address!</h4>
+    <p>@ViewBag.SentConf</p>
+
+    if (ViewBag.SentConf == "")
+    {
+        <h4>Create a new account. Be sure to use your school email address!</h4>
+    }
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary("", new { @class = "text-danger" })
 
     <!--School-->
