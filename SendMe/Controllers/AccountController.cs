@@ -101,7 +101,10 @@ namespace SendMe.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    //If no returnUrl when user logged in, send them to their profile
+                    returnUrl = (returnUrl == null) ? "/send/" + username : returnUrl;
                     return RedirectToLocal(returnUrl);
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
