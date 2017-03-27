@@ -182,21 +182,21 @@ namespace SendMe.Controllers
             //-----------------------------------------------
             //            Verify Domain of Email
             //-----------------------------------------------
-            string schDomain = db.Schools
-                .Where(s => s.Id == model.SchoolId)
-                .Select(s => s.EmailDomain)
-                .Single();
+            //string schDomain = db.Schools
+            //    .Where(s => s.Id == model.SchoolId)
+            //    .Select(s => s.EmailDomain)
+            //    .Single();
 
-            if (!model.Email.Contains(schDomain))
-            {
-                ModelState.AddModelError("Email", "That domain is not approved by your school. "
-                    + "Please check for typos and ensure that you have selected the correct school. "
-                    + "If you believe you received this message in error, please contact your administrator.");
+            //if (!model.Email.Contains(schDomain))
+            //{
+            //    ModelState.AddModelError("Email", "That domain is not approved by your school. "
+            //        + "Please check for typos and ensure that you have selected the correct school. "
+            //        + "If you believe you received this message in error, please contact your administrator.");
 
-                ViewBag.Schools = new SchoolCollection();
+            //    ViewBag.Schools = new SchoolCollection();
 
-                return View(model);
-            }
+            //    return View(model);
+            //}
 
             if (ModelState.IsValid)
             {
@@ -233,7 +233,7 @@ namespace SendMe.Controllers
 
                     Upload placeholder = new Upload
                     {
-                        File = "sm03162017_profpic-placeholder.png",
+                        File = "sm03162017profpic-placeholder.jpg",
                         RefId = user.Id,
                         TypeRef = "ProfPic"
                     };
@@ -250,16 +250,15 @@ namespace SendMe.Controllers
                        string body = MailHelper.PopulateBody("Confirm your account", "Please confirm your account by clicking <a href=\""
                        + callbackUrl + "\">here</a>");
                     await UserManager.SendEmailAsync(user.Id, body);
-
+                    */
                     ViewBag.SentConf = "A confirmation email was sent to " + model.Email
                     + ". Please look for the confirmation email in your inbox and click the provided link to confirm and log in.";
 
                     ModelState.Clear();
 
-                    //ViewBag.Schools = CreateSchoolList().AsEnumerable();
+                    ViewBag.Schools = new SchoolCollection();
 
-                    return View(model);*/
-                    return RedirectToAction("Login", "Account");
+                    return View(model);
                 }
                 AddErrors(result);
             }

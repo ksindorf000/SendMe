@@ -329,6 +329,8 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Stripe.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Upload\636252663926945596uscmedCover031517.jpg" />
+    <Content Include="Upload\sm03162017profpic-placeholder.jpg" />
     <Content Include="Upload\uscmedCover031517.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

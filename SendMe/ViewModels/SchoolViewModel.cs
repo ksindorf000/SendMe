@@ -25,12 +25,17 @@ namespace SendMe.ViewModels
 
             List<StuProfile> spList = db.StuProfiles
                 .Where(sp => sp.SchoolId == school.Id)
+                .OrderBy(sp => sp.LastName)
                 .ToList();
             Students = new List<StudentViewModel>();
             foreach(var student in spList)
             {
-                var sVM = new StudentViewModel(student);
-                Students.Add(sVM);
+                var userRoles = db.Roles.Where(r => r.Users.Select(u => u.UserId).Contains(student.UserId));
+                if (userRoles.Count() < 1)
+                {
+                    var sVM = new StudentViewModel(student);
+                    Students.Add(sVM);
+                }
             }
 
             School = school;

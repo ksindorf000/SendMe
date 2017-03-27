@@ -312,16 +312,20 @@ form .about-content {
     border-radius: 5px;
 }
 
-#loginForm {
-    margin-left: 45%;
-}
-
 #loginForm .form-group {
     margin-left: 5%;
 }
 
 .contactForm {
     margin-left: 25%;
+}
+
+#regForm {
+    margin-left: 35%;
+}
+
+#loginForm {
+    margin-left: 45%;
 }
 
 /*-----------------------
@@ -454,6 +458,10 @@ form .about-content {
 
 .sm-prof-card .card-img-top {
     min-height: 200px;
+}
+
+.sm-prof-card {
+    min-height: 490px;
 }
 
 /*---------------------------------------
