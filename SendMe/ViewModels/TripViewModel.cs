@@ -24,6 +24,7 @@ namespace SendMe.Models
             Student = trip.Student;
             Donations = db.Donations
                 .Where(d => d.TripId == trip.Id)
+                .OrderByDescending(d => d.Created)
                 .ToList();
         }
 

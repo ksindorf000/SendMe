@@ -264,22 +264,15 @@ $(document).ready(function () {
                 console.log(result);
             }, 'json');
         });
+
 });
 
-//Donation partial list accordian show earch/ hide each/back button
+//Donation partial list accordian show each/ hide each/back button
 var j = [];
 for (i = 0; i <= Di; i++) {
-    $("#collapseAcc_" + i).hide();
-    $("#accBody_" + i).hide();
+    $("#collapseAcc_" + i).collapse("hide");
     j.push(i);
 }
-
-j.forEach(function (num) {
-    $("#accBtn_" + num).click(function () {
-        $("#collapseAcc_" + num).show();
-       
-    });
-});
 
 
 

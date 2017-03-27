@@ -204,6 +204,10 @@ h1 {
     margin: 0;
 }
 
+*:focus {
+    outline: none;
+}
+
 #contact_success_message {
     display: none;
 }
@@ -242,13 +246,23 @@ h1 {
     color: #1a5b55;
 }
 
+
+#donationsPanel .col-md-4 {
+    padding: 0;
+    border-radius: 0;
+}
+
+#donationsPanel .form-actions .no-color {
+    max-width: 100%;
+}
+
 /*-----------------------------
 
-      About/Contact Page
+   About/Contact/Login Pages
 
 -----------------------------*/
 .about-content {
-    margin: 5% 60%;
+    margin: 5%;
     background-color: #fff;
     color: #1a5b55;
     padding: 5%;
@@ -286,6 +300,14 @@ form .about-content {
 
 .about-content input {
     border-radius: 5px;
+}
+
+#loginForm {
+    margin-left: 45%;
+}
+
+#loginForm .form-group {
+    margin-left: 5%;
 }
 
 /*-----------------------

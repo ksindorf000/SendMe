@@ -111,6 +111,10 @@ namespace SendMe.Controllers
 
             MailHelper.Execute(body, donation.Donor.Name, donation.Donor.Email, student.Student.FirstName, student.Student.User.Email, subj);
 
+            donation.HaveThanked = true;
+            db.Entry(donation).State = EntityState.Modified;
+            db.SaveChanges();
+
             string returnUrl = "../send/" + student.User.UserName;
 
             return RedirectToAction(returnUrl);
