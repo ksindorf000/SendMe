@@ -10,18 +10,17 @@
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="row">
+        <div class="row" id="profManage">
             <div id="ppfileError"></div>
-            <img src="@ViewBag.ImgPath" class="img-thumbnail" />
-            <p>
+            <img src="@ViewBag.ImgPath" class="profile-pic" />
+            <p data-toggle="tooltip" data-placement="top"
+               data-original-title="Acceptable file size: 250KB  Acceptable file types: jpg, jpeg, png">
                 <input type="file" name="File" id="ppFile" class="form-control btn btn-default" />
-                 @Html.HiddenFor(m => m.refId, new { Value = ViewBag.RefId })
-                 @Html.HiddenFor(m => m.type, new { Value = "ProfPic" })
-                 @Html.HiddenFor(m => m.ReturnUrl, new { Value = ViewBag.ReturnUrl })
+                @Html.HiddenFor(m => m.refId, new { Value = ViewBag.RefId })
+                @Html.HiddenFor(m => m.type, new { Value = "ProfPic" })
+                @Html.HiddenFor(m => m.ReturnUrl, new { Value = ViewBag.ReturnUrl })
             </p>
             <p>
-                Acceptable file size: 250KB <br/>
-                Acceptable file types: "jpg", "jpeg", "png" <br/>
                 <strong>For best results, use a square image.</strong>
 
             </p>
@@ -35,28 +34,27 @@
 }
 else if (ViewBag.Type == "School")
 {
-<!---------------------------->
-<!--     School Cover       -->
-<!---------------------------->
-    using (Html.BeginForm("Upload", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
+    <div class="row">
+        <!---------------------------->
+        <!--     School Cover       -->
+        <!---------------------------->
+        @using (Html.BeginForm("Upload", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="row">
+        <div class="col-sm-12 col-md-6">
             <div id="scfileError"></div>
             <img src="@ViewBag.CoverPath" class="img-thumbnail" />
-            <p>
+            <p  data-toggle="tooltip" data-placement="top" 
+                        data-original-title="Acceptable file size: 500KB - 1MB  Acceptable file types: jpg, jpeg, png">
                 <input type="file" name="File" id="scFile" class="form-control btn btn-default" />
                 @Html.HiddenFor(m => m.refId, new { Value = ViewBag.RefId })
                 @Html.HiddenFor(m => m.type, new { Value = "schCover" })
                 @Html.HiddenFor(m => m.ReturnUrl, new { Value = ViewBag.ReturnUrl })
             </p>
-            <p>
-                Acceptable file size: 500KB - 1MB <br />
-                Acceptable file types: "jpg", "jpeg", "png" <br/>
+            <p>                
                 <strong>For best results, use a landscape oriented image that is at least 50% wider than it is tall.</strong>
-
             </p>
             <p>
                 <button type="submit" id="scUpload" class="btn btn-toolbar btn-success">
@@ -64,27 +62,26 @@ else if (ViewBag.Type == "School")
                 </button>
             </p>
         </div>
-    }
-<!---------------------------->
-<!--     School Logo        -->
-<!---------------------------->
-    using (Html.BeginForm("Upload", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
+        }
+        <!---------------------------->
+        <!--     School Logo        -->
+        <!---------------------------->
+        @using (Html.BeginForm("Upload", "Upload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="row">
+        <div class="col-sm-12 col-md-6">
             <div id="slfileError"></div>
             <img src="@ViewBag.LogoPath" class="img-thumbnail" />
-            <p>
+            <p  data-toggle="tooltip" data-placement="top" 
+                        data-original-title="Acceptable file size: 250KB  Acceptable file types: jpg, jpeg, png">
                 <input type="file" name="File" id="slFile" class="form-control btn btn-default" />
                 @Html.HiddenFor(m => m.refId, new { Value = ViewBag.RefId })
                 @Html.HiddenFor(m => m.type, new { Value = "schLogo" })
                 @Html.HiddenFor(m => m.ReturnUrl, new { Value = ViewBag.ReturnUrl })
             </p>
             <p>
-                Acceptable file size: 250KB <br />
-                Acceptable file types: "jpg", "jpeg", "png" <br/>
                 <strong>For best results, use a square image.</strong>
             </p>
             <p>
@@ -93,5 +90,6 @@ else if (ViewBag.Type == "School")
                 </button>
             </p>
         </div>
-    }
+        }
+    </div>
 }

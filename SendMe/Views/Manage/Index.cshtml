@@ -3,172 +3,184 @@
 @{
     ViewBag.Title = "Manage Profile";
     ViewBag.UserName = User.Identity.Name;
+    var adminSch = (SendMe.Models.School)ViewBag.AdminSchool;
 }
 
-<h2>@ViewBag.Title.</h2>
+<div id="manage-acct">
+    <div class="row">
+        <div class="col-sm-12 col-md-6 about-content">
+            <p class="text-success">@ViewBag.StatusMessage</p>
 
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div class="row">
-    <!----------------------------
-            Update Profile
-    ------------------------------>
-    <div class="col-sm-12 col-md-4">
-        <h4>
-            Update Your Profile
-        </h4>
-        <p><a href="../send/@ViewBag.UserName">View Profile</a></p>
-        <hr />
-
-        @using (Html.BeginForm("UpdateProfile", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @if (!User.IsInRole("Admin"))
             {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary("", new { @class = "text-danger" })
+                <!----------------------------
+                        Update Profile
+                ------------------------------>
+                <h2>
+                    Update Your Profile
+                </h2>
+                <h6 class="text-muted" style="text-align:center">
+                    <a href="../send/@ViewBag.UserName">View Profile</a>
+                </h6>
+                <hr />
+
+                <!----------------------------
+                    Change Profile Pic
+                ------------------------------>
+                if (!User.IsInRole("Admin"))
+                {
+                    <h4>Change Profile Photo:</h4>
+                    @Html.Partial("_Upload", new SendMe.Models.UploadViewModel())
+                }
+
+                using (Html.BeginForm("UpdateProfile", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
 
     <!--FirstName-->
-            <div class="form-group">
-                @Html.LabelFor(m => m.Item1.FirstName, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Item1.FirstName, new { @class = "form-control" })
-                </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Item1.FirstName, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Item1.FirstName, new { @class = "form-control" })
+                        </div>
 
 
-                <!--LastName-->
+                        <!--LastName-->
 
-                @Html.LabelFor(m => m.Item1.LastName, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Item1.LastName, new { @class = "form-control" })
-                </div>
-            </div>
+                        @Html.LabelFor(m => m.Item1.LastName, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Item1.LastName, new { @class = "form-control" })
+                        </div>
+                    </div>
 
     <!--Bio-->
-            <div class="form-group">
-                @Html.LabelFor(m => m.Item1.Bio, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextAreaFor(m => m.Item1.Bio, new { @class = "form-control" })
-                </div>
-            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Item1.Bio, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(m => m.Item1.Bio, new { @class = "form-control" })
+                        </div>
+                    </div>
 
     <!--Specialty-->
-            <div class="form-group">
-                @Html.LabelFor(m => m.Item1.Speciality, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Item1.Speciality, new { @class = "form-control", id = "adminKey" })
-                </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Item1.Speciality, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Item1.Speciality, new { @class = "form-control", id = "adminKey" })
+                        </div>
 
 
-                <!--Year-->
+                        <!--Year-->
 
-                @Html.LabelFor(m => m.Item1.Year, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Item1.Year, new { @class = "form-control", id = "adminKey" })
-                </div>
+                        @Html.LabelFor(m => m.Item1.Year, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Item1.Year, new { @class = "form-control", id = "adminKey" })
+                        </div>
 
-                <!--Submit-->
-                <div class="col-md-4">
-                    <button type="submit" id="profileSave" class="btn btn-toolbar btn-primary">
-                        <span class="glyphicon glyphicon-check"></span>
-                    </button>
-                </div>
-            </div>
+                        <!--Submit-->
+                        <div class="col-md-4">
+                            <button type="submit" id="profileSave" class="btn btn-toolbar btn-primary">
+                                <span class="glyphicon glyphicon-check"></span>
+                            </button>
+                        </div>
+                    </div>
 
-        }
+                }
 
-    </div>
-
-
-    <!----------------------------
-         Change Acct Settings
-    ------------------------------>
-
-    <div class="col-sm-12 col-md-2 col-lg-4">
-        <h4>Change your account settings</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>Password:</dt>
-            <dd>
-                [
-                @if (Model.Item2.HasPassword)
+            }
+            else
             {
-                    @Html.ActionLink("Change your password", "ChangePassword")
-                }
-                else
-                {
-                    @Html.ActionLink("Create", "SetPassword")
-                }
-                ]
-            </dd>
+                Html.RenderPartial("_ManageSch", adminSch);
+            }
+        </div>
 
-            <!----------------------------
-                Change Profile Pic
-            ------------------------------>
-            <dt><h4>Change Profile Photo:</h4></dt>
-            <dd>
-                @Html.Partial("_Upload", new SendMe.Models.UploadViewModel())
-            </dd>
-            @*
-                    <dt>External Logins:</dt>
-                    <dd>
-                        @Model.Item2.Logins.Count [
-                        @Html.ActionLink("Manage", "ManageLogins") ]
-                    </dd>
-
-                        Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-
-                         See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                            for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-
-                         Uncomment the following block after you have set up two-factor authentication
-
-                    <dt>Phone Number:</dt>
-                    <dd>
-                        @(Model.Item2.PhoneNumber ?? "None")
-                        @if (Model.Item2.PhoneNumber != null)
-                        {
-                            <br />
-                            <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                            using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                            {
-                                @Html.AntiForgeryToken()
-                                <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
-                            }
-                        }
-                        else
-                        {
-                            <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
-                        }
-                    </dd>
-
-                <dt>Two-Factor Authentication:</dt>
+        <!----------------------------
+             Change Acct Settings
+        ------------------------------>
+        <div class="col-sm-12 col-md-5 about-content">
+            <h2>
+                Update Account Settings
+            </h2>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>Password:</dt>
                 <dd>
-                    <p>
-                        There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                        for details on setting up this ASP.NET application to support two-factor authentication.
-                    </p>
-                    @if (Model.Item2.TwoFactor)
-                        {
-                            using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    [
+                    @if (Model.Item2.HasPassword)
+            {
+                        @Html.ActionLink("Change your password", "ChangePassword")
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Create", "SetPassword")
+                    }
+                    ]
+                </dd>
+
+                @*
+                        <dt>External Logins:</dt>
+                        <dd>
+                            @Model.Item2.Logins.Count [
+                            @Html.ActionLink("Manage", "ManageLogins") ]
+                        </dd>
+
+                            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
+
+                             See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+
+                             Uncomment the following block after you have set up two-factor authentication
+
+                        <dt>Phone Number:</dt>
+                        <dd>
+                            @(Model.Item2.PhoneNumber ?? "None")
+                            @if (Model.Item2.PhoneNumber != null)
                             {
-                                @Html.AntiForgeryToken()
-                                <text>Enabled
-                                <input type="submit" value="Disable" class="btn btn-link" />
-                                </text>
+                                <br />
+                                <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                                using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
+                                }
                             }
-                        }
-                        else
-                        {
-                            using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            else
                             {
-                                @Html.AntiForgeryToken()
-                                <text>Disabled
-                                <input type="submit" value="Enable" class="btn btn-link" />
-                                </text>
+                                <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
                             }
-                        }
-                </dd>*@
-        </dl>
+                        </dd>
+
+                    <dt>Two-Factor Authentication:</dt>
+                    <dd>
+                        <p>
+                            There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                            for details on setting up this ASP.NET application to support two-factor authentication.
+                        </p>
+                        @if (Model.Item2.TwoFactor)
+                            {
+                                using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <text>Enabled
+                                    <input type="submit" value="Disable" class="btn btn-link" />
+                                    </text>
+                                }
+                            }
+                            else
+                            {
+                                using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <text>Disabled
+                                    <input type="submit" value="Enable" class="btn btn-link" />
+                                    </text>
+                                }
+                            }
+                    </dd>*@
+            </dl>
+        </div>
     </div>
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

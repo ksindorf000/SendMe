@@ -330,6 +330,15 @@ form .about-content {
 
 /*-----------------------
 
+      Manage Account
+
+------------------------*/
+#manage-acct .about-content {
+    margin: 1%;
+}
+
+/*-----------------------
+
       General Card
         Settings
 
@@ -485,6 +494,17 @@ form .about-content {
 
 .school-card .card-block {
     margin-top: 5%;
+}
+
+/*------------------------
+
+    Manage Profile
+
+------------------------*/
+
+#profManage .profile-pic {
+    max-width: 50%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 /*----------------------------------------

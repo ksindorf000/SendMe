@@ -30,24 +30,26 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-6 col-md-offset-1">
+                    @Html.LabelFor(m => m.RememberMe, new { @class = "col-md-10 control-label" })
+                    <div class="col-md-10 col-md-offset-2">
                         <div class="checkbox">
-                            Remember Me
                             @Html.CheckBoxFor(m => m.RememberMe)
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
                 </div>
-                <br/>
-                <hr/>
-                <p>
-                    @Html.ActionLink("Register as a new user.", "Register")
-                </p>
-                <p>
-                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                </p>
+                    <div class="form-group">
+                        <div class="col-md-offset-8 col-md-2">
+                            <input type="submit" value="Log in" class="btn btn-primary" />
+                        </div>
+                    </div>
+                    <br />
+                    <hr />
+                    <p>
+                        @Html.ActionLink("Register as a new user.", "Register")
+                    </p>
+                    <p>
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>
             }
         </section>
     </div>

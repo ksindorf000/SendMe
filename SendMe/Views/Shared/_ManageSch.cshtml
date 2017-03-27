@@ -2,15 +2,17 @@
 
 @{
     ViewBag.Title = "Manage";
+    ViewBag.Type = "School";
 }
 
 <h2>Manage Your School</h2>
-
+<h6 class="text-muted" style="text-align:center">
+    <a href="~/school/@Model.Id">View School Profile</a>
+</h6>
+<hr />
 <p class="text-success">@ViewBag.StatusMessage</p>
-<div>
-    <h4>Change your school's settings</h4>
-    <hr />
 
+<div>
     @using (Html.BeginForm("Manage", "School", new { id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
@@ -29,7 +31,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.Website, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                <input type="url" class="form-control" name="Website" id ="schUrl" value="@Model.Website" />
+                <input type="url" class="form-control" name="Website" id="schUrl" value="@Model.Website" />
                 <p id="urlError" class="alert-warning"></p>
             </div>
         </div>
