@@ -1,10 +1,7 @@
 ﻿//Start Location
-var contentString1 = '<div id="content">' +
+var contentString1 =
       '<div id="siteNotice">' +
-      '</div>' +
-      '<h4 id="firstHeading" class="firstHeading">USC School Of Medicine</h4>' +
-      '<div id="bodyContent">' +
-      '<p>Info here</p>' +
+      '<img width="150" height="100" src="../../img/USCGlobalHealthMapImage.jpg" class="img-responsive inline-block" alt="Responsive image" />' +
       '</div>';
 //lat long
 var address = currentCountry +", "+ currentCity;

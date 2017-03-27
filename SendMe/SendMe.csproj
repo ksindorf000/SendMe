@@ -299,6 +299,7 @@
     <Content Include="Img\SendMe Logo.png" />
     <Content Include="Img\SendMeBanner-WhtTxt.png" />
     <Content Include="Img\SendMeLogoTxt.png" />
+    <Content Include="Img\USCGlobalHealthMapImage.jpg" />
     <Content Include="MailSettings.config" />
     <Content Include="AppSettingsSecrets.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -149,6 +149,11 @@
         $("#donateToggle").show();
         $("#mini-fab").toggleClass('hidden');
     });
+    $("#paymentBackBtn").click(function () {
+        $("#donateToggle").hide();
+        $(".tripDetails").show();
+        $("#map").show();
+    });
 
     //ViewDonations
     $("#viewDonationsToggle").hide();

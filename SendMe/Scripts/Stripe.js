@@ -91,6 +91,8 @@ $("#paymentBackBtn").click(function () {
     $("#map").show();
 });
 
+
+
 //shows tooltips
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();

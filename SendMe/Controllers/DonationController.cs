@@ -58,13 +58,14 @@ namespace SendMe.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    Trip tripInfo = db.Trips.SingleOrDefault(t => t.Id == tripId);
                     //Create the charge request to send to stripe
                     var chargeRequest = new StripeChargeCreateOptions()
                     {
                         Amount = amount,
                         Currency = "USD",
                         SourceTokenOrExistingSourceId = stripeToken,
-                        Description = "Donation"
+                        Description = $"Destination:{tripInfo.Destination}; Student First Name:{tripInfo.Student.FirstName}, Last Name:{tripInfo.Student.LastName};"
 
                     };
                     var service = new StripeChargeService(WebConfigurationManager.AppSettings["PrivateKey"]);

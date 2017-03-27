@@ -1,9 +1,10 @@
-﻿<button style="width:25%" id="viewDonBackBtn" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Go Back"><i class="glyphicon glyphicon-arrow-left"></i> Back</button>
+﻿
 @if (Model.User.UserName == User.Identity.Name && Model.ActiveTrip != null)
 {
     <div class="container" style="width:inherit">
         <div class="panel panel-default">
-            <div class="panel-heading"><h3>Donations</h3></div>
+            <div class="panel-heading"><h3>Donations</h3>
+            <button style="width:25%" id="viewDonBackBtn" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Go Back"><i class="glyphicon glyphicon-arrow-left"></i> Back</button></div>
             <div class="panel-body">
                 <table class="table table-condensed" style="border-collapse:collapse;">
 
@@ -21,7 +22,7 @@
                         {
 
                             <tr data-toggle="collapse" data-target="#collapse_@i" class="accordion-toggle">
-                                <td><button class="btn btn-default btn-sm"><span class="glyphicon glyphicon-chevron-down"></span></button></td>
+                                <td><button class="btn btn-success btn-sm"><span class="glyphicon glyphicon-chevron-down"></span></button></td>
                                 <td><strong>$@donation.Amount .00</strong></td>
                                 <td>@donation.Donor.Name</td>
                                 <td>@donation.Created.ToString("dd MMM yyyy")</td>
@@ -35,14 +36,14 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td class="container" style="width:60%">
-                                                        @donation.DonationMsg
+                                                    <td>
+                                                        <p style="max-width:70%"> @donation.DonationMsg</p>
                                                         <script> var Di = @i;</script>
                                                     </td>
                                                     @if (donation.HaveThanked == false && donation.Donor.Name != "Anonymous")
                                                     {
                                                         <td>
-                                                            <button style="width:25%" class="btn btn-default btn-sm" data-toggle="modal" data-target="#thankModal"><span class="glyphicon glyphicon-envelope"></span></button>
+                                                            <button style="width:100%" class="btn btn-success btn-sm" data-toggle="modal" data-target="#thankModal"><span class="glyphicon glyphicon-envelope"></span></button>
                                                         </td>
                                                         using (Html.BeginForm("SendThankYou", "User", new { donId = donation.Id, stuId = Model.Student.Id }, FormMethod.Post))
                                                         {
@@ -79,7 +80,7 @@
                                                     else
                                                     {
                                                     <td>
-                                                       No need/already thanked
+                                                        <p style="width:30%">No need/already thanked</p>
                                                     </td>
                                                     }
                                             </tr>
@@ -104,8 +105,11 @@
                             }
                             else
                             {
-
-                               <strong>No donations yet</strong>
+                                <div class="conatiner">
+                                    <button style="width:25%" id="viewDonBackBtn" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Go Back"><i class="glyphicon glyphicon-arrow-left"></i> Back</button>
+                                    <strong>No donations yet</strong>
+                                </div>
+                              
                             }
 
 

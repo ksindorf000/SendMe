@@ -726,7 +726,7 @@ css for donation success/fail
         position: relative;
         overflow-y: scroll;
     }
-
+}
 
 
     #left {
@@ -746,38 +746,65 @@ css for donation success/fail
    progress bar css
 
 ---------------------------*/
-.progress-bar{
-    background-color:#1ABBAC;
-}
+    .progress-bar {
+        background-color: #1ABBAC;
+    }
 
     /*---------------------------
 
    Donations Table css
 
 ---------------------------*/
-   
-.table-condensed{
-    font-size:14px;
-}
 
-.modal {
-  text-align: center;
-}
+    .table-condensed {
+        font-size: 14px;
+    }
 
-@media screen and (min-width: 768px) { 
-  .modal:before {
-    display: inline-block;
-    vertical-align: middle;
-    content: " ";
-    height: 100%;
-  }
-}
+    .modal {
+        text-align: center;
+    }
 
-.modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
-}
+    @media screen and (min-width: 768px) {
+        .modal:before {
+            display: inline-block;
+            vertical-align: middle;
+            content: " ";
+            height: 50%;
+        }
+    }
+
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .btn-success,
+    .btn-success:hover,
+    .btn-success:focus,
+    .btn-success:visited,
+    .btn-success:focus,
+    .btn-success:active {
+        color: #ffffff;
+        background-color: #1ABBAC;
+        border-color: #1ABBAC;
+    }
+
+    .btn-danger,
+    .btn-danger:hover,
+    .btn-danger:active,
+    .btn-danger:visited,
+    .btn-danger:focus
+    .btn-danger:active {
+        color: #ffffff;
+        background-color: #556080;
+        border-color: #556080;
+    }
+
+
+
+
+
     /*-------------------------------------------------------------------------------
     Make Active Toggle
         http://callmenick.com/post/css-toggle-switch-examples
