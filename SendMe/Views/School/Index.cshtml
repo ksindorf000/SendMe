@@ -1,5 +1,8 @@
 ﻿@model SendMe.ViewModels.SchoolViewModel
 
+@{ ViewBag.Title = Model.School.Name; }
+
+
 <!--------SCHOOL DETAILS---------->
 <div class="profile-card school-card">
     <div class="card">
@@ -39,24 +42,25 @@
                             <div class="card-block">
                                 @if (student.ActiveTrip != null)
                                 {
-                                    <h3>@student.ActiveTrip.Trip.Title</h3>
+                                    <h4>@student.ActiveTrip.Trip.DestinationCity in
+                                    @student.ActiveTrip.Trip.DestinationState,
+                                    @student.ActiveTrip.Trip.DestinationCountry</h4>
                                     <sup>@student.ActiveTrip.Trip.Dates</sup>
-                                    <p>@student.ActiveTrip.Trip.PercentOfAmnt% Raised</p>
-                                    <div data-toggle="tooltip" data-placement="left" data-original-title="Read More" style="float:right">
-                                        <span class="glyphicon glyphicon-chevron-down"
-                                              data-toggle="collapse" data-target="@("#schTripDetails" + student.ActiveTrip.Trip.Id)">
-                                        </span>
-                                    </div>
-                                    <p id="@("schTripDetails" + student.ActiveTrip.Trip.Id)" class="collapse">
-                                        @student.ActiveTrip.Trip.DestinationCity in
-                                        @student.ActiveTrip.Trip.DestinationState,
-                                        @student.ActiveTrip.Trip.DestinationCountry
-                                    </p>                                    
+                                    <p style="text-align: right">@student.ActiveTrip.Trip.PercentOfAmnt% Raised</p>                                                                    
                                 }
                                 else
                                 {
                                     <h4>@student.Student.FirstName does not have any active trips.</h4>
                                 }
+                                <div data-toggle="tooltip" data-placement="top" data-original-title="Share Link" style="float:right">
+                                    <span class="glyphicon glyphicon-chevron-down"
+                                          data-toggle="collapse" data-target="@("#sendmeUrl" + student.Student.Id)">
+                                    </span>
+                                </div>
+                                <p id="@("sendmeUrl" + student.Student.Id)" class="collapse">
+                                    <strong>@student.Student.FirstName's SendMe! URL:</strong>
+                                    sendme.com/send/@student.User.UserName
+                                </p>    
                             </div>
                         </div>
                     </div>

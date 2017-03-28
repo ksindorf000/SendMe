@@ -211,6 +211,10 @@ h1 {
     display: none;
 }
 
+p {
+    word-wrap: break-word;
+}
+
 
 /*---------------------------------
 
@@ -339,6 +343,82 @@ form .about-content {
 
 /*-----------------------
 
+      Share Icons
+    https://codepen.io/Deadlymuffin/pen/hGiqo/
+
+------------------------*/
+.stuProfShare {
+    text-align: center;
+}
+
+.social-icon {
+    color: #fff;
+    margin: 0;
+}
+
+ul.social-icons {
+    margin-top: 10px;
+    padding-left: 0;
+}
+
+.social-icons li {
+    vertical-align: top;
+    display: inline;
+    height: 100px;
+}
+
+.social-icons a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.fa-facebook {
+    padding: 10px 15px;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+    background-color: #322f30;
+    border-radius: 50%;
+}
+
+    .fa-facebook:hover {
+        background-color: #3d5b99;
+    }
+
+.fa-twitter {
+    padding: 10px 11px;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+    background-color: #322f30;
+    border-radius: 50%;
+}
+
+    .fa-twitter:hover {
+        background-color: #00aced;
+    }
+
+.fa-google-plus {
+    padding: 10px 8px;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+    background-color: #322f30;
+    border-radius: 50%;
+}
+
+    .fa-google-plus:hover {
+        background-color: #e25714;
+    }
+
+/*-----------------------
+
       General Card
         Settings
 
@@ -373,6 +453,7 @@ form .about-content {
     background-size: cover;
     background-repeat: no-repeat;
 }
+
 
 /*-----------------------
 
@@ -417,7 +498,6 @@ form .about-content {
 #tripPartial {
     position: relative;
 }
-
 
 /*-----------------------
 
@@ -488,9 +568,9 @@ form .about-content {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.15);
 }
 
-.school-card .card-prof-pic:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
+    .school-card .card-prof-pic:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
 
 .school-card .card-block {
     margin-top: 5%;
@@ -708,34 +788,23 @@ css for donation success/fail
     transform: translate(-50%, -50%);
     background: #1ABBAC;
     width: 80%;
-    min-width:425px;
+    min-width: 425px;
     padding: 20px;
 }
+
+.modal-backdrop {
+    z-index: -1;
+}
+
 #failedModalContent {
     top: 10px;
     left: 50%;
     transform: translate(-50%, -50%);
     background: #D63232;
     width: 80%;
-    min-width:425px;
+    min-width: 425px;
     padding: 20px;
 }
-.modal-backdrop{
-    z-index:-1;
-}
- .modal {
-        text-align: center;
-    }
- 
-@media screen and (min-width: 768px) {
-        .modal:before {
-            display: inline-block;
-            vertical-align: middle;
-            content: " ";
-            height: 50%;
-        }
-    }
-
 
 
 /*---------------------------
@@ -761,70 +830,82 @@ css for donation success/fail
 }
 
 
-    #left {
-        height: 50%;
-        background-color: #4FC1E9;
-        text-align: center;
-    }
+#left {
+    height: 50%;
+    background-color: #4FC1E9;
+    text-align: center;
+}
 
-    #right {
-        height: 50%;
-        background-color: #4FC1E9;
-        text-align: center;
-    }
+#right {
+    height: 50%;
+    background-color: #4FC1E9;
+    text-align: center;
+}
 
-    /*---------------------------
+/*---------------------------
 
    progress bar css
 
 ---------------------------*/
-    .progress-bar {
-        background-color: #1ABBAC;
-    }
+.progress-bar {
+    background-color: #1ABBAC;
+}
 
-    /*---------------------------
+/*---------------------------
 
    Donations Table css
 
 ---------------------------*/
 
-    .table-condensed {
-        font-size: 14px;
-    }
+.table-condensed {
+    font-size: 14px;
+}
 
-    .modal-dialog {
+.modal {
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .modal:before {
         display: inline-block;
-        text-align: left;
         vertical-align: middle;
+        content: " ";
+        height: 50%;
     }
+}
 
-    .btn-success,
-    .btn-success:hover,
-    .btn-success:focus,
-    .btn-success:visited,
-    .btn-success:focus,
-    .btn-success:active {
-        color: #ffffff;
-        background-color: #1ABBAC;
-        border-color: #1ABBAC;
-    }
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
 
-    .btn-danger,
-    .btn-danger:hover,
-    .btn-danger:active,
-    .btn-danger:visited,
-    .btn-danger:focus
-    .btn-danger:active {
-        color: #ffffff;
-        background-color: #556080;
-        border-color: #556080;
-    }
+.btn-success,
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:visited,
+.btn-success:focus,
+.btn-success:active {
+    color: #ffffff;
+    background-color: #1ABBAC;
+    border-color: #1ABBAC;
+}
+
+.btn-danger,
+.btn-danger:hover,
+.btn-danger:active,
+.btn-danger:visited,
+.btn-danger:focus .btn-danger:active {
+    color: #ffffff;
+    background-color: #556080;
+    border-color: #556080;
+}
 
 
 
 
 
-    /*-------------------------------------------------------------------------------
+/*-------------------------------------------------------------------------------
     Make Active Toggle
         http://callmenick.com/post/css-toggle-switch-examples
         Didn't work because of the foreach and all toggles having the same id

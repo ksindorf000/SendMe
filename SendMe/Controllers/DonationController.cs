@@ -109,8 +109,11 @@ namespace SendMe.Controllers
                             db.SaveChanges();
                         }
 
+                            //Send Receipt
                             //var transportWeb = new SendGrid.Web("SENDGRID_APIKEY");
                             //transportWeb.DeliverAsync(myMessage);
+                            SendReceiptEmail(Email, amount, Name, tripId);
+
                         }
                         else
                         {
