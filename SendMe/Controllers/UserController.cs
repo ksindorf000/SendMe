@@ -82,7 +82,7 @@ namespace SendMe.Controllers
                 ViewBag.PaymentMsg = paymentMsg;
             }
             ViewBag.Email = email;
-            
+                        
                 return View(studentVM);
         }
 

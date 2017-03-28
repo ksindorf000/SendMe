@@ -103,7 +103,8 @@ namespace SendMe.Controllers
                                         .Where(d => d.TripId == trip.Id)
                                         .Sum(d => d.Amount);
                             double target = trip.TargetAmnt;
-                            trip.PercentOfAmnt = (double)((donated / target) * 100);
+                            double rawPercent = (double)((donated / target) * 100);
+                            trip.PercentOfAmnt = Math.Round(rawPercent, 2);
                             db.Entry(trip).State = System.Data.Entity.EntityState.Modified;
                             db.SaveChanges();
                         }
