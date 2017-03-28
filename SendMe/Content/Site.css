@@ -204,7 +204,7 @@ h1 {
 }
 
 *:focus {
-    outline: none!important;
+    outline: none !important;
 }
 
 #contact_success_message {
@@ -516,14 +516,14 @@ ul.social-icons {
     left: 0;
 }
 
-#inactiveTrips li {
-    list-style: none;
-}
+    #inactiveTrips li {
+        list-style: none;
+    }
 
-#inactiveTrips button {
-    margin-top: 0;
-    margin-bottom: 20px;
-}
+    #inactiveTrips button {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
 
 /*-----------------------
 
@@ -567,7 +567,7 @@ ul.social-icons {
 }
 
 #schDonateToggle .school-card {
-    background-color: #fff;    
+    background-color: #fff;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
     border-radius: 5px;
 }
