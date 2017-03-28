@@ -1,4 +1,5 @@
 ﻿using SendMe.Helpers;
+using SendMe.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace SendMe.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
             ViewBag.DisplayFootLogo = false;
@@ -18,7 +21,10 @@ namespace SendMe.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Destination = db.Trips.ToList();
+           
+            
+
             return View();
         }
 

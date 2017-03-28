@@ -1,9 +1,24 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "About";
 }
 
 <h1><img src="~/Img/SendMe Banner.png" class="about-title" /></h1>
 <hr />
+
+<script type="text/javascript">
+    var destinations =[];
+@foreach(var destination in ViewBag.Destination)
+{
+    <text>
+     destinations.push('@destination.Destination');
+    </text>
+}
+    </script>
+
+<div class="container">
+    <div id="mapAll" style="width: 500px; height: 400px; border: 3px solid #DADEE0;"></div><br />
+</div>
 
 <div class="about-content">
 
@@ -58,8 +73,8 @@
 
     <br />
     <h2><strong>The Solution</strong></h2>
-    <hr />    
-    
+    <hr />
+
     <p>
         Send Me! is a secure, user-friendly application that will allow students to
         create profiles to which donors can navigate in order to donate funds to the

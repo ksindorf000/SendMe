@@ -100,4 +100,3 @@ function animate(plane) {
         plane.set('icons', icons);
     }, 100);
 }
-
