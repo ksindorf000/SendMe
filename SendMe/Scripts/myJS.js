@@ -112,9 +112,6 @@
     $(".donateSch").click(function () {
         $("#sch-StuProfile-cards").hide();
         $("#schDonateToggle").show();
-    });
-
-    $("#schDonate").click(function () {
         tripId = $(this).data("id");
         userName = $(this).data("username");        
     });
@@ -163,6 +160,7 @@
     $("#viewDonBackBtn").click(function () {
         $("#viewDonationsToggle").hide();
         $(".tripDetails").show();
+        $("#map").show();
     });
 
     //ViewDonations

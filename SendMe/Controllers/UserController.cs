@@ -17,35 +17,21 @@ namespace SendMe.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
         
         //--------------------------------
-        // INDEX: Username
+        // INDEX 
         //--------------------------------
         [Route("send/{username}")]
         public ActionResult Index(string username, int? donationId, string paymentMsg, string email)
         {
-            if (donationId != null)
-            {
-                var donationModify =
-                from donation in db.Donations
-                .Where(d => d.Id == donationId)
-                select donation;
-
-                foreach (Donation donation in donationModify)
-                {
-                    donation.HaveThanked = true;
-                }
-                db.SaveChanges();
-            }
-
             StuProfile student = db.StuProfiles
                 .Where(sp => sp.User.UserName == username)
                 .FirstOrDefault();
+            StudentViewModel studentVM = new StudentViewModel(student);
 
             if (student == null)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            StudentViewModel studentVM = new StudentViewModel(student);
             ViewBag.CurrentTotal = 0;
 
             if (studentVM.ActiveTrip != null)
@@ -63,12 +49,28 @@ namespace SendMe.Controllers
                 {
                     ViewBag.CurrentTotal = ViewBag.TargetAmount;
                 }
-            }                      
+            }
             else
             {
                 ViewBag.Action = "Create";
             }
+
+            if (donationId != null)
+            {
+                var donationModify =
+                from donation in db.Donations
+                .Where(d => d.Id == donationId)
+                select donation;
+
+                foreach (Donation donation in donationModify)
+                {
+                    donation.HaveThanked = true;
+                }
+                db.SaveChanges();
+            }                       
+
             ViewBag.UserName = username;
+
             if(paymentMsg == "Payment Successful")
             {
                 ViewBag.PaymentMsg = $"{paymentMsg}! An electronic receipt has been sent to {email}.";

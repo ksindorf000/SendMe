@@ -7,93 +7,59 @@
 <hr />
 
 <script type="text/javascript">
-    var destinations =[];
-@foreach(var destination in ViewBag.Destination)
+    var destinations = [];
+    @foreach(var destination in ViewBag.Destination)
 {
     <text>
-     destinations.push('@destination.Destination');
+    destinations.push('@destination.Destination');
     </text>
 }
 </script>
 
+<!--Map-->
+<div class="row">
+    <div class="about-content">
 
-<div class="about-content">
+        <div class="container">
+            <div id="mapAll" style="width: 83%; height: 300px; border: 3px solid #DADEE0"></div>
+            <sup class="text-muted">SendMe! has helped raise $100,000 to send 40 students to 20 different destinations!</sup>
+        </div>
 
-    <div class="container">
-        <div id="mapAll" style="width: 83%; height: 300px; border: 3px solid #DADEE0"></div><br />
+    </div>
+</div>
+
+<!--Problem and Solution-->
+<div class="row about-content">
+    <div class="col-sm-12 col-md-6">
+        <h2><strong>The Problem</strong></h2>
+        <hr />
+        <p>
+            Students need to be able to raise and track funds for their
+            study abroad trips. Faculty and staff need to be able to track students'
+            fund-raising progress and make sure that the funds get where they need to go.
+            However, since there is no standard system for students to use, faculty and
+            staff end up having to keep up with multiple applications depending on each
+            student's tracking method of choice.
+        </p>
     </div>
 
-    <h2><strong>The Motivation</strong></h2>
-    <hr />
+    <div class="col-sm-12 col-md-6">
+        <h2><strong>The Solution</strong></h2>
+        <hr />
+        <p>
+            Send Me! is a secure, user-friendly application that will allow students to
+            create profiles to which donors can navigate in order to donate funds to the
+            student's trip. Students will have to verify their school email address and so 
+            will be affiliated with their school in the application. Each school will have 
+            a dedicated page where the progress of their students' fund-raising is displayed. 
+            This will make it easy for faculty and staff to keep up with all of their 
+            students in one place.
+        </p>
+        <p>
+            As an added bonus, through the use of a general school profile, Alumni of each school
+            who wish to donate to current students have the opportunity to do so without needing
+            to reach out to the school's administration to find out where to send funds.
+        </p>
 
-    <p>
-            <p>
-                <strong>WHO's Global School Health Initiative</strong> launched in 1995, seeks to mobilise and
-                strengthen health promotion and education activities at the local, national,
-                regional and global levels. The Initiative is designed to improve the health of
-                students, school personnel, families and other members of the community through schools.
-            </p>
-
-        <ul>
-            <li>
-                Research to improve school health programmes:
-                Evaluation research and expert opinion is analyzed and consolidated to describe the
-                nature and effectiveness of school health programmes.
-            </li>
-            <li>
-                Building capacity to advocate for improved school health programmes:
-                technical documents are generated that consolidate research and expert opinion about
-                the nature, scope and effectiveness of school health programmes.Each advocacy document
-                makes a strong case for addressing an important health problem, identifies components
-                of a comprehensive school health programme, and provides guidance in integrating the
-                issue into the components.
-            </li>
-            <li>
-                Strengthening national capacities:
-                collaboration between health and education agencies is fostered and countries are
-                helped to develop strategies and programmes to improve health through schools.
-                Pilot projects implemented by the GSHI and partners include Helminth Interventions
-                with China in 1996, HIV/STI Prevention in China in 1997, and Health-Promoting Schools/Health
-                Insurance in Vietnam in 1998.
-            </li>
-        </ul>
-    </p>
-
-
-    <br />
-    <h2><strong>The Problem</strong></h2>
-    <hr />
-
-    <p>
-        Medical students need to be able to raise and track funds for their
-        overseas practicums. Faculty and staff need to be able to track students'
-        fund-raising progress. However, since there is no standard system for
-        students to use, faculty and staff end up having to keep up with multiple
-        applications depending on each student's tracking method of choice.
-    </p>
-
-    <br />
-    <h2><strong>The Solution</strong></h2>
-    <hr />
-
-    <p>
-        Send Me! is a secure, user-friendly application that will allow students to
-        create profiles to which donors can navigate in order to donate funds to the
-        student's trip. The student's profile will display their active trip and the
-        progress they have made towards their monetary goal.
-    </p>
-
-    <p>
-        Students will have to verify their school email address and so will be affiliated
-        with their school in the application. Each school will have a dedicated page where
-        the progress of their students' fund-raising is displayed. This will make it easy
-        for faculty and staff to keep up with all of their students in one place.
-    </p>
-
-    <p>
-        As an added bonus, this will allow Alumni of the school who wish to donate to
-        current students the opportunity to do so without having to reach out to the
-        school's administration to find out where to send funds.
-    </p>
-
+    </div>
 </div>

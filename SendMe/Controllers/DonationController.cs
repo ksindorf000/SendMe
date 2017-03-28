@@ -32,10 +32,10 @@ namespace SendMe.Controllers
                 var attachDonor = new Donor();
 
                 //Check for an existing donor
-                var existingDonor = db.Donors.Where(d => d.Email == Email || d.Phone == Phone).FirstOrDefault();
+                var existingDonor = db.Donors.Where(d => d.Email == Email).FirstOrDefault();
 
                 //Add donor record if none existing
-                if (existingDonor == null && (Name != null || Email != null))
+                if (existingDonor == null)
                 {
                     string name = (Name == "" ? "Anonymous" : Name);
 
