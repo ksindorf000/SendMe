@@ -10,7 +10,7 @@
             @if (User.IsInRole("Admin") && ViewBag.UserSchId == Model.School.Id)
             {
                 <h6 class="card-subtitle text-muted">
-                    @Html.ActionLink("Edit", "Manage", new { id = Model.School.Id })
+                    @Html.ActionLink("Edit", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                 </h6>
             }
         </div>
@@ -41,44 +41,17 @@
                                 {
                                     <h3>@student.ActiveTrip.Trip.Title</h3>
                                     <sup>@student.ActiveTrip.Trip.Dates</sup>
-                                    <br />
-                                    <p>
+                                    <p>@student.ActiveTrip.Trip.PercentOfAmnt% Raised</p>
+                                    <div data-toggle="tooltip" data-placement="left" data-original-title="Read More" style="float:right">
+                                        <span class="glyphicon glyphicon-chevron-down"
+                                              data-toggle="collapse" data-target="@("#schTripDetails" + student.ActiveTrip.Trip.Id)">
+                                        </span>
+                                    </div>
+                                    <p id="@("schTripDetails" + student.ActiveTrip.Trip.Id)" class="collapse">
                                         @student.ActiveTrip.Trip.DestinationCity in
                                         @student.ActiveTrip.Trip.DestinationState,
                                         @student.ActiveTrip.Trip.DestinationCountry
-                                        <br />
-                                        @student.ActiveTrip.Trip.PercentOfAmnt% Raised
-                                    </p>
-                                    if (User.IsInRole("Admin") && ViewBag.UserSchId == Model.School.Id)
-                                    {
-                                        if (student.ActiveTrip.Donations.Count > 0)
-                                        {
-                                            <p id="showSchIdxDonations">
-                                                <button data-toggle="collapse" data-target="@("#show" + student.Id)">
-                                                    <span class="glyphicon glyphicon-chevron-down">Donations</span>
-                                                </button>
-                                            </p>
-                                            <div id="@("show" + student.Id)" class="collapse">
-                                                <table id="schIdxDonations">
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Email</th>
-                                                        <th>Phone</th>
-                                                        <th>Amount</th>
-                                                    </tr>
-                                                    @foreach (var donation in student.ActiveTrip.Donations)
-                                                    {
-                                                        <tr>
-                                                            <td>@donation.Donor.Name</td>
-                                                            <td>@donation.Donor.Email</td>
-                                                            <td>@donation.Donor.Phone</td>
-                                                            <td>@donation.Amount</td>
-                                                        </tr>
-                                                    }
-                                                </table>
-                                            </div>
-                                        }
-                                    }
+                                    </p>                                    
                                 }
                                 else
                                 {

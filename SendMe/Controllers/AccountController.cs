@@ -102,7 +102,22 @@ namespace SendMe.Controllers
             {
                 case SignInStatus.Success:
                     //If no returnUrl when user logged in, send them to their profile
-                    returnUrl = (returnUrl == null) ? "/send/" + username : returnUrl;
+                    //If user is Admin, send to school profile
+
+                    StuProfile profile = db.StuProfiles
+                        .Where(sp => sp.UserId == userid)
+                        .FirstOrDefault();
+
+                    if (returnUrl == null && profile.FirstName != "Admin")
+                    {
+                        returnUrl = "/send/" + username;
+                    }
+                    else if (returnUrl == null && profile.FirstName == "Admin")
+                    {
+                        string schId = profile.SchoolId.ToString();
+                        returnUrl = "/school/" + schId;
+                    }
+
                     return RedirectToLocal(returnUrl);
 
                 case SignInStatus.LockedOut:
@@ -210,9 +225,11 @@ namespace SendMe.Controllers
                     //          Verify Admin Key and Add to Role
                     //---------------------------------------------------
                     string adminKey = WebConfigurationManager.AppSettings["AdminKey"];
+                    bool isAdmin = false;
                     if (model.AdminKey != null && model.AdminKey == adminKey)
                     {
                         var result1 = UserManager.AddToRole(user.Id, "Admin");
+                        isAdmin = true;
                     }
 
                     //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -230,7 +247,7 @@ namespace SendMe.Controllers
                     //---------------------------------------------------
 
                     StuProfile stuProfile = new StuProfile(user, model.SchoolId);
-                    if (User.IsInRole("Admin"))
+                    if (isAdmin)
                     {
                         stuProfile.FirstName = "Admin";
                         stuProfile.LastName = "Admin";
