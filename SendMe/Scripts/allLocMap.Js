@@ -6,6 +6,12 @@ var pinIcon = new google.maps.MarkerImage("http://chart.apis.google.com/chart?ch
     new google.maps.Size(21, 34),
     new google.maps.Point(0, 0),
     new google.maps.Point(10, 34));
+
+var pinColor2 = '75000b';
+var pinIcon2 = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor2,
+    new google.maps.Size(21, 34),
+    new google.maps.Point(0, 0),
+    new google.maps.Point(10, 34));
 var contentString2 =
       '<div id="siteNotice">' +
       '<img width="150" height="100" src="../../img/USCGlobalHealthMapImage.jpg" class="img-responsive inline-block" alt="Responsive image" />' +
@@ -29,7 +35,7 @@ function initializeAllMap() {
         draggable: false,
         animation: google.maps.Animation.DROP,
         position: pos1,
-        icon: pinIcon,
+        icon: pinIcon2,
     });
     marker1.addListener('click', function () {
         infowindow.open(mapAll, marker1);
