@@ -81,7 +81,7 @@ namespace SendMe.Controllers
             }
             else
             {
-                ViewBag.PaymentMsg = paymentMsg;
+                ViewBag.PaymentMsg = $"There was a problem: {paymentMsg}";
             }
             ViewBag.Email = email;
                         

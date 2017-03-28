@@ -74,8 +74,11 @@ if(paymentMsg.indexOf('Payment Successful') >= 0)
     $("#paymentSuccessToggle").modal('show');
     $("#successMsgModal").modal('show');
 }
-if(paymentMsg.indexOf('declined') >= 0)
-{ $("#paymentFailedToggle").modal('show'); }
+if(paymentMsg.indexOf('problem') >= 0)
+{
+    $("#paymentFailedToggle").modal('show');
+    $("#failedMsgModal").modal('show');
+}
    
 $("#approveMsgBtn").click(function () {
     window.location.href = "/send/"+userName;
