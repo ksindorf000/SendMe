@@ -20,7 +20,7 @@
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" id="sch-StuProfile-cards">
     <div class="row-fluid">
         <div class="card-group">
 
@@ -31,22 +31,42 @@
                     <div class="profile-card sm-prof-card">
                         <div class="card">
                             <div class="card-img-top"></div>
-                            <a href="../send/@student.Student.User.UserName">
+                            <div class="profilePic-donate">
+                                <!--Profile Pic-->
                                 <img class="card-prof-pic-sm image-fluid" src="@student.Upload.FilePath" />
-                            </a>
+                                @if (student.ActiveTrip != null)
+                                {
+                                    <!--Donate Button-->
+                                    <button class="btn btn-fab donateSch" data-toggle="tooltip"
+                                            data-placement="top" data-original-title="Donate" title="" id="schDonate"
+                                             data-id="@(student.ActiveTrip.Trip.Id)" data-username="@(student.User.UserName)">
+                                        <i class="material-icons">
+                                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                                <path fill="#FFF" d="M11,4.5H13V15.5H11V4.5M13,17.5V19.5H11V17.5H13Z" />
+                                            </svg>
+                                        </i>
+                                    </button>
+                                }
+                            </div>
                             <div class="card-text">
                                 <h2 class="card-title">
-                                    @student.Student.FirstName @student.Student.LastName
+                                    <!--Student Name-->
+                                    <a href="../send/@student.User.UserName" data-toggle="tooltip" data-placement="bottom" data-original-title="View Profile">
+                                        @student.Student.FirstName @student.Student.LastName
+                                    </a>
                                 </h2>
                             </div>
                             <div class="card-block">
+                                <!--Trip Details-->
                                 @if (student.ActiveTrip != null)
                                 {
-                                    <h4>@student.ActiveTrip.Trip.DestinationCity in
-                                    @student.ActiveTrip.Trip.DestinationState,
-                                    @student.ActiveTrip.Trip.DestinationCountry</h4>
+                                    <h4>
+                                        @student.ActiveTrip.Trip.DestinationCity in
+                                        @student.ActiveTrip.Trip.DestinationState,
+                                        @student.ActiveTrip.Trip.DestinationCountry
+                                    </h4>
                                     <sup>@student.ActiveTrip.Trip.Dates</sup>
-                                    <p style="text-align: right">@student.ActiveTrip.Trip.PercentOfAmnt% Raised</p>                                                                    
+                                    <p style="text-align: right">@student.ActiveTrip.Trip.PercentOfAmnt% Raised</p>
                                 }
                                 else
                                 {
@@ -60,12 +80,24 @@
                                 <p id="@("sendmeUrl" + student.Student.Id)" class="collapse">
                                     <strong>@student.Student.FirstName's SendMe! URL:</strong>
                                     sendme.com/send/@student.User.UserName
-                                </p>    
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             }
         </div>
+    </div>
+</div>
+
+
+<div id="schDonateToggle" class="school-card col-sm-12 col-lg-4 col-lg-offset-3">
+    <div class="card">
+        @{Html.RenderPartial("_PaymentPartial");}
+        <script language="JavaScript" type="text/javascript">
+
+            var pubKey = '@System.Configuration.ConfigurationManager.AppSettings["PubKey"]';
+
+        </script>
     </div>
 </div>

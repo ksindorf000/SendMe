@@ -84,13 +84,10 @@ $("#declineMsgBtn").click(function () {
     window.location.href = "/send/" + userName;
 });
 
-//hides donation partial view
+//refresh page
 $("#paymentBackBtn").click(function () {
-    $("#donateToggle").hide();
-    $("#tripDetails").show();
-    $("#map").show();
+    location.reload();
 });
-
 
 
 //shows tooltips

@@ -104,24 +104,25 @@
         }
     });
 
+    //------------------------------------------------------
+    //   Donate Button on School Profile
+    //------------------------------------------------------
+    $("#schDonateToggle").hide();
 
-    //----------------------------------------
-    //      School Index Donation Toggle
-    //----------------------------------------
-    $("#hideSchIdxDonations").hide();
-    $("#schIdxDonations").hide();
-
-    $("#showSchIdxDonations").click(function () {
-        $("#hideSchIdxDonations").show();
-        $("#schIdxDonations").show();
-        $("#showSchIdxDonations").hide();
+    $(".donateSch").click(function () {
+        $("#sch-StuProfile-cards").hide();
+        $("#schDonateToggle").show();
     });
 
-    $("#hideSchIdxDonations").click(function () {
-        $("#hideSchIdxDonations").hide();
-        $("#schIdxDonations").hide();
-        $("#showSchIdxDonations").show();
+    $("#schDonate").click(function () {
+        tripId = $(this).data("id");
+        userName = $(this).data("username");        
     });
+
+    $("#paymentBackBtn").click(function () {
+        location.reload();
+    });
+    
     
     //------------------------------------------------------
     //    Trip Menu Buttons
@@ -148,11 +149,6 @@
         $(".tripDetails").hide();
         $("#donateToggle").show();
         $("#mini-fab").toggleClass('hidden');
-    });
-    $("#paymentBackBtn").click(function () {
-        $("#donateToggle").hide();
-        $(".tripDetails").show();
-        $("#map").show();
     });
 
     //ViewDonations
