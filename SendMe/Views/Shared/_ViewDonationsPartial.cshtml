@@ -1,10 +1,15 @@
-﻿
-@if (Model.User.UserName == User.Identity.Name && Model.ActiveTrip != null)
+﻿<!--------------
+    Student
+    View
+-------------->
+@if (Model.User.UserName == User.Identity.Name)
 {
     <div class="container" style="width:inherit">
         <div class="panel panel-default">
-            <div class="panel-heading"><h3>Donations</h3>
-            <button style="width:25%" id="viewDonBackBtn" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Go Back"><i class="glyphicon glyphicon-arrow-left"></i> Back</button></div>
+            <div class="panel-heading">
+                <h3>Donations</h3>
+                <button style="width:25%" id="viewDonBackBtn" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Go Back"><i class="glyphicon glyphicon-arrow-left"></i> Back</button>
+            </div>
             <div class="panel-body">
                 <table class="table table-condensed" style="border-collapse:collapse;">
 
@@ -71,45 +76,70 @@
                                                                                 <button style="width:25%" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                                                             </div>
                                                                         </form>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
                                                             </div>
                                                         }
 
                                                     }
                                                     else
                                                     {
-                                                    <td>
-                                                        <p style="width:30%">No need/already thanked</p>
-                                                    </td>
+                                                        <td>
+                                                            <p style="width:30%">No need/already thanked</p>
+                                                        </td>
                                                     }
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                </tr>
+                                            </tbody>
+                                        </table>
 
-                                </div>
+                                    </div>
                                 </td>
-                                </tr>
+                            </tr>
 
 
                             i++;
 
                         }
-                        </tbody>
-                        </table>
-                    </div>
+                    </tbody>
+                </table>
+            </div>
 
-                </div>
-                </div>
+        </div>
+    </div>
+}
 
-                            }
-                            else
-                            {
-                                <div class="conatiner">
-                                    <button style="width:25%" id="viewDonBackBtn" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Go Back"><i class="glyphicon glyphicon-arrow-left"></i> Back</button>
-                                    <strong>No donations yet</strong>
-                                </div>
-                              
-                            }
+<!--------------
+    Admin
+    View
+-------------->
+@if ((User.IsInRole("Admin") && ViewBag.UserSchId == Model.School.Id) && Model.ActiveTrip != null)
+{
+        <div class="donations-card card">
+            <div class="card-block">
+                <table class="table table-condensed" style="border-collapse:collapse;">
 
-
+                    <thead>
+                        <tr>
+                            <th>Donor Name</th>
+                            <th>Donor Email</th>
+                            <th>Donor Phone</th>
+                            <th>Donation Amount</th>
+                            <th>Donation Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var donation in Model.ActiveTrip.Donations)
+                        {
+                            <tr>
+                                <td>@donation.Donor.Name</td>
+                                <td>@donation.Donor.Email</td>
+                                <td>@donation.Donor.Phone</td>
+                                <td>$@donation.Amount.00</td>
+                                <td>@donation.Created.ToString("dd MMM yyyy")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+}

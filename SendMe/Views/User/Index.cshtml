@@ -298,9 +298,12 @@
                         </div>
                     }
                     <!-----------View Donations Partial------------->
+                    @if (Model.User.UserName == User.Identity.Name && Model.ActiveTrip != null)
+                    {
                     <div id="viewDonationsToggle">
                         @Html.Partial("_ViewDonationsPartial")
                     </div>
+                    }
                 </div>
             </div>
 

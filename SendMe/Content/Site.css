@@ -517,14 +517,14 @@ ul.social-icons {
     left: 0;
 }
 
-    #inactiveTrips li {
-        list-style: none;
-    }
+#inactiveTrips li {
+    list-style: none;
+}
 
-    #inactiveTrips button {
-        margin-top: 0;
-        margin-bottom: 20px;
-    }
+#inactiveTrips button {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
 
 /*-----------------------
 
@@ -551,7 +551,7 @@ ul.social-icons {
 }
 
 .sm-prof-card {
-    min-height: 495px;
+    min-height: 440px;
 }
 
 .donateSch {
@@ -595,6 +595,14 @@ ul.social-icons {
 
 .school-card .card-block {
     margin-top: 5%;
+}
+
+.donations-card {
+    min-width: 100%;
+    margin-left: 25px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    border-radius: 5px;
+    background-color: #fff;
 }
 
 /*------------------------
