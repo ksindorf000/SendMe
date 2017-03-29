@@ -18,69 +18,71 @@ var contentStringAll2 =
       '<img width="150" height="100" src="../../img/USCGlobalHealthMapImage.jpg" class="img-responsive inline-block" alt="Responsive image" />' +
       '</div>';
 
+
 ///Call the map
-    var mapAll = new google.maps.Map(document.getElementById('mapAll'), {
-        center: centerPosAll,
-        zoom: 2,
-        mapTypeId: 'hybrid',
-        scrollwheel: false,
-        disableDefaultUI: true,
-    });
-    var infowindowAll = new google.maps.InfoWindow({
-        content: contentStringAll2
+var mapAll = new google.maps.Map(document.getElementById('mapAll'), {
+    center: centerPosAll,
+    zoom: 2,
+    mapTypeId: 'hybrid',
+    scrollwheel: false,
+    disableDefaultUI: true,
+});
+var infowindowAll = new google.maps.InfoWindow({
+    content: contentStringAll2
+});
 
-    });
 //First marker
-    markerAll1 = new google.maps.Marker({
-        map: mapAll,
-        draggable: false,
-        animation: google.maps.Animation.DROP,
-        position: posAll1,
-        icon: pinIconAll2,
-    });
-    markerAll1.addListener('click', function () {
-        infowindowAll.open(mapAll, markerAll1);
-    });
+markerAll1 = new google.maps.Marker({
+    map: mapAll,
+    draggable: false,
+    animation: google.maps.Animation.DROP,
+    position: posAll1,
+    icon: pinIconAll2,
+});
+markerAll1.addListener('click', function () {
+    infowindowAll.open(mapAll, markerAll1);
+});
 
-    for (var i = 0, len = destinations.length; i < len; i++) {
-        address = destinations[i];
-        ///Geo loc for all non school positions
-        var geocoderAll = new google.maps.Geocoder();
-        geocoderAll.geocode({
-            'address': address
-        },
-        ///Second Marker
-        function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                markerAll2 = new google.maps.Marker({
-                    map: mapAll,
-                    position: results[0].geometry.location,
-                    animation: google.maps.Animation.DROP,
-                    draggable: false,
-                    icon: pinIconAll,
-                });
+for (var i = 0, len = destinations.length; i < len; i++) {
+    address = destinations[i];
+    ///Geo loc for all non school positions
+    var geocoderAll = new google.maps.Geocoder();
+    geocoderAll.geocode({
+        'address': address
+    },
 
-                var geolocLat = results[0].geometry.location.lat();
-                var geolocLng = results[0].geometry.location.lng();
-                var polylinesLoc = [
-                {lat: geolocLat, lng: geolocLng },
-                { lat: 33.980796, lng: -80.962908 },            
-                ];
+    ///Second Marker
+    function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            markerAll2 = new google.maps.Marker({
+                map: mapAll,
+                position: results[0].geometry.location,
+                animation: google.maps.Animation.DROP,
+                draggable: false,
+                icon: pinIconAll,
+            });
+ 
 
-                ///The Lines
-                var polyline = new google.maps.Polyline({
-                    path: polylinesLoc,
-                    geodesic: true,
-                    strokeColor: '#289f94',
-                    strokeOpacity: 1,
-                    strokeWeight: 2
-                });
+            var geolocLat = results[0].geometry.location.lat();
+            var geolocLng = results[0].geometry.location.lng();
+            var polylinesLoc = [
+            { lat: geolocLat, lng: geolocLng },
+            { lat: 33.980796, lng: -80.962908 },
+            ];
 
-                polyline.setMap(mapAll);
-            }
-        })
-       
-    }
-    
+            ///The Lines
+            var polyline = new google.maps.Polyline({
+                path: polylinesLoc,
+                geodesic: true,
+                strokeColor: '#289f94',
+                strokeOpacity: 1,
+                strokeWeight: 2
+            });
+
+            polyline.setMap(mapAll);
+        }
+    })
+
+}
+
 ////
-  
