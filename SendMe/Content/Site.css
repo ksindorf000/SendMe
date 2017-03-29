@@ -317,6 +317,20 @@ form .about-content {
     border-radius: 5px;
 }
 
+.about-content .profile-pic {
+    max-width: 35%;
+    margin-left: 30%;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+}
+
+.about-content h3 {
+    text-align: center;
+}
+
+.about-content a {
+    text-decoration: none;
+}
+
 #loginForm .form-group {
     margin-left: 5%;
 }
@@ -417,6 +431,23 @@ ul.social-icons {
     .fa-google-plus:hover {
         background-color: #e25714;
     }
+
+.fa-github {
+    padding: 8px 10px;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+    background-color: #000;
+    border-radius: 50%;
+}
+
+    .fa-github:hover {
+        background-color: #322f30;
+        color: #fff;
+    }
+
 
 /*-----------------------
 

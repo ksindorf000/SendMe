@@ -293,6 +293,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Img\globe-bg.jpg" />
+    <Content Include="Img\kris-sindorf.jpg" />
+    <Content Include="Img\mic-anderson.jpg" />
     <Content Include="Img\SendMe Banner.jpg" />
     <Content Include="Img\SendMe Banner.png" />
     <Content Include="Img\SendMe Footer.jpg" />
