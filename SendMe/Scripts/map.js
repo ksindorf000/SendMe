@@ -11,8 +11,7 @@ var pos2;
 var plane;
 
 //Create map
-window.onload = initialize;
-function initialize() {
+
     var map = new google.maps.Map(document.getElementById('map'), {
         center: centerPos,
         zoom: 2,
@@ -88,7 +87,7 @@ function initialize() {
     };
     //The Line
     
-}
+
 //The animation
 function animate(plane) {
     var count = 0;
@@ -100,3 +99,28 @@ function animate(plane) {
         plane.set('icons', icons);
     }, 100);
 }
+
+
+///////All Maps Loctions
+
+var centerPosAll = { lat: 14.5994, lng: -28.6731 };
+var posAll1 = { lat: 33.980796, lng: -80.962908 };
+var pinColorAll = '1abbac';
+var pinIconAll = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColorAll,
+    new google.maps.Size(21, 34),
+    new google.maps.Point(0, 0),
+    new google.maps.Point(10, 34));
+
+var pinColorAll2 = '75000b';
+var pinIconAll2 = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColorAll2,
+    new google.maps.Size(21, 34),
+    new google.maps.Point(0, 0),
+    new google.maps.Point(10, 34));
+var contentStringAll2 =
+      '<div id="siteNotice">' +
+      '<img width="150" height="100" src="../../img/USCGlobalHealthMapImage.jpg" class="img-responsive inline-block" alt="Responsive image" />' +
+      '</div>';
+
+
+    
+
