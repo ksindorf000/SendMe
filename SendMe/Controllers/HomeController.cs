@@ -22,9 +22,8 @@ namespace SendMe.Controllers
         public ActionResult About()
         {
             ViewBag.Destination = db.Trips.ToList();
-           
-            
-
+            ViewBag.TotalDonations = db.Donations.ToList();
+            ViewBag.TotalStudents = db.StuProfiles.ToList();
             return View();
         }
 

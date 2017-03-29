@@ -65,9 +65,9 @@ namespace SendMe.Controllers
                         Amount = amount,
                         Currency = "USD",
                         SourceTokenOrExistingSourceId = stripeToken,
-                        Description = $"Destination:{tripInfo.Destination}; Student First Name:{tripInfo.Student.FirstName}, Last Name:{tripInfo.Student.LastName};"
+                        Description = $"Destination:{tripInfo.Destination} || Student Name:{ tripInfo.Student.FirstName},{ tripInfo.Student.LastName}",
 
-                    };
+                };
                     var service = new StripeChargeService(WebConfigurationManager.AppSettings["PrivateKey"]);
                     try
                     {
