@@ -155,12 +155,12 @@ namespace SendMe.Controllers
             string picPath = stuVM.Upload.FilePath;
 
             string msg = "Thank you for helping send "
-                + stuVM.Student.FirstName + " to " + trip.Destination + "! </br>"
+                + stuVM.Student.FirstName + " to " + trip.DestinationCountry + "! </br></br>"
                 + "You donated $" + amount + " on " + today + ".";
 
             string body = "<table><tr><td style=\"padding: 20px\"><img src=\"" + picPath
                 + "\" style = \"width: 150px; height: 150px; border-radius: 50%\" ></td >"
-                + "<td style=\"padding: 20px: text-align: left\">" + msg + "</td></tr></table>";
+                + "<td style=\"padding: 20px; text-align: left\">" + msg + "</td></tr></table>";
 
             string fromEmail = ConfigurationManager.AppSettings["SendEmailsFrom"];
 
