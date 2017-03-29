@@ -597,6 +597,13 @@ ul.social-icons {
     margin-top: 5%;
 }
 
+/*-----------------------
+    
+    Admin
+    Donations Table
+
+-----------------------*/
+
 .donations-card {
     min-width: 100%;
     margin-left: 25px;
@@ -894,6 +901,10 @@ css for donation success/fail
 
 .modal {
     text-align: center;
+}
+
+#thankModal {
+    margin: 10%;
 }
 
 @media screen and (min-width: 768px) {
