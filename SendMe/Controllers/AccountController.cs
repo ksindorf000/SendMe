@@ -197,21 +197,21 @@ namespace SendMe.Controllers
             //-----------------------------------------------
             //            Verify Domain of Email
             //-----------------------------------------------
-            //string schDomain = db.Schools
-            //    .Where(s => s.Id == model.SchoolId)
-            //    .Select(s => s.EmailDomain)
-            //    .Single();
+            string schDomain = db.Schools
+                .Where(s => s.Id == model.SchoolId)
+                .Select(s => s.EmailDomain)
+                .Single();
 
-            //if (!model.Email.Contains(schDomain))
-            //{
-            //    ModelState.AddModelError("Email", "That domain is not approved by your school. "
-            //        + "Please check for typos and ensure that you have selected the correct school. "
-            //        + "If you believe you received this message in error, please contact your administrator.");
+            if (!model.Email.Contains(schDomain))
+            {
+                ModelState.AddModelError("Email", "That domain is not approved by your school. "
+                    + "Please check for typos and ensure that you have selected the correct school. "
+                    + "If you believe you received this message in error, please contact your administrator.");
 
-            //    ViewBag.Schools = new SchoolCollection();
+                ViewBag.Schools = new SchoolCollection();
 
-            //    return View(model);
-            //}
+                return View(model);
+            }
 
             if (ModelState.IsValid)
             {
@@ -268,13 +268,13 @@ namespace SendMe.Controllers
                     //---------------------------------------------------
                     //          Send Confirmation Email
                     //---------------------------------------------------
-                    /*string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account",
                        new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                       string body = MailHelper.PopulateBody("Confirm your account", "Please confirm your account by clicking <a href=\""
+                       string body = MailHelper.PopulateBody("Please confirm your account by clicking <a href=\""
                        + callbackUrl + "\">here</a>");
-                    await UserManager.SendEmailAsync(user.Id, body);
-                    */
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your SendMe! account", body);
+                    
                     ViewBag.SentConf = "A confirmation email was sent to " + model.Email
                     + ". Please look for the confirmation email in your inbox and click the provided link to confirm and log in.";
 

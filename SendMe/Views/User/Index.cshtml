@@ -90,6 +90,8 @@
                                                     {
                                                         <li>
                                                             @trip.Title - @trip.Destination, @trip.Dates
+                                                        </li>
+                                                        <li>
                                                             @using (Html.BeginForm("MakeActive", "Trip", new { id = trip.Id }, FormMethod.Post))
                                                             {
                                                                 @Html.AntiForgeryToken()
@@ -100,6 +102,8 @@
                                                         </li>
                                                     }
                                                 </ul>
+                                            </div>
+                                            <div class="row">
                                                 <!--Create New Trip-->
                                                 <h3>Add New</h3>
                                                 <div id="tripPartial">
@@ -168,7 +172,7 @@
                                                                     </div>
 
                                                                     <!-------------MAP------------>
-                                                                        <div id="map" style="height: 400px; border: 3px solid #DADEE0;"></div><br />
+                                                                    <div id="map" style="height: 400px; border: 3px solid #DADEE0;"></div><br />
 
                                                                     <!-----------Progress bar------------->
                                                                     <div class="col-sm-10">
@@ -298,9 +302,9 @@
                     <!-----------View Donations Partial------------->
                     @if (Model.User.UserName == User.Identity.Name && Model.ActiveTrip != null)
                     {
-                    <div id="viewDonationsToggle">
-                        @Html.Partial("_ViewDonationsPartial")
-                    </div>
+                        <div id="viewDonationsToggle">
+                            @Html.Partial("_ViewDonationsPartial")
+                        </div>
                     }
                 </div>
             </div>
