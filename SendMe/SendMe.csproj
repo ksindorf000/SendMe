@@ -312,6 +312,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\SendMeProj - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\allLocMap.Js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -333,20 +334,6 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Stripe.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Upload\636252663926945596uscmedCover031517.jpg" />
-    <Content Include="Upload\636252694637447926uscmedLogo031517.jpg" />
-    <Content Include="Upload\636252697324400097Bitmoji_Hello.jpg" />
-    <Content Include="Upload\636262042201808558aaron-james-sm.jpg" />
-    <Content Include="Upload\636262139427749327gabbi-alton-sm.jpg" />
-    <Content Include="Upload\636262155760239440illi-stitt-sm.jpg" />
-    <Content Include="Upload\636262160248783772aatik-tasneem-sm.jpg" />
-    <Content Include="Upload\636262164137161438alexi-chambon-sm.jpg" />
-    <Content Include="Upload\636262185683634800issac-alvarez-sm.jpg" />
-    <Content Include="Upload\schCover.jpg" />
-    <Content Include="Upload\schLogo.jpg" />
-    <Content Include="Upload\sm03162017profpic-placeholder.png" />
-    <Content Include="Upload\tumblr_nyb2milJhz1tes9mvo1_500.jpg" />
-    <Content Include="Upload\uscmedCover031517.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -395,6 +382,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Upload\" />
     <Folder Include="Views\Trip\" />
   </ItemGroup>
   <ItemGroup>
