@@ -242,3 +242,5 @@ ModelManifest.xml
 .fake/
 /SendMe/AppSettingsSecrets.config
 /SendMe/MailSettings.config
+/AppSettingsSecrets.config
+/MailSettings.config
