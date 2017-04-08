@@ -74,7 +74,7 @@ for (var i = 0, len = destinations.length; i < len; i++) {
             var polyline = new google.maps.Polyline({
                 path: polylinesLoc,
                 geodesic: true,
-                strokeColor: '#289f94',
+                strokeColor: '#730023',
                 strokeOpacity: 1,
                 strokeWeight: 2
             });

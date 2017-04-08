@@ -1,15 +1,17 @@
 ﻿@model SendMe.ViewModels.SchoolViewModel
 
-@{ ViewBag.Title = Model.School.Name; }
-
+@{ 
+    ViewBag.Title = "Home";
+}
 
 <!--------SCHOOL DETAILS---------->
 <div class="profile-card school-card">
     <div class="card">
         <div class="card-img-top" style="background-image: url(@Model.CoverImg.FilePath)"></div>
-        <img class="card-prof-pic" src="@Model.LogoImg.FilePath" />
+        <a href="@Model.School.Website" target="_blank">
+            <img class="card-prof-pic" src="@Model.LogoImg.FilePath" />
+        </a>
         <div class="card-block">
-            <h1 class="card-title"><a href="@Model.School.Website" target="_blank">@Model.School.Name</a></h1>
             @if (User.IsInRole("Admin") && ViewBag.UserSchId == Model.School.Id)
             {
                 <h6 class="card-subtitle text-muted">
@@ -92,7 +94,7 @@
                         @{ Html.RenderPartial("_ViewDonationsPartial", student); }
                     </div>
                 </div>
-            }
+                            }
         </div>
     </div>
 </div>

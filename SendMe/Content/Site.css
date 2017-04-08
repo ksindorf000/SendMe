@@ -38,7 +38,7 @@ textarea {
 /*--------------------------------------------------*/
 
 a {
-    color: #1a5b55;
+    color: #fff;
 }
 
 .wrapper {
@@ -56,7 +56,7 @@ td {
 
 
 .btn-primary {
-    background-color: #1ABBAC;
+    background-color: #98012e;
     border-color: #fff;
 }
 
@@ -66,7 +66,7 @@ td {
     .btn-primary.active,
     .open .dropdown-toggle.btn-primary {
         color: #ffffff;
-        background-color: #2c9288;
+        background-color: #660220;
         border-color: #fff;
     }
 
@@ -139,7 +139,7 @@ label > span {
 button {
     float: left;
     display: block;
-    background: #1ABBAC;
+    background: #98012e;
     color: white;
     box-shadow: 0 7px 14px 0 rgba(49,49,93,0.10), 0 3px 6px 0 rgba(0,0,0,0.08);
     border-radius: 4px;
@@ -154,11 +154,11 @@ button {
 }
 
     button:focus {
-        background: #289f94;
+        background: #730023;
     }
 
     button:active {
-        background: #2c9288;
+        background: #660220;
     }
 
 .outcome {
@@ -196,7 +196,7 @@ button {
 }
 
 h1 {
-    color: #2c9288;
+    color: #660220;
 }
 
 .row {
@@ -223,15 +223,15 @@ p {
 ---------------------------------*/
 
 .primary-color {
-    background-color: #1ABBAC;
+    background-color: #98012e;
 }
 
 .dark-primary-color {
-    background-color: #2c9288;
+    background-color: #660220;
 }
 
 .medium-primary-color {
-    background-color: #289f94;
+    background-color: #730023;
 }
 
 .accent-color {
@@ -247,7 +247,7 @@ p {
 }
 
 .dark-text-color {
-    color: #1a5b55;
+    color: #fff;
 }
 
 /*-----------------------
@@ -286,7 +286,7 @@ select {
 
     .about-content h2 {
         text-align: center;
-        color: #289f94;
+        color: #730023;
     }
 
     .about-content li {
@@ -329,6 +329,11 @@ form .about-content {
 
 .about-content a {
     text-decoration: none;
+    color: #730023;
+}
+
+.about-content a:hover {
+    color: #555555;
 }
 
 #loginForm .form-group {
@@ -590,7 +595,7 @@ ul.social-icons {
     padding: 12px 2px;
     height: 50px;
     width: 50px;
-    background-color: #1ABBAC;
+    background-color: #98012e;
     border-radius: 50%;
     position: absolute;
     top: 30%;
@@ -664,7 +669,7 @@ ul.social-icons {
     padding: 12px 2px;
     height: 50px;
     width: 50px;
-    background-color: #1ABBAC;
+    background-color: #98012e;
     border-radius: 50%;
     position: absolute;
     top: 0;
@@ -699,7 +704,7 @@ ul.social-icons {
     padding: 12px 2px;
     height: 50px;
     width: 50px;
-    background-color: #1ABBAC;
+    background-color: #98012e;
     right: 10px;
 }
 
@@ -708,7 +713,7 @@ ul.social-icons {
     padding: 12px 2px;
     height: 50px;
     width: 50px;
-    border-color: #1ABBAC;
+    border-color: #98012e;
     background-color: #FFF;
     border-width: 2px;
 }
@@ -759,8 +764,8 @@ ul.social-icons {
 }
 
 .navbar-default {
-    background-color: #1abbac;
-    border-color: #2c9288;
+    background-color: #98012e;
+    border-color: #660220;
 }
 
     .navbar-default .navbar-brand {
@@ -770,44 +775,44 @@ ul.social-icons {
         .navbar-default .navbar-brand:hover,
         .navbar-default .navbar-brand:focus {
             color: #ffffff;
-            background-color: #2c9288;
+            background-color: #660220;
         }
 
     .navbar-default .navbar-text {
-        color: #1a5b55;
+        color: #fff;
     }
 
     .navbar-default .navbar-nav > li > a {
-        color: #1a5b55;
+        color: #fff;
     }
 
         .navbar-default .navbar-nav > li > a:hover,
         .navbar-default .navbar-nav > li > a:focus {
             color: #ffffff;
-            background-color: #2c9288;
+            background-color: #660220;
         }
 
     .navbar-default .navbar-nav > .active > a,
     .navbar-default .navbar-nav > .active > a:hover,
     .navbar-default .navbar-nav > .active > a:focus {
         color: #ffffff;
-        background-color: #2c9288;
+        background-color: #660220;
     }
 
     .navbar-default .navbar-nav > .open > a,
     .navbar-default .navbar-nav > .open > a:hover,
     .navbar-default .navbar-nav > .open > a:focus {
         color: #ffffff;
-        background-color: #2c9288;
+        background-color: #660220;
     }
 
     .navbar-default .navbar-toggle {
-        border-color: #2c9288;
+        border-color: #660220;
     }
 
         .navbar-default .navbar-toggle:hover,
         .navbar-default .navbar-toggle:focus {
-            background-color: #2c9288;
+            background-color: #660220;
         }
 
         .navbar-default .navbar-toggle .icon-bar {
@@ -841,7 +846,7 @@ ul.social-icons {
     .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
     .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
         color: #ffffff;
-        background-color: #2c9288;
+        background-color: #660220;
     }
 }
 
@@ -855,7 +860,7 @@ css for donation success/fail
     top: 10px;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #1ABBAC;
+    background: #98012e;
     width: 80%;
     min-width: 425px;
     padding: 20px;
@@ -917,7 +922,7 @@ css for donation success/fail
 
 ---------------------------*/
 .progress-bar {
-    background-color: #1ABBAC;
+    background-color: #98012e;
 }
 
 /*---------------------------
@@ -960,8 +965,8 @@ css for donation success/fail
 .btn-success:focus,
 .btn-success:active {
     color: #ffffff;
-    background-color: #1ABBAC;
-    border-color: #1ABBAC;
+    background-color: #98012e;
+    border-color: #98012e;
 }
 
 .btn-danger,
@@ -974,13 +979,28 @@ css for donation success/fail
     border-color: #556080;
 }
 
+/*--------------------------------
 
+    Focus on Input Forms
 
-
-
-/*-------------------------------------------------------------------------------
-    Make Active Toggle
-        http://callmenick.com/post/css-toggle-switch-examples
-        Didn't work because of the foreach and all toggles having the same id
-        If time, try to add back in cuz it looks awesome.
--------------------------------------------------------------------------------*/
+--------------------------------*/
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+  border-color: rgba(114, 38, 38, 0.3);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(114, 38, 38, 0.3);
+  outline: 0 none;
+}
