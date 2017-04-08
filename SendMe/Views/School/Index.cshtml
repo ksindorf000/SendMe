@@ -1,16 +1,17 @@
 ﻿@model SendMe.ViewModels.SchoolViewModel
 
-@{ 
-    ViewBag.Title = "Home";
+@{
+    ViewBag.Title = "All Students";
 }
 
 <!--------SCHOOL DETAILS---------->
+
 <div class="profile-card school-card">
     <div class="card">
         <div class="card-img-top" style="background-image: url(@Model.CoverImg.FilePath)"></div>
-        <a href="@Model.School.Website" target="_blank">
-            <img class="card-prof-pic" src="@Model.LogoImg.FilePath" />
-        </a>
+            <a href="@Model.School.Website" target="_blank" class="center-block" style="max-width:25%">
+                <img class="card-prof-pic" src="@Model.LogoImg.FilePath" />
+            </a>
         <div class="card-block">
             @if (User.IsInRole("Admin") && ViewBag.UserSchId == Model.School.Id)
             {
@@ -21,6 +22,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="container-fluid" id="sch-StuProfile-cards">
     <div class="row-fluid">

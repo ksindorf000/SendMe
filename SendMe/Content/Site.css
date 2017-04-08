@@ -31,7 +31,7 @@ body {
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 80%;
 }
 
 
@@ -53,7 +53,6 @@ a {
 td {
     padding: 15px;
 }
-
 
 .btn-primary {
     background-color: #98012e;
@@ -84,9 +83,9 @@ body {
     min-height: 100%;
 }
 
-form {
+/*form {
     width: 480px;
-}
+}*/
 
 .group {
     background: white;
@@ -215,7 +214,6 @@ p {
     word-wrap: break-word;
 }
 
-
 /*---------------------------------
 
           Color Palette
@@ -340,16 +338,8 @@ form .about-content {
     margin-left: 5%;
 }
 
-.contactForm {
-    margin-left: 25%;
-}
-
-#regForm {
-    margin-left: 35%;
-}
-
-#loginForm {
-    margin-left: 45%;
+.contactForm, #regForm, #loginForm {
+    max-width: 90%;
 }
 
 /*-----------------------
@@ -621,6 +611,7 @@ ul.social-icons {
     position: absolute;
     z-index: -1;
     border-radius: 50%;
+    width: 55%;
     max-width: 250px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.15);
 }
@@ -748,7 +739,11 @@ ul.social-icons {
 .landing-img {
     max-width: 100%;
     max-height: 100%;
-    margin: 0 !important;
+    margin: 15% 0 0 0 !important;
+}
+
+.home .col {
+    margin-top: 3%;
 }
 
 /*---------------------------
@@ -761,6 +756,7 @@ ul.social-icons {
 .logo-nav {
     max-height: 50px;
     padding: 5px;
+    float: left;
 }
 
 .navbar-default {
@@ -848,6 +844,10 @@ ul.social-icons {
         color: #ffffff;
         background-color: #660220;
     }
+}
+
+.navbar-default .navbar-header {
+    margin-left: 15px!important;
 }
 
 /*---------------------------
