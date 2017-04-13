@@ -54,9 +54,13 @@ namespace SendMe.Controllers
 
                 //Apply search string to users
                 List<StuProfile> stuProf = db.StuProfiles
-                    .Where(sp => sp.FirstName.Contains(searchString)
-                            || sp.LastName.Contains(searchString)
-                            || sp.User.UserName.Contains(searchString))
+                    .Where(sp => 
+                        sp.FirstName.Contains(searchString)
+                        || sp.LastName.Contains(searchString)
+                        || sp.User.UserName.Contains(searchString)
+                        && sp.FirstName != "Admin"
+                        && sp.FirstName != null
+                    )
                     .ToList();
 
                 foreach (StuProfile stu in stuProf)
@@ -76,8 +80,11 @@ namespace SendMe.Controllers
 
                 foreach (Trip trip in trips)
                 {
-                    StudentViewModel student = new StudentViewModel(trip.Student);
-                    schoolVM.Students.Add(student);
+                    if (!schoolVM.Students.Any(s => s.User.Id == trip.Student.UserId))
+                    {
+                        StudentViewModel student = new StudentViewModel(trip.Student);
+                        schoolVM.Students.Add(student);
+                    }
                 }
             }
 

@@ -24,7 +24,11 @@ namespace SendMe.ViewModels
         {
 
             List<StuProfile> spList = db.StuProfiles
-                .Where(sp => sp.SchoolId == school.Id)
+                .Where(
+                    sp => sp.SchoolId == school.Id
+                    && sp.FirstName != "Admin"
+                    && sp.FirstName != null
+                    )
                 .OrderBy(sp => sp.LastName)
                 .ToList();
 
