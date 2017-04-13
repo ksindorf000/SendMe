@@ -897,10 +897,14 @@ css for donation success/fail
 
 ---------------------------*/
 @media (min-width: 768px) {
-    #left {
+    #left, table {
         position: relative;
         overflow-y: scroll;
     }
+}
+
+.donations table {
+    background-color: #efefef;
 }
 
 
@@ -1003,4 +1007,25 @@ input[type="color"]:focus,
   border-color: rgba(114, 38, 38, 0.3);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(114, 38, 38, 0.3);
   outline: 0 none;
+}
+
+/*-------------------------------------
+
+    Remove Margins on Small Screens
+
+-------------------------------------*/
+@media only screen and (max-width: 40em) { 
+   .body-content, .container-fluid {
+    padding-left: 0rem;
+    padding-right: 0rem;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+    #donateToggle .container, 
+    #schDonateToggle .container {
+        width: inherit;
+    }
 }
