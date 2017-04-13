@@ -5,7 +5,6 @@
 }
 
 <!--------SCHOOL DETAILS---------->
-
 <div class="profile-card school-card">
     <div class="card">
         <div class="card-img-top" style="background-image: url(@Model.CoverImg.FilePath)"></div>
@@ -19,6 +18,14 @@
                     @Html.ActionLink("Edit", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                 </h6>
             }
+
+            <form class="search" id="searchSch">
+                <div class="input-group">
+                    <input type="text" placeholder="Search" aria-describedby="basic-addon2">
+                    <button type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                </div>
+            </form>
+
         </div>
     </div>
 </div>
@@ -27,7 +34,7 @@
 <div class="container-fluid" id="sch-StuProfile-cards">
     <div class="row-fluid">
         <div class="card-group">
-
+            @ViewBag.NullSearch
             <!-------------STUDENT DETAILS------------->
             @foreach (var student in Model.Students)
             {
