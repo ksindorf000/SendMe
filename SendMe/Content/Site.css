@@ -625,7 +625,7 @@ ul.social-icons {
     }
 
 .school-card .card-block {
-    margin-top: 10%;
+    margin-top: 6%;
 }
 
 /*-----------------------
@@ -876,7 +876,7 @@ ul.social-icons {
 	.navbar-collapse form[role="search"] button,
 	.navbar-collapse form[role="search"] input {
 		padding: 8px 12px;
-		border-radius: 0px;
+		border-radius: 5px;
 		border-width: 0px;		
 		border-color: rgb(231, 231, 231);
 		box-shadow: none;
@@ -902,8 +902,8 @@ ul.social-icons {
 			padding: 15px 12px;
 		}
 		.navbar-collapse form[role="search"] input {
-			padding: 25px 12px;
-			font-size: 18pt;
+			padding: 15px 12px;
+			font-size: 16pt;
 			opacity: 0;
 			display: none;
 		}
@@ -927,7 +927,20 @@ ul.social-icons {
     max-width: 50px;
     max-height: 35px;
     margin: 0;
-    border-radius: 0;
+    border-radius: 5px;
+    float: right;
+    padding: 0;
+}
+
+#searchSch input {
+    border-radius: 5px;
+    float: left;
+    margin: 0;
+    padding: 0 12px;
+}
+
+#searchSch {
+    margin-left: 75%;
 }
 
 
@@ -1096,12 +1109,19 @@ input[type="color"]:focus,
 
 -------------------------------------*/
 @media only screen and (max-width: 40em) { 
-   .body-content, .container-fluid {
+   .body-content, 
+   .container-fluid, 
+   #searchSch {
     padding-left: 0rem;
     padding-right: 0rem;
     margin-left: 0;
     margin-right: 0;
   }
+   .school-card .card-prof-pic,
+   #sch-StuProfile-cards .card-prof-pic {
+       top: 43%;
+       left: 20%;
+   }
 }
 
 @media (min-width: 1200px) {
