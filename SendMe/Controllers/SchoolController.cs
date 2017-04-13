@@ -52,6 +52,7 @@ namespace SendMe.Controllers
             {
                 schoolVM.Students.Clear();
 
+                //Apply search string to users
                 List<StuProfile> stuProf = db.StuProfiles
                     .Where(sp => sp.FirstName.Contains(searchString)
                             || sp.LastName.Contains(searchString)
@@ -61,6 +62,21 @@ namespace SendMe.Controllers
                 foreach (StuProfile stu in stuProf)
                 {
                     StudentViewModel student = new StudentViewModel(stu);
+                    schoolVM.Students.Add(student);
+                }
+
+                //Apply search string to Trips
+                List<Trip> trips = db.Trips
+                    .Where(t => t.Title.Contains(searchString)
+                            || t.Destination.Contains(searchString)
+                            || t.DestinationCity.Contains(searchString)
+                            || t.DestinationState.Contains(searchString)
+                            || t.DestinationCountry.Contains(searchString))
+                    .ToList();                
+
+                foreach (Trip trip in trips)
+                {
+                    StudentViewModel student = new StudentViewModel(trip.Student);
                     schoolVM.Students.Add(student);
                 }
             }
