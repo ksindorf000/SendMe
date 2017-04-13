@@ -81,10 +81,20 @@ namespace SendMe.Controllers
                 return View(model);
             }
 
-            string userid = UserManager.FindByEmail(model.Email).Id;
+            string userid;
+
+            try
+            {
+                userid = UserManager.FindByEmail(model.Email).Id;
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", "Invalid login attempt.");
+                return View(model);
+            }
 
             //If user email has not been verified return view with message
-            if (!UserManager.IsEmailConfirmed(userid))
+            if (userid != null && !UserManager.IsEmailConfirmed(userid))
             {
                 ViewBag.NotConfirmed = "A confirmation email was sent to " + model.Email
                 + " but the email has not yet been confirmed. Please look for the confirmation"
@@ -93,7 +103,13 @@ namespace SendMe.Controllers
                 return View();
             }
 
-            string username = UserHelpers.CreateUserName(model.Email);
+            //Get Existing UserName
+            string username = UserManager.FindByEmail(model.Email).UserName;
+            //Update username only if it doesn't match the custom username conventions
+            if (username.Contains('@'))
+            {
+                username = UserHelpers.CreateUserName(model.Email);
+            };
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true

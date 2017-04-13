@@ -24,8 +24,8 @@ namespace SendMe.Controllers
         /*********************************
          * INDEX: School
          ********************************/
-         [Route("School/{id}")]
-        public ActionResult Index(int? id)
+        [Route("School/{id}")]
+        public ActionResult Index(int? id, string searchString)
         {
             if (id == null)
             {
@@ -46,7 +46,29 @@ namespace SendMe.Controllers
                 .Select(sp => sp.SchoolId)
                 .SingleOrDefault();
 
-            SchoolViewModel schoolVM = new SchoolViewModel(school);
+            SchoolViewModel schoolVM = new SchoolViewModel(school);            
+
+            if (searchString != null)
+            {
+                schoolVM.Students.Clear();
+
+                List<StuProfile> stuProf = db.StuProfiles
+                    .Where(sp => sp.FirstName.Contains(searchString)
+                            || sp.LastName.Contains(searchString)
+                            || sp.User.UserName.Contains(searchString))
+                    .ToList();
+
+                foreach (StuProfile stu in stuProf)
+                {
+                    StudentViewModel student = new StudentViewModel(stu);
+                    schoolVM.Students.Add(student);
+                }
+            }
+
+            if (schoolVM.Students.Count < 1)
+            {
+                ViewBag.NullSearch = "No Results Found";
+            }
 
             return View(schoolVM);
         }
