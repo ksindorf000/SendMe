@@ -309,11 +309,6 @@ $(document).ready(function () {
 });
 
 //Donation partial list accordian show each/ hide each/back button
-var j = [];
-for (i = 0; i <= Di; i++) {
-    $("#collapseAcc_" + i).collapse("hide");
-    j.push(i);
-}
 
 
 

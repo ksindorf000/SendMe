@@ -27,7 +27,7 @@ namespace SendMe
            if (!roleManager.RoleExists("Admin"))
             {
                 var role = new IdentityRole();
-                role.Name = "Admin";
+               role.Name = "Admin";
                roleManager.Create(role);
            }            
         }

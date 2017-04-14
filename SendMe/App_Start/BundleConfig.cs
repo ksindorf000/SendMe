@@ -20,9 +20,9 @@ namespace SendMe
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js",
-                      "~/Scripts/myJS.js",
+                       "~/Scripts/myJS.js",
+                       "~/Scripts/bootstrap.js",
+                       "~/Scripts/respond.js",
                        "~/Scripts/progressBar.js",
                        "~/Scripts/Stripe.js",
                        "~/Scripts/jquery.unobtrusive-ajax.min.js",
