@@ -342,8 +342,8 @@ form .about-content {
     margin: inherit;
 }
 
-#regForm .contactForm {
-    max-width: 90%;
+#registration {
+    max-width: 55%;
 }
 
 /*-----------------------

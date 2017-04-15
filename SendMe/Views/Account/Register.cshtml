@@ -4,7 +4,7 @@
 }
 
 <div class="row">
-    <div class="center-block" style="max-width:410px">
+    <div class="center-block" id="registration">
         @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal about-content", id = "regForm", role = "form" }))
         {
             <h2>Welcome!</h2>
@@ -21,7 +21,7 @@
     <!--School-->
             <div class="form-group">
                 @Html.LabelFor(m => m.SchoolId, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
+                <div class="col-md-12">
                     @Html.DropDownListFor(x => x.SchoolId, new SelectList(ViewBag.Schools, "Value", "Text"))
                     @Html.ValidationMessageFor(m => m.SchoolId)
                 </div>
@@ -30,7 +30,7 @@
     <!--Email-->
             <div class="form-group">
                 @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
+                <div class="col-md-12">
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                 </div>
             </div>
@@ -38,7 +38,7 @@
     <!--Password-->
             <div class="form-group">
                 @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
+                <div class="col-md-12">
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                 </div>
             </div>
@@ -46,7 +46,7 @@
     <!--Password Confirm-->
             <div class="form-group">
                 @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-10 control-label" })
-                <div class="col-md-10">
+                <div class="col-md-12">
                     @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
                 </div>
             </div>
@@ -54,7 +54,7 @@
     <!--Admin Code-->
             <div class="form-group">
                 @Html.LabelFor(m => m.AdminKey, new { @class = "col-md-10 control-label" })
-                <div class="col-md-10">
+                <div class="col-md-12">
                     @Html.PasswordFor(m => m.AdminKey, new { @class = "form-control", id = "adminKey" })
                 </div>
                 <div id="adminErr"></div>

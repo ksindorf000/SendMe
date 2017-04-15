@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace SendMe.Helpers
@@ -10,10 +11,15 @@ namespace SendMe.Helpers
         internal static string CreateUserName(string email)
         {
             int idxAT = email.IndexOf("@");
-            int idxPeriod = email.IndexOf(".") - 1;
-
+            int idxPrd = email.IndexOf(".");
             string un1 = email.Substring(0, idxAT);
-            string un2 = email.Substring((idxAT + 1), (idxPeriod - idxAT));
+            un1 = un1.Remove(idxPrd, 1);
+
+            string un2 = email.Substring(idxAT);
+            idxPrd = un2.IndexOf(".");
+            un2 = un2.Remove(idxPrd);
+            idxAT = un2.IndexOf("@");
+            un2 = un2.Remove(idxAT, 1);
 
             return (un1 + un2);
         }
