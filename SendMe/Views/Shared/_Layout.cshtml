@@ -6,12 +6,13 @@
     <title>@ViewBag.Title - USCMed</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <script src="https://use.fontawesome.com/eb5762e410.js"></script>
+    @using System.Web.Configuration;
+    @{ var GoogleMapsKey = WebConfigurationManager.AppSettings["GoogleMapsKey"];
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=@GoogleMapsKey"></script> }
+    <script async defer src="https://use.fontawesome.com/eb5762e410.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeRXmZZlGZELFdxR7815FJirzZDHiZRY4" type="text/javascript"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="//geodata.solutions/includes/countrystatecity.js"></script>
+    <script async defer type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+    <script async defer src="//geodata.solutions/includes/countrystatecity.js"></script>
 
 </head>
 <body>
