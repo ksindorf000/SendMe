@@ -302,6 +302,9 @@
     <Content Include="Img\SendMeBanner-WhtTxt.png" />
     <Content Include="Img\SendMeLogoTxt.png" />
     <Content Include="Img\USCGlobalHealthMapImage.jpg" />
+    <Content Include="Img\uscmed-garnet-logo.png" />
+    <Content Include="Img\uscmed-wht-logo.png" />
+    <Content Include="Img\uscmed.png" />
     <Content Include="MailSettings.config" />
     <Content Include="AppSettingsSecrets.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -314,6 +317,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\BlackJackDevGroup - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\SendMeProj - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\USCMed.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\allLocMap.Js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -335,6 +339,21 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Stripe.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Upload\636252663926945596uscmedCover031517.jpg" />
+    <Content Include="Upload\636252694637447926uscmedLogo031517.jpg" />
+    <Content Include="Upload\636262042201808558aaron-james-sm.jpg" />
+    <Content Include="Upload\636262139427749327gabbi-alton-sm.jpg" />
+    <Content Include="Upload\636262155760239440illi-stitt-sm.jpg" />
+    <Content Include="Upload\636262160248783772aatik-tasneem-sm.jpg" />
+    <Content Include="Upload\636262164137161438alexi-chambon-sm.jpg" />
+    <Content Include="Upload\636262185683634800issac-alvarez-sm.jpg" />
+    <Content Include="Upload\636278039654490194636262139427749327gabbi-alton-sm.jpg" />
+    <Content Include="Upload\636278040274620980636262042201808558aaron-james-sm.jpg" />
+    <Content Include="Upload\636278040675238034636262185683634800issac-alvarez-sm.jpg" />
+    <Content Include="Upload\636278046026354088636262160248783772aatik-tasneem-sm.jpg" />
+    <Content Include="Upload\636278087388645066636262155760239440illi-stitt-sm.jpg" />
+    <Content Include="Upload\636278091967413111636262164137161438alexi-chambon-sm.jpg" />
+    <Content Include="Upload\sm03162017profpic-placeholder.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -383,7 +402,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Upload\" />
     <Folder Include="Views\Trip\" />
   </ItemGroup>
   <ItemGroup>
