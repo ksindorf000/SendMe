@@ -35,7 +35,8 @@
 
         //////////////////////////////////////////////////////////////
         // ----------- WILL NEED TO CHANGE THIS URL! ------------- //
-        url = 'http://uscmed.azurewebsites.net/school/1/?searchstring=' + $input.val();
+        //url = 'http://uscmed.azurewebsites.net/school/1/?searchstring=' + $input.val();
+        url = '/school/1/?searchstring=' + $input.val();
         //////////////////////////////////////////////////////////////            
 
         window.location = url;
